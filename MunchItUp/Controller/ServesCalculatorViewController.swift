@@ -19,6 +19,7 @@ class ServesCalculatorViewController: UIViewController {
     @IBOutlet weak var targetServesLabel: UILabel!
     @IBOutlet weak var totalServesLabel: UILabel!
     @IBOutlet weak var setButton: UIButton!
+    @IBOutlet weak var clearButton: UIButton!
     
     let myN = NumberFormatsTYX()
     
@@ -26,6 +27,7 @@ class ServesCalculatorViewController: UIViewController {
         super.viewDidLoad()
 
         setButton.layer.cornerRadius = 10
+        clearButton.layer.cornerRadius = 10
         navigationItem.title = category
         targetServesLabel.text = myN.limitDigits(targetServes)
                 
@@ -33,6 +35,11 @@ class ServesCalculatorViewController: UIViewController {
     
     @IBAction func setButtonPressed(_ sender: UIButton) {
         tableVC?.setForUser()
+    }
+    
+    
+    @IBAction func clearButtonPressed(_ sender: UIButton) {
+        tableVC?.clearServes()
     }
     
     //MARK: - Functions

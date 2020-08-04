@@ -60,6 +60,20 @@ extension ServesCalculatorTableViewController {
         
     }
     
+    
+    func clearServes() {
+        
+        for size in serveSizes {
+            size.serves = 0
+            size.done = false
+        }
+        saveServeSizes()
+        notifyChangeOfServes()
+        tableView.reloadData()
+        
+    }
+    
+    
     func initServesAndDone(force: Bool = false){
         
         let servesPerItem = myN.roundToHalf(targetServes/Double(serveSizes.count))

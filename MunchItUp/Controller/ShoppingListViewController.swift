@@ -159,6 +159,9 @@ extension ShoppingListViewController {
             let item = itemArray[indexPath.row - foodGroups.count]
             cell.done = item.done
             cell.checkMarkImage.image = item.done ? checkedSymbol: uncheckedSymbol
+            if item.title == nil {
+                cell.checkMarkImage.isHidden = true
+            }
             cell.titleTextField.text = item.title
             cell.titleTextField.tag = indexPath.row
             cell.titleTextField.delegate = self
