@@ -13,7 +13,7 @@ class SettingsTableViewController: UITableViewController {
     let defaults = UserDefaults.standard
     
     @IBOutlet weak var daysTextField: UITextField!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         loadSettings()
@@ -34,9 +34,30 @@ class SettingsTableViewController: UITableViewController {
         }
         defaults.set(Int(sender.text!), forKey: NSLocalizedString("Days", comment: "plist"))
     }
+
+    @IBAction func servesForChildrenButtonPressed(_ sender: UIButton) {
+        
+        openUrl(K.servesForChildrenLink)
+    }
+    
+    @IBAction func servesForAdultsButtonPressed(_ sender: UIButton) {
+        
+        openUrl(K.servesForAdultsLink)
+    }
+    
+    @IBAction func serveSizesButtonPressed(_ sender: UIButton) {
+        
+        openUrl(K.serveSizesLink)
+    }
     
     func loadSettings(){
         daysTextField.text = "\(defaults.integer(forKey: NSLocalizedString("Days", comment: "plist")))"
+    }
+    
+    func openUrl(_ string: String){
+        if let url = URL(string: string) {
+            UIApplication.shared.open(url)
+        }
     }
 }
 

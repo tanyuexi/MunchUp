@@ -15,8 +15,11 @@ struct K {
     static let otherItemCellID = "OtherItemReusableCell"
     static let servesCalculatorCellID = "ServesCalculatorReusableCell"
     
+    static let servesForChildrenLink = "https://www.eatforhealth.gov.au/food-essentials/how-much-do-we-need-each-day/recommended-number-serves-children-adolescents-and"
+    static let servesForAdultsLink = "https://www.eatforhealth.gov.au/food-essentials/how-much-do-we-need-each-day/recommended-number-serves-adults"
+    static let serveSizesLink = "https://www.eatforhealth.gov.au/food-essentials/how-much-do-we-need-each-day/serve-sizes"
+    
     //Daily Five Group Serves Table
-    //source: https://www.eatforhealth.gov.au/food-essentials/how-much-do-we-need-each-day/recommended-number-serves-children-adolescents-and
     //for Toddler(1-2yrs), mid value serves is used in stead of range
     //for addition, mid value is used in stead of range
     //if pregnant & breastfeeding, max value is used
@@ -268,8 +271,5 @@ struct K {
             "19 FPB": 2
         ]
     ]
-    
-    //Serve Sizes (Core Data: OneServe)
-    //source: https://www.eatforhealth.gov.au/food-essentials/how-much-do-we-need-each-day/serve-sizes
 
 }
