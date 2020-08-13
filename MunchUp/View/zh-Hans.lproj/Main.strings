@@ -1,32 +1,17 @@
 /* Class = "UIButton"; normalTitle = "Shop!"; ObjectID = "3Po-vb-yu0"; */
 "3Po-vb-yu0.normalTitle" = "采购！";
 
-/* Class = "UITextField"; placeholder = "Number"; ObjectID = "5wO-lH-Vkh"; */
-"5wO-lH-Vkh.placeholder" = "整数";
-
 /* Class = "UILabel"; text = "0"; ObjectID = "7bU-w5-t4x"; */
 "7bU-w5-t4x.text" = "0";
 
-/* Class = "UILabel"; text = "Date of Birth: "; ObjectID = "7Rp-V0-RnG"; */
-"7Rp-V0-RnG.text" = "生日：";
+/* Class = "UITextField"; placeholder = "DD/MM/YYYY"; ObjectID = "cih-Xh-IeF"; */
+"cih-Xh-IeF.placeholder" = "年年年年/月月/日日";
 
-/* Class = "UILabel"; text = "Breastfeeding/Lactating: "; ObjectID = "a78-JE-Gq4"; */
-"a78-JE-Gq4.text" = "正在哺乳/泌乳：";
+/* Class = "UIButton"; normalTitle = "Save"; ObjectID = "dG2-tX-XIQ"; */
+"dG2-tX-XIQ.normalTitle" = "保存";
 
-/* Class = "UISegmentedControl"; Bd6-LA-SqM.segmentTitles[0] = "Female"; ObjectID = "Bd6-LA-SqM"; */
-"Bd6-LA-SqM.segmentTitles[0]" = "女性";
-
-/* Class = "UISegmentedControl"; Bd6-LA-SqM.segmentTitles[1] = "Male"; ObjectID = "Bd6-LA-SqM"; */
-"Bd6-LA-SqM.segmentTitles[1]" = "男性";
-
-/* Class = "UILabel"; text = "Days to plan for:"; ObjectID = "Bem-Tq-dIJ"; */
-"Bem-Tq-dIJ.text" = "采购天数：";
-
-/* Class = "UILabel"; text = "Pregnant: "; ObjectID = "bMh-hX-5wL"; */
-"bMh-hX-5wL.text" = "怀孕：";
-
-/* Class = "UILabel"; text = "(DD/MM/YYYY)"; ObjectID = "cSk-oC-BAC"; */
-"cSk-oC-BAC.text" = "(日/月/年)";
+/* Class = "UILabel"; text = "Pregnant: "; ObjectID = "DgA-nX-cRt"; */
+"DgA-nX-cRt.text" = "怀孕：";
 
 /* Class = "UIBarButtonItem"; title = " "; ObjectID = "Djq-vb-Sca"; */
 "Djq-vb-Sca.title" = " ";
@@ -34,8 +19,26 @@
 /* Class = "UINavigationItem"; title = "Serves Calculator"; ObjectID = "eQX-hV-Nxl"; */
 "eQX-hV-Nxl.title" = "份数计算器";
 
-/* Class = "UITextField"; placeholder = "DD/MM/YYYY"; ObjectID = "hdQ-B8-Xsj"; */
-"hdQ-B8-Xsj.placeholder" = "日日/月月/年年年年";
+/* Class = "UILabel"; text = "Name: "; ObjectID = "EX1-gM-keY"; */
+"EX1-gM-keY.text" = "名字：";
+
+/* Class = "UISegmentedControl"; eyZ-Lv-2Fx.segmentTitles[0] = "Female"; ObjectID = "eyZ-Lv-2Fx"; */
+"eyZ-Lv-2Fx.segmentTitles[0]" = "女性";
+
+/* Class = "UISegmentedControl"; eyZ-Lv-2Fx.segmentTitles[1] = "Male"; ObjectID = "eyZ-Lv-2Fx"; */
+"eyZ-Lv-2Fx.segmentTitles[1]" = "男性";
+
+/* Class = "UILabel"; text = "e.g. 31/01/1990"; ObjectID = "Gkj-xe-OBr"; */
+"Gkj-xe-OBr.text" = "例：1990/01/31";
+
+/* Class = "UILabel"; text = "Date of Birth: "; ObjectID = "gqM-vH-aeS"; */
+"gqM-vH-aeS.text" = "出生日期：";
+
+/* Class = "UILabel"; text = "Days to plan for:"; ObjectID = "gYb-iX-hfV"; */
+"gYb-iX-hfV.text" = "采购天数：";
+
+/* Class = "UIButton"; normalTitle = "Delete"; ObjectID = "HTN-Mp-4fq"; */
+"HTN-Mp-4fq.normalTitle" = "删除";
 
 /* Class = "UILabel"; text = "Detail"; ObjectID = "i2d-Uy-7bv"; */
 "i2d-Uy-7bv.text" = "详细";
@@ -46,14 +49,8 @@
 /* Class = "UINavigationItem"; title = "Family Members"; ObjectID = "jTx-ss-ylo"; */
 "jTx-ss-ylo.title" = "家庭成员";
 
-/* Class = "UILabel"; text = "Name: "; ObjectID = "LCu-ea-D4t"; */
-"LCu-ea-D4t.text" = "名字：";
-
-/* Class = "UIButton"; normalTitle = "Save"; ObjectID = "Lgy-Ny-hJg"; */
-"Lgy-Ny-hJg.normalTitle" = "保存";
-
-/* Class = "UINavigationItem"; title = "Edit Member"; ObjectID = "Mmy-7h-TdK"; */
-"Mmy-7h-TdK.title" = "修改成员";
+/* Class = "UINavigationItem"; title = "Settings"; ObjectID = "kT8-mJ-GSG"; */
+"kT8-mJ-GSG.title" = "设置";
 
 /* Class = "UIButton"; normalTitle = "Auto Set"; ObjectID = "MvE-EY-kvq"; */
 "MvE-EY-kvq.normalTitle" = "自动设定";
@@ -70,6 +67,9 @@
 /* Class = "UILabel"; text = "Detail"; ObjectID = "Q4j-Ow-CGF"; */
 "Q4j-Ow-CGF.text" = "详细";
 
+/* Class = "UILabel"; text = "Active/Taller than average: "; ObjectID = "qdk-Vb-w9n"; */
+"qdk-Vb-w9n.text" = "运动较多/身高较高";
+
 /* Class = "UILabel"; text = "Title"; ObjectID = "Qe0-K3-2b1"; */
 "Qe0-K3-2b1.text" = "标题";
 
@@ -85,17 +85,20 @@
 /* Class = "UILabel"; text = "0"; ObjectID = "ric-w2-ndZ"; */
 "ric-w2-ndZ.text" = "0";
 
+/* Class = "UINavigationItem"; title = "Edit Member"; ObjectID = "SqI-Jh-9qL"; */
+"SqI-Jh-9qL.title" = "修改成员";
+
 /* Class = "UILabel"; text = "Target"; ObjectID = "T1z-mU-6wK"; */
 "T1z-mU-6wK.text" = "目标";
 
-/* Class = "UIButton"; normalTitle = "Delete"; ObjectID = "Vhg-oF-lEU"; */
-"Vhg-oF-lEU.normalTitle" = "删除";
+/* Class = "UILabel"; text = "Breastfeeding/Lactating: "; ObjectID = "WLL-Vv-AqW"; */
+"WLL-Vv-AqW.text" = "正在哺乳/泌乳：";
 
-/* Class = "UILabel"; text = "Active/Taller than average: "; ObjectID = "vwJ-zO-GSI"; */
-"vwJ-zO-GSI.text" = "活动较多/长得较高";
+/* Class = "UILabel"; text = "(DD/MM/YYYY)"; ObjectID = "wob-Ag-PvP"; */
+"wob-Ag-PvP.text" = "(年/月/日)";
 
-/* Class = "UINavigationItem"; title = "Settings"; ObjectID = "X4k-FH-Ple"; */
-"X4k-FH-Ple.title" = "设置";
+/* Class = "UITextField"; placeholder = "Number"; ObjectID = "XK0-Q0-K4z"; */
+"XK0-Q0-K4z.placeholder" = "整数";
 
 /* Class = "UILabel"; text = "Title"; ObjectID = "xoZ-rF-gpR"; */
 "xoZ-rF-gpR.text" = "标题";

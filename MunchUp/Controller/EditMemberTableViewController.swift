@@ -1,5 +1,5 @@
 //
-//  MemberDetailViewController.swift
+//  EditMemberTableViewController.swift
 //  MunchItUp
 //
 //  Created by Yuexi Tan on 2020/7/20.
@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class MemberDetailViewController: UIViewController {
+class EditMemberTableViewController: UITableViewController {
     
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var DOBTextField: UITextField!
@@ -26,6 +26,8 @@ class MemberDetailViewController: UIViewController {
     var selectedMember: [FamilyMember] = []
     var validDOB = false
     
+    let dateFormatter = DateFormatter()
+    let confirmFormatter = DateFormatter()
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     override func viewDidLoad() {
@@ -33,7 +35,10 @@ class MemberDetailViewController: UIViewController {
         
         saveButton.layer.cornerRadius = 10
         deleteButton.layer.cornerRadius = 10
-                
+        
+        dateFormatter.dateFormat = NSLocalizedString("dd/MM/yyyy", comment: "DOB text field data format")
+        confirmFormatter.dateFormat = NSLocalizedString("(d MMM, yyyy)", comment: "DOB confirm label data format")
+        
         if selectedMember.count == 0 {
             navigationItem.title = NSLocalizedString("New Member", comment: "navigation title")
             deleteButton.isHidden = true
@@ -45,20 +50,21 @@ class MemberDetailViewController: UIViewController {
         
         nameTextField.delegate = self
         DOBTextField.delegate = self
-    
+        
         checkIfReadyToSave()
     }
     
     func dataToForm(from data: FamilyMember){
         nameTextField.text = data.name
-        DOBTextField.text = data.dateOfBirthString
+        DOBTextField.text = dateFormatter.string(from: data.dateOfBirth!)
+        DOBConfirmLabel.text = confirmFormatter.string(from: data.dateOfBirth!)
         validDOB = true
         additionalSwitch.isOn = data.additional
         pregnantSwitch.isOn = data.pregnant
         breastfeedingSwitch.isOn = data.breastfeeding
         enableFemaleOptions(data.female)
     }
-
+    
     @IBAction func nameTextFieldEditingChanged(_ sender: UITextField) {
         checkIfReadyToSave()
     }
@@ -69,13 +75,9 @@ class MemberDetailViewController: UIViewController {
             DOBConfirmLabel.textColor = .none
             validDOB = false
         } else {
-            let oldFormatter = DateFormatter()
-            oldFormatter.dateFormat = "dd/MM/yyyy"
-            let newFormatter = DateFormatter()
-            newFormatter.dateFormat = "(d MMM, yyyy)"
-            if let oldDate = oldFormatter.date(from: DOBTextField.text!),
-                oldFormatter.date(from: DOBTextField.text!)! <= Date() {
-                DOBConfirmLabel.text = newFormatter.string(from: oldDate)
+            if let oldDate = dateFormatter.date(from: DOBTextField.text!),
+                dateFormatter.date(from: DOBTextField.text!)! <= Date() {
+                DOBConfirmLabel.text = confirmFormatter.string(from: oldDate)
                 DOBConfirmLabel.textColor = .none
                 DOBTextField.clearsOnBeginEditing = false
                 validDOB = true
@@ -118,10 +120,7 @@ class MemberDetailViewController: UIViewController {
     
     func formToData(to data: FamilyMember){
         data.name = nameTextField.text!
-        data.dateOfBirthString = DOBTextField.text!
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd/MM/yyyy"
-        data.dateOfBirth = dateFormatter.date(from: data.dateOfBirthString!)
+        data.dateOfBirth = dateFormatter.date(from: DOBTextField.text!)
         data.additional = additionalSwitch.isOn
         data.female = (genderSegmentedControl.selectedSegmentIndex == 0)
         data.pregnant = pregnantSwitch.isOn
@@ -149,28 +148,28 @@ class MemberDetailViewController: UIViewController {
 
 //MARK: - UITextFieldDelegate
 
-extension MemberDetailViewController: UITextFieldDelegate {
+extension EditMemberTableViewController: UITextFieldDelegate {
     
     //DOBTextField auto format to "XX/XX/XXXX"
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if textField != DOBTextField || string == "" {
             return true
         }
-
+        
         let currentText = textField.text! as NSString
         var updatedText = currentText.replacingCharacters(in: range, with: string)
-
+        
         switch updatedText.count {
-        case 2:
+        case Int(NSLocalizedString("2", comment: "auto format date")):
             updatedText.append("/")
-        case 5:
+        case Int(NSLocalizedString("5", comment: "auto format date")):
             updatedText.append("/")
         case 11:
             return false
         default:
             return true
         }
-
+        
         textField.text = updatedText
         return false
     }
@@ -187,7 +186,7 @@ extension MemberDetailViewController: UITextFieldDelegate {
 
 //MARK: - Model Manupulation Methods
 
-extension MemberDetailViewController {
+extension EditMemberTableViewController {
     func saveMemberDetail() {
         do {
             try context.save()

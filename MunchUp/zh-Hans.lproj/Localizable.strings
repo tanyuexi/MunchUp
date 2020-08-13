@@ -1,8 +1,17 @@
+/* DOB confirm label data format */
+"(d MMM, yyyy)" = "(yyyy年M月d日)";
+
 /* DOB confirm label */
-"(DD/MM/YYYY)" = "(日/月/年)";
+"(DD/MM/YYYY)" = "(年/月/日)";
 
 /* DOB confirm label */
 "(Invalid date)" = "(无效日期)";
+
+/* auto format date */
+"2" = "4";
+
+/* auto format date */
+"5" = "7";
 
 /* food group */
 "Additional" = "额外需求";
@@ -16,6 +25,9 @@
 /* plist
    plist days */
 "Days" = "天数";
+
+/* DOB text field data format */
+"dd/MM/yyyy" = "yyyy/MM/dd";
 
 /* navigation title */
 "Edit" = "修改";

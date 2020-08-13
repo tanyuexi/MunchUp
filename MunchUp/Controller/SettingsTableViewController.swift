@@ -1,5 +1,5 @@
 //
-//  SettingsViewController.swift
+//  SettingsTableViewController.swift
 //  MunchItUp
 //
 //  Created by Yuexi Tan on 2020/7/24.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SettingsViewController: UIViewController {
+class SettingsTableViewController: UITableViewController {
     
     let defaults = UserDefaults.standard
     
@@ -42,7 +42,7 @@ class SettingsViewController: UIViewController {
 
 //MARK: - Text Field Delegate Methods
 
-extension SettingsViewController: UITextFieldDelegate {
+extension SettingsTableViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.endEditing(true)

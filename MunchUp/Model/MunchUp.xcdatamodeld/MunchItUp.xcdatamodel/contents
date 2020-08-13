@@ -4,7 +4,6 @@
         <attribute name="additional" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="breastfeeding" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="dateOfBirth" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="dateOfBirthString" optional="YES" attributeType="String"/>
         <attribute name="female" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="pregnant" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
@@ -27,7 +26,7 @@
         <attribute name="title" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="FamilyMember" positionX="-63" positionY="-18" width="128" height="148"/>
+        <element name="FamilyMember" positionX="-63" positionY="-18" width="128" height="133"/>
         <element name="OneServe" positionX="-27" positionY="63" width="128" height="193"/>
         <element name="OtherItem" positionX="-54" positionY="45" width="128" height="88"/>
     </elements>

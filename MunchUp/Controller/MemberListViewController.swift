@@ -108,7 +108,7 @@ extension MemberListViewController: UITableViewDelegate {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "GoToMemberDetailVC",
-            let destinationVC = segue.destination as? MemberDetailViewController,
+            let destinationVC = segue.destination as? EditMemberTableViewController,
             let indexPath = tableView.indexPathForSelectedRow {
             if indexPath.row < memberArray.count {
                 destinationVC.selectedMember = [memberArray[indexPath.row]]
