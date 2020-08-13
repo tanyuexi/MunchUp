@@ -16,7 +16,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <sections>
-                            <tableViewSection id="k1Q-MY-aFo">
+                            <tableViewSection headerTitle="General" id="k1Q-MY-aFo" userLabel="General">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="70" id="2US-FT-ggL">
                                         <rect key="frame" x="0.0" y="28" width="414" height="70"/>
@@ -51,6 +51,85 @@
                                             <constraints>
                                                 <constraint firstItem="Hg5-fS-MjO" firstAttribute="centerX" secondItem="TWF-P9-SCm" secondAttribute="centerX" id="Y0Z-qw-iNs"/>
                                                 <constraint firstItem="Hg5-fS-MjO" firstAttribute="centerY" secondItem="TWF-P9-SCm" secondAttribute="centerY" id="a7Y-4b-688"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection headerTitle="Links" id="BqX-8Y-CEy">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="70" id="mA1-go-ng3">
+                                        <rect key="frame" x="0.0" y="154" width="414" height="70"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mA1-go-ng3" id="qIW-Sz-6MH">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="70"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZFl-2J-gs2">
+                                                    <rect key="frame" x="20" y="11" width="374" height="48"/>
+                                                    <state key="normal" title="Recommended daily serves for children">
+                                                        <color key="titleColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="servesForChildrenButtonPressed:" destination="NbG-iz-y7d" eventType="touchUpInside" id="7RP-My-rXe"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="ZFl-2J-gs2" firstAttribute="top" secondItem="qIW-Sz-6MH" secondAttribute="topMargin" id="CdH-Bv-iYw"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="ZFl-2J-gs2" secondAttribute="trailing" id="LMH-qj-MWw"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="ZFl-2J-gs2" secondAttribute="bottom" id="dFv-vh-fgA"/>
+                                                <constraint firstItem="ZFl-2J-gs2" firstAttribute="leading" secondItem="qIW-Sz-6MH" secondAttribute="leadingMargin" id="i1V-0j-4zI"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="70" id="zDf-fU-Meg">
+                                        <rect key="frame" x="0.0" y="224" width="414" height="70"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zDf-fU-Meg" id="Jyb-EC-gDn">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="70"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="11w-rs-6Hx">
+                                                    <rect key="frame" x="20" y="11" width="374" height="48"/>
+                                                    <state key="normal" title="Recommended daily serves for adults">
+                                                        <color key="titleColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="servesForAdultsButtonPressed:" destination="NbG-iz-y7d" eventType="touchUpInside" id="e7P-p9-bWP"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottomMargin" secondItem="11w-rs-6Hx" secondAttribute="bottom" id="5oK-cA-Aa7"/>
+                                                <constraint firstItem="11w-rs-6Hx" firstAttribute="top" secondItem="Jyb-EC-gDn" secondAttribute="topMargin" id="DQw-Vd-THi"/>
+                                                <constraint firstItem="11w-rs-6Hx" firstAttribute="leading" secondItem="Jyb-EC-gDn" secondAttribute="leadingMargin" id="gNt-hC-JPt"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="11w-rs-6Hx" secondAttribute="trailing" id="skb-6l-aPy"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="70" id="11r-ck-QKa">
+                                        <rect key="frame" x="0.0" y="294" width="414" height="70"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="11r-ck-QKa" id="4OP-c7-OXS">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="70"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xei-fB-RUI">
+                                                    <rect key="frame" x="20" y="11" width="374" height="48"/>
+                                                    <state key="normal" title="What is a serve?">
+                                                        <color key="titleColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="serveSizesButtonPressed:" destination="NbG-iz-y7d" eventType="touchUpInside" id="fDI-DN-FSZ"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottomMargin" secondItem="Xei-fB-RUI" secondAttribute="bottom" id="6oX-my-UGq"/>
+                                                <constraint firstItem="Xei-fB-RUI" firstAttribute="leading" secondItem="4OP-c7-OXS" secondAttribute="leadingMargin" id="bDq-ql-N4f"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="Xei-fB-RUI" secondAttribute="trailing" id="fKY-Vl-6H8"/>
+                                                <constraint firstItem="Xei-fB-RUI" firstAttribute="top" secondItem="4OP-c7-OXS" secondAttribute="topMargin" id="krM-9o-YzQ"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
