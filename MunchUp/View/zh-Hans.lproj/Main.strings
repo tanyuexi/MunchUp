@@ -1,0 +1,102 @@
+/* Class = "UIButton"; normalTitle = "Shop!"; ObjectID = "3Po-vb-yu0"; */
+"3Po-vb-yu0.normalTitle" = "采购！";
+
+/* Class = "UITextField"; placeholder = "Number"; ObjectID = "5wO-lH-Vkh"; */
+"5wO-lH-Vkh.placeholder" = "整数";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "7bU-w5-t4x"; */
+"7bU-w5-t4x.text" = "0";
+
+/* Class = "UILabel"; text = "Date of Birth: "; ObjectID = "7Rp-V0-RnG"; */
+"7Rp-V0-RnG.text" = "生日：";
+
+/* Class = "UILabel"; text = "Breastfeeding/Lactating: "; ObjectID = "a78-JE-Gq4"; */
+"a78-JE-Gq4.text" = "正在哺乳/泌乳：";
+
+/* Class = "UISegmentedControl"; Bd6-LA-SqM.segmentTitles[0] = "Female"; ObjectID = "Bd6-LA-SqM"; */
+"Bd6-LA-SqM.segmentTitles[0]" = "女性";
+
+/* Class = "UISegmentedControl"; Bd6-LA-SqM.segmentTitles[1] = "Male"; ObjectID = "Bd6-LA-SqM"; */
+"Bd6-LA-SqM.segmentTitles[1]" = "男性";
+
+/* Class = "UILabel"; text = "Days to plan for:"; ObjectID = "Bem-Tq-dIJ"; */
+"Bem-Tq-dIJ.text" = "采购天数：";
+
+/* Class = "UILabel"; text = "Pregnant: "; ObjectID = "bMh-hX-5wL"; */
+"bMh-hX-5wL.text" = "怀孕：";
+
+/* Class = "UILabel"; text = "(DD/MM/YYYY)"; ObjectID = "cSk-oC-BAC"; */
+"cSk-oC-BAC.text" = "(日/月/年)";
+
+/* Class = "UIBarButtonItem"; title = " "; ObjectID = "Djq-vb-Sca"; */
+"Djq-vb-Sca.title" = " ";
+
+/* Class = "UINavigationItem"; title = "Serves Calculator"; ObjectID = "eQX-hV-Nxl"; */
+"eQX-hV-Nxl.title" = "份数计算器";
+
+/* Class = "UITextField"; placeholder = "DD/MM/YYYY"; ObjectID = "hdQ-B8-Xsj"; */
+"hdQ-B8-Xsj.placeholder" = "日日/月月/年年年年";
+
+/* Class = "UILabel"; text = "Detail"; ObjectID = "i2d-Uy-7bv"; */
+"i2d-Uy-7bv.text" = "详细";
+
+/* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "i6X-wV-uba"; */
+"i6X-wV-uba.title" = "东西";
+
+/* Class = "UINavigationItem"; title = "Family Members"; ObjectID = "jTx-ss-ylo"; */
+"jTx-ss-ylo.title" = "家庭成员";
+
+/* Class = "UILabel"; text = "Name: "; ObjectID = "LCu-ea-D4t"; */
+"LCu-ea-D4t.text" = "名字：";
+
+/* Class = "UIButton"; normalTitle = "Save"; ObjectID = "Lgy-Ny-hJg"; */
+"Lgy-Ny-hJg.normalTitle" = "保存";
+
+/* Class = "UINavigationItem"; title = "Edit Member"; ObjectID = "Mmy-7h-TdK"; */
+"Mmy-7h-TdK.title" = "修改成员";
+
+/* Class = "UIButton"; normalTitle = "Auto Set"; ObjectID = "MvE-EY-kvq"; */
+"MvE-EY-kvq.normalTitle" = "自动设定";
+
+/* Class = "UILabel"; text = "Add Member..."; ObjectID = "oIZ-my-Nxc"; */
+"oIZ-my-Nxc.text" = "添加成员...";
+
+/* Class = "UIBarButtonItem"; title = " "; ObjectID = "onx-ZW-GH3"; */
+"onx-ZW-GH3.title" = " ";
+
+/* Class = "UINavigationItem"; title = "Shopping List"; ObjectID = "pxr-r0-LZr"; */
+"pxr-r0-LZr.title" = "采购清单";
+
+/* Class = "UILabel"; text = "Detail"; ObjectID = "Q4j-Ow-CGF"; */
+"Q4j-Ow-CGF.text" = "详细";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "Qe0-K3-2b1"; */
+"Qe0-K3-2b1.text" = "标题";
+
+/* Class = "UIButton"; normalTitle = "Clear"; ObjectID = "qKN-en-rBk"; */
+"qKN-en-rBk.normalTitle" = "归零";
+
+/* Class = "UILabel"; text = "Delta"; ObjectID = "qmj-2F-Yja"; */
+"qmj-2F-Yja.text" = "现有";
+
+/* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "QNk-g2-LCx"; */
+"QNk-g2-LCx.title" = "东西";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "ric-w2-ndZ"; */
+"ric-w2-ndZ.text" = "0";
+
+/* Class = "UILabel"; text = "Target"; ObjectID = "T1z-mU-6wK"; */
+"T1z-mU-6wK.text" = "目标";
+
+/* Class = "UIButton"; normalTitle = "Delete"; ObjectID = "Vhg-oF-lEU"; */
+"Vhg-oF-lEU.normalTitle" = "删除";
+
+/* Class = "UILabel"; text = "Active/Taller than average: "; ObjectID = "vwJ-zO-GSI"; */
+"vwJ-zO-GSI.text" = "活动较多/长得较高";
+
+/* Class = "UINavigationItem"; title = "Settings"; ObjectID = "X4k-FH-Ple"; */
+"X4k-FH-Ple.title" = "设置";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "xoZ-rF-gpR"; */
+"xoZ-rF-gpR.text" = "标题";
+
