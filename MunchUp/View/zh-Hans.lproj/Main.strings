@@ -4,9 +4,6 @@
 /* Class = "UILabel"; text = "0"; ObjectID = "7bU-w5-t4x"; */
 "7bU-w5-t4x.text" = "0";
 
-/* Class = "UIButton"; normalTitle = "Recommended daily serves for adults"; ObjectID = "11w-rs-6Hx"; */
-"11w-rs-6Hx.normalTitle" = "成人每日推荐食物份数（英文）";
-
 /* Class = "UITableViewSection"; headerTitle = "Links"; ObjectID = "BqX-8Y-CEy"; */
 "BqX-8Y-CEy.headerTitle" = "链接";
 
@@ -40,7 +37,7 @@
 /* Class = "UILabel"; text = "Date of Birth: "; ObjectID = "gqM-vH-aeS"; */
 "gqM-vH-aeS.text" = "出生日期：";
 
-/* Class = "UILabel"; text = "Days to plan for:"; ObjectID = "gYb-iX-hfV"; */
+/* Class = "UILabel"; text = "Days to plan for: "; ObjectID = "gYb-iX-hfV"; */
 "gYb-iX-hfV.text" = "采购天数：";
 
 /* Class = "UIButton"; normalTitle = "Delete"; ObjectID = "HTN-Mp-4fq"; */
@@ -64,11 +61,17 @@
 /* Class = "UIButton"; normalTitle = "Auto Set"; ObjectID = "MvE-EY-kvq"; */
 "MvE-EY-kvq.normalTitle" = "自动设定";
 
+/* Class = "UILabel"; text = "What is a serve?"; ObjectID = "oFZ-jP-wqy"; */
+"oFZ-jP-wqy.text" = "一份是多少？";
+
 /* Class = "UILabel"; text = "Add Member..."; ObjectID = "oIZ-my-Nxc"; */
 "oIZ-my-Nxc.text" = "添加成员...";
 
 /* Class = "UIBarButtonItem"; title = " "; ObjectID = "onx-ZW-GH3"; */
 "onx-ZW-GH3.title" = " ";
+
+/* Class = "UILabel"; text = "Recommended daily serves for adults"; ObjectID = "pg8-cV-Tts"; */
+"pg8-cV-Tts.text" = "成人每日推荐食物份数";
 
 /* Class = "UINavigationItem"; title = "Shopping List"; ObjectID = "pxr-r0-LZr"; */
 "pxr-r0-LZr.title" = "采购清单";
@@ -94,6 +97,9 @@
 /* Class = "UILabel"; text = "0"; ObjectID = "ric-w2-ndZ"; */
 "ric-w2-ndZ.text" = "0";
 
+/* Class = "UILabel"; text = "Recommended daily serves for children"; ObjectID = "sLG-6F-qTN"; */
+"sLG-6F-qTN.text" = "儿童每日推荐食物份数";
+
 /* Class = "UINavigationItem"; title = "Edit Member"; ObjectID = "SqI-Jh-9qL"; */
 "SqI-Jh-9qL.title" = "修改成员";
 
@@ -106,15 +112,12 @@
 /* Class = "UILabel"; text = "(DD/MM/YYYY)"; ObjectID = "wob-Ag-PvP"; */
 "wob-Ag-PvP.text" = "(年/月/日)";
 
-/* Class = "UIButton"; normalTitle = "What is a serve?"; ObjectID = "Xei-fB-RUI"; */
-"Xei-fB-RUI.normalTitle" = "1份是多少？";
-
 /* Class = "UITextField"; placeholder = "Number"; ObjectID = "XK0-Q0-K4z"; */
 "XK0-Q0-K4z.placeholder" = "整数";
 
 /* Class = "UILabel"; text = "Title"; ObjectID = "xoZ-rF-gpR"; */
 "xoZ-rF-gpR.text" = "标题";
 
-/* Class = "UIButton"; normalTitle = "Recommended daily serves for children"; ObjectID = "ZFl-2J-gs2"; */
-"ZFl-2J-gs2.normalTitle" = "儿童每日推荐食物份数（英文）";
+/* Class = "UILabel"; text = "Re-load food database"; ObjectID = "ZAP-zd-gMi"; */
+"ZAP-zd-gMi.text" = "重新载入食物数据库";
 

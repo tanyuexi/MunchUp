@@ -11,11 +11,11 @@ import CoreData
 
 class MemberListViewController: UIViewController {
     
-        
-    let P = PublicData()
     
+    var days = 0.0
     var ageThreshold: [Int: Date] = [:]
     var memberArray : [FamilyMember] = []
+    var dailyTotalServes: [String: Double] = [:]
     
     
     @IBOutlet weak var tableView: UITableView!
@@ -29,12 +29,11 @@ class MemberListViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         
-        //initialize settings
-        if !P.defaults.bool(forKey: NSLocalizedString("Settings initialized", comment: "plist")) {
-            P.updateDays(7)
-            P.defaults.set(true, forKey: NSLocalizedString("Settings initialized", comment: "plist"))
-        } else {
-            P.days = P.defaults.double(forKey: NSLocalizedString("Days", comment: "plist"))
+        //if days not set, let days = 7
+        days = getDays()
+        if days == 0 {
+            updateDays(7)
+            days = 7.0
         }
     }
     
@@ -72,9 +71,9 @@ class MemberListViewController: UIViewController {
         return false
     }
     
-    @IBAction func shopButtonPressed(_ sender: UIButton) {
+    func calculateDailyTotalServes() {
         
-        P.dailyTotalServes = [:]
+        dailyTotalServes = [:]
         
         for i in [1, 2, 4, 9, 12, 14, 19, 51, 70] {
             ageThreshold[i] = yearsBeforeToday(i)
@@ -107,19 +106,20 @@ class MemberListViewController: UIViewController {
             if member.breastfeeding {key += "B"}
             
             for group in K.foodGroups {
-                if P.dailyTotalServes[group] == nil {
-                    P.dailyTotalServes[group] = 0.0
+                if dailyTotalServes[group] == nil {
+                    dailyTotalServes[group] = 0.0
                 }
-                P.dailyTotalServes[group]! += K.dailyServes[group]![key]!
-                if (member.additional || olderRange), group != K.foodGroups[5] {
-                    P.dailyTotalServes[group]! += K.dailyServes[NSLocalizedString("Additional", comment: "food group")]![key]!/5
+                
+                dailyTotalServes[group]! += K.dailyServes[group]![key]!
+                
+                if (member.additional || olderRange),
+                    group != K.foodGroups[5] {   //oil
+                    
+                    dailyTotalServes[group]! += K.dailyServes[K.additionalString]![key]!/5
                 }
             }
         }
-        
-//        tableView.reloadData()
-        
-        performSegue(withIdentifier: "GoToShoppingListVC", sender: nil)
+                
     }
     
 }
@@ -168,39 +168,23 @@ extension MemberListViewController: UITableViewDelegate {
         performSegue(withIdentifier: "GoToMemberDetailVC", sender: self)
         tableView.deselectRow(at: indexPath, animated: true)
     }
-    
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        
-        if editingStyle == .delete {
-            P.context.delete(memberArray[indexPath.row])
-            memberArray.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
-            do {
-                try P.context.save()
-            } catch {
-                print("Error saving context \(error)")
-            }
-        }
-        
-    }
+
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "GoToMemberDetailVC",
             let destinationVC = segue.destination as? EditMemberTableViewController,
             let indexPath = tableView.indexPathForSelectedRow {
+            
             if indexPath.row < memberArray.count {
                 destinationVC.selectedMember = [memberArray[indexPath.row]]
             }
         } else if segue.identifier == "GoToShoppingListVC",
             let destinationVC = segue.destination as? ShoppingListViewController {
             
-            destinationVC.P = P
+            calculateDailyTotalServes()
+            destinationVC.dailyTotalServes = dailyTotalServes
             
-        } else if segue.identifier == "GoToSettingsVC",
-            let destinationVC = segue.destination as? SettingsTableViewController {
-            
-            destinationVC.P = P
-        }
+        } 
     }
 }
 
@@ -214,11 +198,14 @@ extension MemberListViewController {
         let sortByName = NSSortDescriptor(key: "name", ascending: true)
         request.sortDescriptors = [sortByAge, sortByName]
         do{
-            memberArray = try P.context.fetch(request)
+            memberArray = try K.context.fetch(request)
         } catch {
             print("Error loading FamilyMembers \(error)")
         }
         tableView.reloadData()
     }
     
+
 }
+
+

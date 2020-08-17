@@ -1,31 +1,27 @@
 //
-//  PublicData.swift
-//  MunchUp
+//  SharedFunctions.swift
+//  MunchItUp
 //
-//  Created by Yuexi Tan on 2020/8/17.
+//  Created by Yuexi Tan on 2020/8/3.
 //  Copyright © 2020 Yuexi Tan. All rights reserved.
 //
 
 import UIKit
 import CoreData
 
-class PublicData {
+
+extension UIViewController {
     
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    let defaults = UserDefaults.standard
-    
-    var days = 0.0
-    var dailyTotalServes: [String: Double] = [:]
-    
-    let checkedSymbol = UIImage(systemName: "checkmark.circle.fill")
-    let uncheckedSymbol = UIImage(systemName: "circle")
- 
-    //plist days
     func updateDays(_ int: Int){
-        defaults.set(int, forKey: NSLocalizedString("Days", comment: "plist"))
-        days = Double(int)
-        print(days)
+        K.defaults.set(int, forKey: K.daysString)
     }
+    
+    
+    func getDays() -> Double {
+        let days = K.defaults.integer(forKey: K.daysString)
+        return Double(days)
+    }
+    
     
     func reloadServeSizes(){
         
@@ -34,7 +30,7 @@ class PublicData {
         let request : NSFetchRequest<OneServe> = OneServe.fetchRequest()
 
         do{
-            oldServeSizes = try context.fetch(request)
+            oldServeSizes = try K.context.fetch(request)
         } catch {
             print("Error loading OneServe \(error)")
         }
@@ -52,7 +48,7 @@ class PublicData {
             if i.custom {
                 newServeSizes.append(i)
             } else {
-                context.delete(i)
+                K.context.delete(i)
             }
         }
         
@@ -61,7 +57,7 @@ class PublicData {
         //read in new serve sizes
         while let line = readLine() {
             let fields: [String] = line.components(separatedBy: "\t")
-            let newServe = OneServe(context: context)
+            let newServe = OneServe(context: K.context)
             newServe.category = fields[0]
             newServe.order = Int16(Int(fields[1]) ?? 0)
             newServe.quantity1 = Double(fields[2]) ?? 0.0
@@ -75,11 +71,41 @@ class PublicData {
             newServeSizes.append(newServe)
         }
         
-        do {
-          try context.save()
-        } catch {
-           print("Error saving context \(error)")
-        }
+        saveContext()
         
     }
+    
+    
+    func saveContext(){
+        do {
+            try K.context.save()
+        } catch {
+            print("Error saving context \(error)")
+        }
+    }
+
+    
+    func limitDigits(_ double: Double, max: Int = 1) -> String {
+        let formatter = NumberFormatter()
+        formatter.minimumFractionDigits = 0
+        formatter.maximumFractionDigits = max
+        return formatter.string(from: NSNumber(value: double))!
+    }
+    
+    
+    func roundToHalf(_ double: Double) -> Double {
+        return round(double*2)/2
+    }
+    
+    
+    func formatWeight(_ grams: Double) -> String {
+        if grams < 1000 {
+            return limitDigits(grams)
+        } else {
+            return limitDigits(grams/1000)
+
+        }
+    }
+    
+    
 }

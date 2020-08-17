@@ -11,18 +11,21 @@ import CoreData
 
 class ShoppingListViewController: UITableViewController {
     
-    let myN = NumberFormatsTYX()
-    let P = PublicData()
-    
+    var days = 0.0
     var itemArray: [OtherItem] = []
+    var dailyTotalServes: [String: Double] = [:]
+    
     let foodIcon = ["🥬","🍎","🍗","🍞","🥛","🥜"]
 
     override func viewDidAppear(_ animated: Bool) {
+        
+        days = getDays()
 
         let titleLocalize = NSLocalizedString("Shop for", comment: "navigation title")
         let daysLocalize = NSLocalizedString("days", comment: "navigation title")
-        navigationItem.title = "\(titleLocalize) \(Int(P.days)) \(daysLocalize)"
-        print(P.days)
+        navigationItem.title = "\(titleLocalize) \(Int(days)) \(daysLocalize)"
+        
+        tableView.reloadData()
     }
     
     
@@ -32,19 +35,18 @@ class ShoppingListViewController: UITableViewController {
         tableView.register(UINib(nibName: "OtherItemCell", bundle: nil), forCellReuseIdentifier: K.otherItemCellID)
         
 
-        
         loadItems()
         if itemArray.count == 0 {
-            let emptyItem = OtherItem(context: P.context)
+            let emptyItem = OtherItem(context: K.context)
             emptyItem.lastEdited = Date()
             itemArray.append(emptyItem)
         }
         
         //initialize serve sizes
         let appLanguage = Locale.preferredLanguages[0]
-        if P.defaults.string(forKey: "Localization") != appLanguage {
-            P.reloadServeSizes()
-            P.defaults.set(appLanguage, forKey: "Localization")
+        if K.defaults.string(forKey: "Localization") != appLanguage {
+            reloadServeSizes()
+            K.defaults.set(appLanguage, forKey: "Localization")
         }
         
     }
@@ -65,23 +67,17 @@ extension ShoppingListViewController {
             
             let cell = tableView.dequeueReusableCell(withIdentifier: K.foodGroupCellID, for: indexPath)
             let group = K.foodGroups[indexPath.row]
+            
             cell.textLabel?.text = "\(foodIcon[indexPath.row])  \(group)"
             
-            if let serves = P.dailyTotalServes[group] {
-                
-                let total = serves * P.days
-                let servesLocalize = NSLocalizedString("serves", comment: "a unit of food")
-                
-                if group == NSLocalizedString("Oil", comment: "food group") {
+            if let serves = dailyTotalServes[group] {
+                let total = serves * days
+                var detail = "\(limitDigits(total)) \(K.servesString)"
+                if group == K.foodGroups[5] {
                     let upToLocalize = NSLocalizedString("up to", comment: "oil serves")
-                    cell.detailTextLabel?.text = "\(upToLocalize) \(myN.limitDigits(total)) \(servesLocalize)"
-                } else {
-                    cell.detailTextLabel?.text = "\(myN.limitDigits(total)) \(servesLocalize)"
+                    detail = "\(upToLocalize) \(detail)"
                 }
-                
-            } else {
-                
-                cell.detailTextLabel?.text = ""
+                cell.detailTextLabel?.text = detail
             }
             
             return cell
@@ -91,7 +87,7 @@ extension ShoppingListViewController {
             let cell = tableView.dequeueReusableCell(withIdentifier: K.otherItemCellID, for: indexPath) as! OtherItemCell
             let item = itemArray[indexPath.row - K.foodGroups.count]
             cell.done = item.done
-            cell.checkMarkImage.image = item.done ? P.checkedSymbol: P.uncheckedSymbol
+            cell.checkMarkImage.image = item.done ? K.checkedSymbol: K.uncheckedSymbol
             if item.title == nil {
                 cell.checkMarkImage.isHidden = true
             }
@@ -110,14 +106,17 @@ extension ShoppingListViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let itemIndex = indexPath.row - K.foodGroups.count
+        //if food, go to servers calculator
         if itemIndex < 0 {
             performSegue(withIdentifier: "GoToServesCalculatorVC", sender: self)
+            
+        //if other items, change 'done' state
         } else {
             let cell = tableView.cellForRow(at: indexPath) as! OtherItemCell
             cell.done = !cell.done
-            cell.checkMarkImage.image = cell.done ? P.checkedSymbol: P.uncheckedSymbol
+            cell.checkMarkImage.image = cell.done ? K.checkedSymbol: K.uncheckedSymbol
             itemArray[itemIndex].done = cell.done
-            saveItems(false)
+            saveContext()
         }
         tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -129,7 +128,7 @@ extension ShoppingListViewController {
             
             let group = K.foodGroups[indexPath.row]
             destinationVC.category = group
-            destinationVC.targetServes = P.dailyTotalServes[group]! * P.days
+            destinationVC.targetServes = dailyTotalServes[group]! * days
         }
     }
 }
@@ -139,7 +138,7 @@ extension ShoppingListViewController {
 extension ShoppingListViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
+
         textField.endEditing(true)
         return true
     }
@@ -150,22 +149,24 @@ extension ShoppingListViewController: UITextFieldDelegate {
         let itemIndex = textField.tag - K.foodGroups.count
 
         if textField.text == "", itemIndex > 0 {
-            P.context.delete(itemArray[itemIndex])
+            K.context.delete(itemArray[itemIndex])
             itemArray.remove(at: itemIndex)
-            saveItems()
+            saveContext()
+            tableView.reloadData()
         }else if textField.text != "" {
             itemArray[itemIndex].title = textField.text
             itemArray[itemIndex].lastEdited = Date()
             if itemIndex == 0 {
                 //add new item
-                itemArray.insert(OtherItem(context: P.context), at: 0)
+                itemArray.insert(OtherItem(context: K.context), at: 0)
             } else {
                 //put edited item first
                 itemArray.insert(itemArray[itemIndex], at: 1)
                 itemArray.remove(at: itemIndex + 1)
             }
             itemArray[0].lastEdited = Date().advanced(by: 1)
-            saveItems()
+            saveContext()
+            tableView.reloadData()
         }
     }
     
@@ -181,29 +182,12 @@ extension ShoppingListViewController {
         let sortByDate = NSSortDescriptor(key: "lastEdited", ascending: false)
         request.sortDescriptors = [sortByDate]
         do{
-            itemArray = try P.context.fetch(request)
+            itemArray = try K.context.fetch(request)
         } catch {
             print("Error loading OtherItem \(error)")
         }
         self.tableView.reloadData()
     }
-    
-    
-    func saveItems(_ reload: Bool = true) {
-        
-        do {
-          try P.context.save()
-        } catch {
-           print("Error saving P.context \(error)")
-        }
-        
-        if reload {
-            tableView.reloadData()
-        }
-    }
-    
-    
-    
     
     
 }

@@ -22,7 +22,6 @@ class ServesCalculatorViewController: UIViewController {
     @IBOutlet weak var setButton: UIButton!
     @IBOutlet weak var clearButton: UIButton!
     
-    let myN = NumberFormatsTYX()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +29,7 @@ class ServesCalculatorViewController: UIViewController {
         setButton.layer.cornerRadius = 10
         clearButton.layer.cornerRadius = 10
         navigationItem.title = category
-        targetServesLabel.text = myN.limitDigits(targetServes)
+        targetServesLabel.text = limitDigits(targetServes)
         
 //        tableVC.category = category
 //        tableVC.targetServes = targetServes
@@ -49,7 +48,7 @@ class ServesCalculatorViewController: UIViewController {
     //MARK: - Functions
     
     func updateTotal(_ serves: Double) {
-        currentServes = myN.roundToHalf(serves)
+        currentServes = roundToHalf(serves)
         let delta = currentServes - targetServes
         totalServesLabel.text = (delta > 0) ? "+": ""
         if delta == 0 {
@@ -59,7 +58,7 @@ class ServesCalculatorViewController: UIViewController {
         } else if delta < 0 {
             moreOrLessLabel.text = NSLocalizedString("Too little", comment: "serves calculator")
         }
-        totalServesLabel.text! += myN.limitDigits(delta)
+        totalServesLabel.text! += limitDigits(delta)
     }
     
 
@@ -72,9 +71,9 @@ class ServesCalculatorViewController: UIViewController {
             
             tableVC = segue.destination as? ServesCalculatorTableViewController
 
-//            tableVC?.category = category
-//            tableVC?.targetServes = targetServes
-//            tableVC?.containerVC = self
+            tableVC?.category = category
+            tableVC?.targetServes = targetServes
+            tableVC?.containerVC = self
 
         }
 

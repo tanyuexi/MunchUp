@@ -10,14 +10,13 @@ import UIKit
 
 class SettingsTableViewController: UITableViewController {
     
-    var P: PublicData?
     
     @IBOutlet weak var daysTextField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        daysTextField.text = "\(Int(P.days))"
+        daysTextField.text = "\(Int(getDays()))"
         
         daysTextField.delegate = self 
     
@@ -35,7 +34,7 @@ class SettingsTableViewController: UITableViewController {
             sender.text = "1"
         }
         
-        P.updateDays(Int(sender.text!)!)
+        updateDays(Int(sender.text!)!)
     }
     
     
@@ -51,7 +50,7 @@ class SettingsTableViewController: UITableViewController {
         
         let alert = UIAlertController(title: message, message: "", preferredStyle: .alert)
         
-        alert.addAction(UIAlertAction(title: NSLocalizedString("Got it", comment: "alert"), style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "alert"), style: .cancel, handler: nil))
         
         present(alert, animated: true, completion: nil)
 
@@ -66,7 +65,7 @@ extension SettingsTableViewController {
         
         switch indexPath {
         case [0,1]:
-            P.reloadServeSizes()
+            reloadServeSizes()
             alertPopUp(NSLocalizedString("Food database reloaded", comment: "alert"))
             
         case [1,0]:

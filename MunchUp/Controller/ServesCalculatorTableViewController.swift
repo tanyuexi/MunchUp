@@ -11,18 +11,17 @@ import CoreData
 
 class ServesCalculatorTableViewController: UITableViewController {
     
-//    var category = ""
-//    var targetServes = 0.0
-    let containerVC = ServesCalculatorViewController()
+    var category = ""
+    var targetServes = 0.0
+    var containerVC: ServesCalculatorViewController?
     
     var serveSizes: [OneServe] = []
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    let myN = NumberFormatsTYX()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        loadServeSizes(containerVC.category)
+        loadServeSizes(category)
         initServesAndDone()
         notifyChangeOfServes()
         
@@ -38,7 +37,7 @@ extension ServesCalculatorTableViewController {
     
     func notifyChangeOfServes() {
         
-        containerVC.updateTotal(sumUpServes())
+        containerVC?.updateTotal(sumUpServes())
         
     }
     
@@ -67,7 +66,7 @@ extension ServesCalculatorTableViewController {
             size.serves = 0
             size.done = false
         }
-        saveServeSizes()
+        saveContext()
         notifyChangeOfServes()
         tableView.reloadData()
         
@@ -76,12 +75,12 @@ extension ServesCalculatorTableViewController {
     
     func initServesAndDone(force: Bool = false){
         
-        let servesPerItem = myN.roundToHalf(containerVC.targetServes/Double(serveSizes.count))
+        let servesPerItem = roundToHalf(targetServes/Double(serveSizes.count))
         for size in serveSizes {
             if force || size.serves == -1 {
                 size.serves = servesPerItem
                 size.done = false
-                saveServeSizes()
+                saveContext()
                 notifyChangeOfServes()
             }
         }
@@ -103,7 +102,7 @@ extension ServesCalculatorTableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: K.servesCalculatorCellID, for: indexPath) as! ServesCalculatorCell
         
         cell.serveSizes = serveSizes[indexPath.row]
-//        cell.tableVC = self
+        cell.tableVC = self
         
         cell.updateAll()
         
@@ -128,10 +127,10 @@ extension ServesCalculatorTableViewController {
         
         if editingStyle == .delete {
             
-            context.delete(serveSizes[i])
+            K.context.delete(serveSizes[i])
             serveSizes.remove(at: i)
             tableView.deleteRows(at: [indexPath], with: .fade)
-            saveServeSizes()
+            saveContext()
         }
         
     }
@@ -146,27 +145,18 @@ extension ServesCalculatorTableViewController {
         
         let request : NSFetchRequest<OneServe> = OneServe.fetchRequest()
         
-        let categoryPredicate = NSPredicate(format: "category == %@", containerVC.category)
+        let categoryPredicate = NSPredicate(format: "category == %@", category)
         request.predicate = categoryPredicate
         
         let sortByOrder = NSSortDescriptor(key: "order", ascending: true)
         request.sortDescriptors = [sortByOrder]
         
         do{
-            serveSizes = try context.fetch(request)
+            serveSizes = try K.context.fetch(request)
         } catch {
             print("Error loading OneServe \(error)")
         }
     }
     
-    
-    func saveServeSizes() {
-        
-        do {
-          try context.save()
-        } catch {
-           print("Error saving context \(error)")
-        }
-        
-    }
+
 }
