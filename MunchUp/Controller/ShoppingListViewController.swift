@@ -41,11 +41,11 @@ class ShoppingListViewController: UITableViewController {
         
         //initialize serve sizes
         let appLanguage = Locale.preferredLanguages[0]
-        print(appLanguage)
         if defaults.string(forKey: "Localization") != appLanguage {
             storeServeSizes()
             defaults.set(appLanguage, forKey: "Localization")
-        }        
+        }
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -300,7 +300,8 @@ extension ShoppingListViewController {
             newServe.unit1 = fields[3]
             newServe.quantity2 = Double(fields[4]) ?? 0.0
             newServe.unit2 = fields[5]
-            newServe.detail = fields[6]
+            newServe.image = fields[6]
+            newServe.detail = fields[7]
             newServe.custom = false
             newServe.serves = -1
             serveSizes.append(newServe)

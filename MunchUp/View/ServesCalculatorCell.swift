@@ -13,6 +13,7 @@ class ServesCalculatorCell: UITableViewCell {
     
     @IBOutlet weak var detailLabel: UILabel!
     @IBOutlet weak var checkMark: UIImageView!
+    @IBOutlet weak var foodImage: UIImageView!
     @IBOutlet weak var numberTextField: UITextField!
     @IBOutlet weak var servesStepper: UIStepper!
     @IBOutlet weak var unitSegmentedControl: UISegmentedControl!
@@ -48,6 +49,7 @@ class ServesCalculatorCell: UITableViewCell {
         
         super.awakeFromNib()
         numberTextField.delegate = self
+        foodImage.layer.cornerRadius = 10
         
     }
 
@@ -92,6 +94,7 @@ class ServesCalculatorCell: UITableViewCell {
             
             //image
             updateCheckmark(sizes.done)
+            updateFoodImage(sizes.image!)
             
             //stepper
             servesStepper.stepValue = 1
@@ -161,7 +164,22 @@ class ServesCalculatorCell: UITableViewCell {
     
     func updateCheckmark(_ done: Bool) {
         
-        checkMark.image = done ? checkedSymbol: uncheckedSymbol
+        if done {
+            checkMark.image = checkedSymbol
+        } else {
+            checkMark.image = uncheckedSymbol
+        }
+        
+    }
+    
+    
+    func updateFoodImage(_ name: String){
+        
+        if let image = UIImage(named: name) {
+            
+            foodImage.image = image
+            
+        }
         
     }
     

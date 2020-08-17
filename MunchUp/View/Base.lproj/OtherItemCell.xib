@@ -16,18 +16,19 @@
                 <rect key="frame" x="0.0" y="0.0" width="412" height="51"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="bIF-65-eTL">
+                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="bIF-65-eTL">
                         <rect key="frame" x="20" y="10" width="372" height="31"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="gAP-UF-ils">
-                                <rect key="frame" x="0.0" y="0.5" width="30" height="30"/>
+                                <rect key="frame" x="0.0" y="1" width="30" height="29"/>
                                 <color key="tintColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="30" id="Ngn-jJ-2U7"/>
+                                    <constraint firstAttribute="height" constant="30" id="zhO-pV-BfY"/>
                                 </constraints>
                             </imageView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Add Item..." textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="GNR-8L-gFo">
-                                <rect key="frame" x="40" y="0.0" width="332" height="31"/>
+                                <rect key="frame" x="40" y="2" width="332" height="27"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                 <connections>

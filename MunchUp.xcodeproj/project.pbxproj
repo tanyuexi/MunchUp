@@ -18,7 +18,7 @@
 		E757C0E624C6639900B8AA08 /* EditMemberTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E757C0E524C6639900B8AA08 /* EditMemberTableViewController.swift */; };
 		E76F6A2024DD03EF0009B0E0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E76F6A1E24DD03EF0009B0E0 /* InfoPlist.strings */; };
 		E76F6A2324DD03EF0009B0E0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E76F6A2124DD03EF0009B0E0 /* Localizable.strings */; };
-		E76F6A2824DD09B60009B0E0 /* ServeSizes_Australia_en.txt in Resources */ = {isa = PBXBuildFile; fileRef = E76F6A2A24DD09B60009B0E0 /* ServeSizes_Australia_en.txt */; };
+		E76F6A2824DD09B60009B0E0 /* ServeSizes_Australia.txt in Resources */ = {isa = PBXBuildFile; fileRef = E76F6A2A24DD09B60009B0E0 /* ServeSizes_Australia.txt */; };
 		E76F6A2D24DD2AA80009B0E0 /* OtherItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E76F6A2F24DD2AA80009B0E0 /* OtherItemCell.xib */; };
 		E76F6A3224DD2AEE0009B0E0 /* ServesCalculatorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E76F6A3424DD2AEE0009B0E0 /* ServesCalculatorCell.xib */; };
 		E76F6A3A24E5551B0009B0E0 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76F6A3924E5551A0009B0E0 /* SettingsTableViewController.swift */; };
@@ -45,7 +45,7 @@
 		E757C0E524C6639900B8AA08 /* EditMemberTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditMemberTableViewController.swift; sourceTree = "<group>"; };
 		E76F6A1F24DD03EF0009B0E0 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		E76F6A2224DD03EF0009B0E0 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		E76F6A2924DD09B60009B0E0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text; name = Base; path = Base.lproj/ServeSizes_Australia_en.txt; sourceTree = "<group>"; usesTabs = 1; };
+		E76F6A2924DD09B60009B0E0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text; name = Base; path = Base.lproj/ServeSizes_Australia.txt; sourceTree = "<group>"; usesTabs = 1; };
 		E76F6A2C24DD09E10009B0E0 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text; name = "zh-Hans"; path = "zh-Hans.lproj/ServeSizes_Australia.txt"; sourceTree = "<group>"; usesTabs = 1; };
 		E76F6A2E24DD2AA80009B0E0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/OtherItemCell.xib; sourceTree = "<group>"; };
 		E76F6A3124DD2AB50009B0E0 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/OtherItemCell.strings"; sourceTree = "<group>"; };
@@ -109,7 +109,7 @@
 		E757C0DA24C1743900B8AA08 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				E76F6A2A24DD09B60009B0E0 /* ServeSizes_Australia_en.txt */,
+				E76F6A2A24DD09B60009B0E0 /* ServeSizes_Australia.txt */,
 				E757C0DC24C1776E00B8AA08 /* Constants.swift */,
 				E757C0C924C1662000B8AA08 /* MunchUp.xcdatamodeld */,
 			);
@@ -215,7 +215,7 @@
 				E76F6A2324DD03EF0009B0E0 /* Localizable.strings in Resources */,
 				E757C0CD24C1662400B8AA08 /* Assets.xcassets in Resources */,
 				E757C0C824C1662000B8AA08 /* Main.storyboard in Resources */,
-				E76F6A2824DD09B60009B0E0 /* ServeSizes_Australia_en.txt in Resources */,
+				E76F6A2824DD09B60009B0E0 /* ServeSizes_Australia.txt in Resources */,
 				E76F6A2024DD03EF0009B0E0 /* InfoPlist.strings in Resources */,
 				E76F6A2D24DD2AA80009B0E0 /* OtherItemCell.xib in Resources */,
 			);
@@ -281,13 +281,13 @@
 			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
-		E76F6A2A24DD09B60009B0E0 /* ServeSizes_Australia_en.txt */ = {
+		E76F6A2A24DD09B60009B0E0 /* ServeSizes_Australia.txt */ = {
 			isa = PBXVariantGroup;
 			children = (
 				E76F6A2924DD09B60009B0E0 /* Base */,
 				E76F6A2C24DD09E10009B0E0 /* zh-Hans */,
 			);
-			name = ServeSizes_Australia_en.txt;
+			name = ServeSizes_Australia.txt;
 			sourceTree = SOURCE_ROOT;
 			usesTabs = 1;
 		};
