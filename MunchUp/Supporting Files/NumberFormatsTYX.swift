@@ -20,4 +20,13 @@ class NumberFormatsTYX {
     func roundToHalf(_ double: Double) -> Double {
         return round(double*2)/2
     }
+    
+    func formatWeight(_ grams: Double) -> String {
+        if grams < 1000 {
+            return limitDigits(grams)
+        } else {
+            return limitDigits(grams/1000)
+
+        }
+    }
 }

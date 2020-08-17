@@ -11,9 +11,9 @@ import CoreData
 
 class ServesCalculatorTableViewController: UITableViewController {
     
-    var category = ""
-    var targetServes = 0.0
-    var containerVC: ServesCalculatorViewController?
+//    var category = ""
+//    var targetServes = 0.0
+    let containerVC = ServesCalculatorViewController()
     
     var serveSizes: [OneServe] = []
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -22,7 +22,7 @@ class ServesCalculatorTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        loadServeSizes(category)
+        loadServeSizes(containerVC.category)
         initServesAndDone()
         notifyChangeOfServes()
         
@@ -38,7 +38,7 @@ extension ServesCalculatorTableViewController {
     
     func notifyChangeOfServes() {
         
-        containerVC?.updateTotal(sumUpServes())
+        containerVC.updateTotal(sumUpServes())
         
     }
     
@@ -76,7 +76,7 @@ extension ServesCalculatorTableViewController {
     
     func initServesAndDone(force: Bool = false){
         
-        let servesPerItem = myN.roundToHalf(targetServes/Double(serveSizes.count))
+        let servesPerItem = myN.roundToHalf(containerVC.targetServes/Double(serveSizes.count))
         for size in serveSizes {
             if force || size.serves == -1 {
                 size.serves = servesPerItem
@@ -103,7 +103,7 @@ extension ServesCalculatorTableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: K.servesCalculatorCellID, for: indexPath) as! ServesCalculatorCell
         
         cell.serveSizes = serveSizes[indexPath.row]
-        cell.tableVC = self
+//        cell.tableVC = self
         
         cell.updateAll()
         
@@ -146,7 +146,7 @@ extension ServesCalculatorTableViewController {
         
         let request : NSFetchRequest<OneServe> = OneServe.fetchRequest()
         
-        let categoryPredicate = NSPredicate(format: "category == %@", category)
+        let categoryPredicate = NSPredicate(format: "category == %@", containerVC.category)
         request.predicate = categoryPredicate
         
         let sortByOrder = NSSortDescriptor(key: "order", ascending: true)

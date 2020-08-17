@@ -19,7 +19,7 @@ class ServesCalculatorCell: UITableViewCell {
     @IBOutlet weak var unitSegmentedControl: UISegmentedControl!
     
     var serveSizes: OneServe?
-    var tableVC: ServesCalculatorTableViewController?
+    let tableVC = ServesCalculatorTableViewController()
     
     let myN = NumberFormatsTYX()
     let checkedSymbol = UIImage(systemName: "checkmark.circle.fill")
@@ -59,7 +59,7 @@ class ServesCalculatorCell: UITableViewCell {
         if let sizes = serveSizes, selected {
             sizes.done = !sizes.done
             updateCheckmark(sizes.done)
-            tableVC?.saveServeSizes()
+            tableVC.saveServeSizes()
         }
         
     }
@@ -69,8 +69,8 @@ class ServesCalculatorCell: UITableViewCell {
         
         if let sizes = serveSizes {
             sizes.serves = sender.value
-            tableVC?.saveServeSizes()
-            tableVC?.notifyChangeOfServes()
+            tableVC.saveServeSizes()
+            tableVC.notifyChangeOfServes()
             updateServesStepper(sizes.serves)
             updateUnitSegmentedControl(sizes)
             updateNumberTextField()
@@ -231,8 +231,8 @@ extension ServesCalculatorCell: UITextFieldDelegate {
                 return
             }
             
-            tableVC?.saveServeSizes()
-            tableVC?.notifyChangeOfServes()
+            tableVC.saveServeSizes()
+            tableVC.notifyChangeOfServes()
             updateServesStepper(sizes.serves)
             updateUnitSegmentedControl(sizes)
             updateNumberTextField()

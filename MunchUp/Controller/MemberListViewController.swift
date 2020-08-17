@@ -11,13 +11,16 @@ import CoreData
 
 class MemberListViewController: UIViewController {
     
+        
+    let P = PublicData()
+    
+    var ageThreshold: [Int: Date] = [:]
+    var memberArray : [FamilyMember] = []
+    
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var shopButton: UIButton!
     
-    var memberArray : [FamilyMember] = []
-        
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    let defaults = UserDefaults.standard
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,9 +30,11 @@ class MemberListViewController: UIViewController {
         tableView.delegate = self
         
         //initialize settings
-        if !defaults.bool(forKey: NSLocalizedString("Settings initialized", comment: "plist")) {
-            defaults.set(7, forKey: NSLocalizedString("Days", comment: "plist"))
-            defaults.set(true, forKey: NSLocalizedString("Settings initialized", comment: "plist"))
+        if !P.defaults.bool(forKey: NSLocalizedString("Settings initialized", comment: "plist")) {
+            P.updateDays(7)
+            P.defaults.set(true, forKey: NSLocalizedString("Settings initialized", comment: "plist"))
+        } else {
+            P.days = P.defaults.double(forKey: NSLocalizedString("Days", comment: "plist"))
         }
     }
     
@@ -37,6 +42,7 @@ class MemberListViewController: UIViewController {
         loadFamilyMembers()
         disableShopButton(with: memberArray.count == 0)
     }
+    
     
     func disableShopButton(with disable: Bool){
         if disable {
@@ -47,6 +53,75 @@ class MemberListViewController: UIViewController {
             shopButton.backgroundColor = .systemRed
         }
     }
+    
+    
+    func yearsBeforeToday(_ years: Int) -> Date {
+        let calendar = Calendar.current
+        let today = Date()
+        let component = DateComponents(year: -years)
+        return calendar.date(byAdding: component, to: today)!
+    }
+    
+    func olderRangeInAgeZone(_ date: Date) -> Bool {
+        for i in [4, 9, 12, 14, 19] {
+            let diff = Calendar.current.dateComponents([.year], from: date, to: ageThreshold[i]!)
+            if diff.year! == 0 {
+                return true
+            }
+        }
+        return false
+    }
+    
+    @IBAction func shopButtonPressed(_ sender: UIButton) {
+        
+        P.dailyTotalServes = [:]
+        
+        for i in [1, 2, 4, 9, 12, 14, 19, 51, 70] {
+            ageThreshold[i] = yearsBeforeToday(i)
+        }
+
+        //calculate total serves
+        for member in memberArray {
+            var ageZone = 0
+            let olderRange = olderRangeInAgeZone(member.dateOfBirth!)
+            if member.pregnant || member.breastfeeding {
+                if member.dateOfBirth! <= ageThreshold[19]! {
+                    ageZone = 19
+                } else {
+                    ageZone = 1
+                }
+            } else {
+                for i in ageThreshold.keys.sorted() {
+                    if member.dateOfBirth! <= ageThreshold[i]! {
+                        ageZone = i
+                    }
+                }
+            }
+            
+            //if less than 1 yrs old, next member
+            if ageZone == 0 {continue}
+            
+            var key = "\(ageZone) "
+            key += member.female ? "F": "M"
+            if member.pregnant {key += "P"}
+            if member.breastfeeding {key += "B"}
+            
+            for group in K.foodGroups {
+                if P.dailyTotalServes[group] == nil {
+                    P.dailyTotalServes[group] = 0.0
+                }
+                P.dailyTotalServes[group]! += K.dailyServes[group]![key]!
+                if (member.additional || olderRange), group != K.foodGroups[5] {
+                    P.dailyTotalServes[group]! += K.dailyServes[NSLocalizedString("Additional", comment: "food group")]![key]!/5
+                }
+            }
+        }
+        
+//        tableView.reloadData()
+        
+        performSegue(withIdentifier: "GoToShoppingListVC", sender: nil)
+    }
+    
 }
 
 //MARK: - TableView Data Source
@@ -97,11 +172,11 @@ extension MemberListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
         if editingStyle == .delete {
-            context.delete(memberArray[indexPath.row])
+            P.context.delete(memberArray[indexPath.row])
             memberArray.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
             do {
-                try context.save()
+                try P.context.save()
             } catch {
                 print("Error saving context \(error)")
             }
@@ -118,7 +193,13 @@ extension MemberListViewController: UITableViewDelegate {
             }
         } else if segue.identifier == "GoToShoppingListVC",
             let destinationVC = segue.destination as? ShoppingListViewController {
-            destinationVC.memberArray = memberArray
+            
+            destinationVC.P = P
+            
+        } else if segue.identifier == "GoToSettingsVC",
+            let destinationVC = segue.destination as? SettingsTableViewController {
+            
+            destinationVC.P = P
         }
     }
 }
@@ -133,7 +214,7 @@ extension MemberListViewController {
         let sortByName = NSSortDescriptor(key: "name", ascending: true)
         request.sortDescriptors = [sortByAge, sortByName]
         do{
-            memberArray = try context.fetch(request)
+            memberArray = try P.context.fetch(request)
         } catch {
             print("Error loading FamilyMembers \(error)")
         }

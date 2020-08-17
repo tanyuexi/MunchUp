@@ -10,20 +10,21 @@ import UIKit
 
 class SettingsTableViewController: UITableViewController {
     
-    let defaults = UserDefaults.standard
-    let shopListVC = ShoppingListViewController()
+    var P: PublicData?
     
     @IBOutlet weak var daysTextField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadSettings()
+        
+        daysTextField.text = "\(Int(P.days))"
         
         daysTextField.delegate = self 
     
     }
     
     @IBAction func daysTextFieldEditingDidEnd(_ sender: UITextField) {
+        
         if let days = Int(sender.text!) {
             if days < 1 {
                 sender.text = "1"
@@ -33,13 +34,10 @@ class SettingsTableViewController: UITableViewController {
         } else {
             sender.text = "1"
         }
-        defaults.set(Int(sender.text!), forKey: NSLocalizedString("Days", comment: "plist"))
+        
+        P.updateDays(Int(sender.text!)!)
     }
     
-    
-    func loadSettings(){
-        daysTextField.text = "\(defaults.integer(forKey: NSLocalizedString("Days", comment: "plist")))"
-    }
     
     
     func openUrl(_ string: String){
@@ -68,21 +66,17 @@ extension SettingsTableViewController {
         
         switch indexPath {
         case [0,1]:
-            shopListVC.reloadServeSizes()
+            P.reloadServeSizes()
             alertPopUp(NSLocalizedString("Food database reloaded", comment: "alert"))
-            break
             
         case [1,0]:
             openUrl(K.servesForChildrenLink)
-            break
             
         case [1,1]:
             openUrl(K.servesForAdultsLink)
-            break
             
         case [1,2]:
             openUrl(K.serveSizesLink)
-            break
 
         default:
             break
