@@ -15,7 +15,6 @@ class ShoppingListViewController: UITableViewController {
     var ageThreshold: [Int: Date] = [:]
     var totalServes: [String: Double] = [:]
     var itemArray: [OtherItem] = []
-    var serveSizes: [OneServe] = []
     let foodIcon = ["🥬","🍎","🍗","🍞","🥛","🥜"]
     let checkedSymbol = UIImage(systemName: "checkmark.circle.fill")
     let uncheckedSymbol = UIImage(systemName: "circle")
@@ -42,7 +41,7 @@ class ShoppingListViewController: UITableViewController {
         //initialize serve sizes
         let appLanguage = Locale.preferredLanguages[0]
         if defaults.string(forKey: "Localization") != appLanguage {
-            storeServeSizes()
+            reloadServeSizes()
             defaults.set(appLanguage, forKey: "Localization")
         }
         
@@ -207,12 +206,16 @@ extension ShoppingListViewController {
 //MARK: - Text Field Delegate Methods
 
 extension ShoppingListViewController: UITextFieldDelegate {
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
         textField.endEditing(true)
         return true
     }
     
+    
     func textFieldDidEndEditing(_ textField: UITextField) {
+        
         let itemIndex = textField.tag - K.foodGroups.count
 
         if textField.text == "", itemIndex > 0 {
@@ -234,6 +237,8 @@ extension ShoppingListViewController: UITextFieldDelegate {
             saveItems()
         }
     }
+    
+    
 }
 
 //MARK: - Core Data Actions
@@ -252,6 +257,7 @@ extension ShoppingListViewController {
         self.tableView.reloadData()
     }
     
+    
     func saveItems(_ reload: Bool = true) {
         
         do {
@@ -265,17 +271,18 @@ extension ShoppingListViewController {
         }
     }
     
-    func loadServeSizes() {
+    
+    func reloadServeSizes(){
+        
+        //load old serve sizes
+        var oldServeSizes: [OneServe] = []
         let request : NSFetchRequest<OneServe> = OneServe.fetchRequest()
 
         do{
-            serveSizes = try context.fetch(request)
+            oldServeSizes = try context.fetch(request)
         } catch {
             print("Error loading OneServe \(error)")
         }
-    }
-    
-    func storeServeSizes(){
     
         let serveSizesPath = Bundle.main.path(forResource: "ServeSizes_Australia", ofType: "txt")
         
@@ -283,14 +290,20 @@ extension ShoppingListViewController {
             perror(serveSizesPath)
         }
         
-        //delete previous whatever serve sizes
-        loadServeSizes()
-        for i in serveSizes {
-            context.delete(i)
+        //delete previous serve sizes in database
+        var newServeSizes: [OneServe] = []
+        
+        for i in oldServeSizes {
+            if i.custom {
+                newServeSizes.append(i)
+            } else {
+                context.delete(i)
+            }
         }
         
-        serveSizes = []
+        oldServeSizes = []
         
+        //read in new serve sizes
         while let line = readLine() {
             let fields: [String] = line.components(separatedBy: "\t")
             let newServe = OneServe(context: context)
@@ -304,7 +317,7 @@ extension ShoppingListViewController {
             newServe.detail = fields[7]
             newServe.custom = false
             newServe.serves = -1
-            serveSizes.append(newServe)
+            newServeSizes.append(newServe)
         }
         
         do {
@@ -313,6 +326,7 @@ extension ShoppingListViewController {
            print("Error saving context \(error)")
         }
         
-        serveSizes = []
     }
+    
+    
 }

@@ -122,6 +122,20 @@ extension ServesCalculatorTableViewController {
         
     }
     
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+        let i = indexPath.row
+        
+        if editingStyle == .delete {
+            
+            context.delete(serveSizes[i])
+            serveSizes.remove(at: i)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            saveServeSizes()
+        }
+        
+    }
+    
 }
 
 //MARK: - Core Data

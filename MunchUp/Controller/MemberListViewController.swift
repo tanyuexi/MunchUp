@@ -89,11 +89,13 @@ extension MemberListViewController: UITableViewDataSource {
 extension MemberListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         performSegue(withIdentifier: "GoToMemberDetailVC", sender: self)
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
         if editingStyle == .delete {
             context.delete(memberArray[indexPath.row])
             memberArray.remove(at: indexPath.row)
@@ -104,6 +106,7 @@ extension MemberListViewController: UITableViewDelegate {
                 print("Error saving context \(error)")
             }
         }
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
