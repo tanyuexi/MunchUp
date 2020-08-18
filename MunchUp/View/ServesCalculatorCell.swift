@@ -11,19 +11,19 @@ import CoreData
 
 class ServesCalculatorCell: UITableViewCell {
     
+    var serveSizes: OneServe?
+    var tableVC: ServesCalculatorTableViewController?
+    
+    let shared = UIViewController()
+    
     @IBOutlet weak var detailLabel: UILabel!
     @IBOutlet weak var checkMark: UIImageView!
+    @IBOutlet weak var foodImage: UIImageView!
     @IBOutlet weak var numberTextField: UITextField!
     @IBOutlet weak var servesStepper: UIStepper!
     @IBOutlet weak var unitSegmentedControl: UISegmentedControl!
     
-    var serveSizes: OneServe?
-    var tableVC: ServesCalculatorTableViewController?
-    
-    let myN = NumberFormatsTYX()
-    let checkedSymbol = UIImage(systemName: "checkmark.circle.fill")
-    let uncheckedSymbol = UIImage(systemName: "circle")
-    
+
     /********************************
      Value update ways:
         1. loading from core data, if -1, set for user
@@ -48,6 +48,7 @@ class ServesCalculatorCell: UITableViewCell {
         
         super.awakeFromNib()
         numberTextField.delegate = self
+        foodImage.layer.cornerRadius = 10
         
     }
 
@@ -57,7 +58,7 @@ class ServesCalculatorCell: UITableViewCell {
         if let sizes = serveSizes, selected {
             sizes.done = !sizes.done
             updateCheckmark(sizes.done)
-            tableVC?.saveServeSizes()
+            shared.saveContext()
         }
         
     }
@@ -67,7 +68,7 @@ class ServesCalculatorCell: UITableViewCell {
         
         if let sizes = serveSizes {
             sizes.serves = sender.value
-            tableVC?.saveServeSizes()
+            shared.saveContext()
             tableVC?.notifyChangeOfServes()
             updateServesStepper(sizes.serves)
             updateUnitSegmentedControl(sizes)
@@ -92,6 +93,7 @@ class ServesCalculatorCell: UITableViewCell {
             
             //image
             updateCheckmark(sizes.done)
+            updateFoodImage(sizes.image!)
             
             //stepper
             servesStepper.stepValue = 1
@@ -117,17 +119,15 @@ class ServesCalculatorCell: UITableViewCell {
     
     
     func updateUnitSegmentedControl(_ sizes: OneServe) {
-        
-        let servesLocalize = NSLocalizedString("serves", comment: "a unit for food")
-        
+                
         unitSegmentedControl.setTitle(
-            "\(myN.limitDigits(sizes.serves)) \(servesLocalize)",
+            "\(shared.limitDigits(sizes.serves)) \(K.servesString)",
             forSegmentAt: 0)
         
         let calculatedQ1 = sizes.quantity1 * sizes.serves
         
         unitSegmentedControl.setTitle(
-            "\(myN.limitDigits(calculatedQ1)) \(sizes.unit1!)",
+            "\(shared.limitDigits(calculatedQ1)) \(sizes.unit1!)",
             forSegmentAt: 1)
         
         if sizes.unit2 == "" {
@@ -140,7 +140,7 @@ class ServesCalculatorCell: UITableViewCell {
             let calculatedQ2 = sizes.quantity2 * sizes.serves
             
             unitSegmentedControl.setTitle(
-                "\(myN.limitDigits(calculatedQ2)) \(sizes.unit2!)",
+                "\(shared.limitDigits(calculatedQ2)) \(sizes.unit2!)",
                 forSegmentAt: 2)
             
             unitSegmentedControl.setEnabled(true, forSegmentAt: 2)
@@ -161,7 +161,17 @@ class ServesCalculatorCell: UITableViewCell {
     
     func updateCheckmark(_ done: Bool) {
         
-        checkMark.image = done ? checkedSymbol: uncheckedSymbol
+        checkMark.image = done ? K.checkedSymbol: K.uncheckedSymbol
+    }
+    
+    
+    func updateFoodImage(_ name: String){
+        
+        if let image = UIImage(named: name) {
+            
+            foodImage.image = image
+            
+        }
         
     }
     
@@ -204,16 +214,16 @@ extension ServesCalculatorCell: UITextFieldDelegate {
             
             switch unitSegmentedControl.selectedSegmentIndex {
             case 0:
-                sizes.serves = myN.roundToHalf(double)
+                sizes.serves = shared.roundToHalf(double)
             case 1:
-                sizes.serves = myN.roundToHalf(double/sizes.quantity1)
+                sizes.serves = shared.roundToHalf(double/sizes.quantity1)
             case 2:
-                sizes.serves = myN.roundToHalf(double/sizes.quantity2)
+                sizes.serves = shared.roundToHalf(double/sizes.quantity2)
             default:
                 return
             }
             
-            tableVC?.saveServeSizes()
+            shared.saveContext()
             tableVC?.notifyChangeOfServes()
             updateServesStepper(sizes.serves)
             updateUnitSegmentedControl(sizes)

@@ -10,7 +10,6 @@
 		E757C0C124C1662000B8AA08 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E757C0C024C1662000B8AA08 /* AppDelegate.swift */; };
 		E757C0C324C1662000B8AA08 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E757C0C224C1662000B8AA08 /* SceneDelegate.swift */; };
 		E757C0C824C1662000B8AA08 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E757C0C624C1662000B8AA08 /* Main.storyboard */; };
-		E757C0CB24C1662000B8AA08 /* MunchUp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E757C0C924C1662000B8AA08 /* MunchUp.xcdatamodeld */; };
 		E757C0CD24C1662400B8AA08 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E757C0CC24C1662400B8AA08 /* Assets.xcassets */; };
 		E757C0D024C1662400B8AA08 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E757C0CE24C1662400B8AA08 /* LaunchScreen.storyboard */; };
 		E757C0DD24C1776E00B8AA08 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E757C0DC24C1776E00B8AA08 /* Constants.swift */; };
@@ -18,15 +17,16 @@
 		E757C0E624C6639900B8AA08 /* EditMemberTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E757C0E524C6639900B8AA08 /* EditMemberTableViewController.swift */; };
 		E76F6A2024DD03EF0009B0E0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E76F6A1E24DD03EF0009B0E0 /* InfoPlist.strings */; };
 		E76F6A2324DD03EF0009B0E0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E76F6A2124DD03EF0009B0E0 /* Localizable.strings */; };
-		E76F6A2824DD09B60009B0E0 /* ServeSizes_Australia_en.txt in Resources */ = {isa = PBXBuildFile; fileRef = E76F6A2A24DD09B60009B0E0 /* ServeSizes_Australia_en.txt */; };
+		E76F6A2824DD09B60009B0E0 /* ServeSizes_Australia.txt in Resources */ = {isa = PBXBuildFile; fileRef = E76F6A2A24DD09B60009B0E0 /* ServeSizes_Australia.txt */; };
 		E76F6A2D24DD2AA80009B0E0 /* OtherItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E76F6A2F24DD2AA80009B0E0 /* OtherItemCell.xib */; };
 		E76F6A3224DD2AEE0009B0E0 /* ServesCalculatorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E76F6A3424DD2AEE0009B0E0 /* ServesCalculatorCell.xib */; };
 		E76F6A3A24E5551B0009B0E0 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76F6A3924E5551A0009B0E0 /* SettingsTableViewController.swift */; };
+		E76F6A4024EA54300009B0E0 /* MunchUp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E76F6A3E24EA54300009B0E0 /* MunchUp.xcdatamodeld */; };
 		E7DA8C8D24CDA93500538CD3 /* ShoppingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DA8C8C24CDA93500538CD3 /* ShoppingListViewController.swift */; };
 		E7DA8C9024D280C000538CD3 /* OtherItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DA8C8E24D280C000538CD3 /* OtherItemCell.swift */; };
 		E7DA8C9B24D6C30800538CD3 /* ServesCalculatorTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DA8C9A24D6C30800538CD3 /* ServesCalculatorTableViewController.swift */; };
 		E7DA8CA024D6D22800538CD3 /* ServesCalculatorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DA8C9E24D6D22800538CD3 /* ServesCalculatorCell.swift */; };
-		E7DA8CA324D78EDA00538CD3 /* NumberFormatsTYX.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DA8CA224D78EDA00538CD3 /* NumberFormatsTYX.swift */; };
+		E7DA8CA324D78EDA00538CD3 /* SharedFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DA8CA224D78EDA00538CD3 /* SharedFunctions.swift */; };
 		E7DA8CA524D8E46700538CD3 /* ServesCalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DA8CA424D8E46700538CD3 /* ServesCalculatorViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -35,7 +35,6 @@
 		E757C0C024C1662000B8AA08 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E757C0C224C1662000B8AA08 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		E757C0C724C1662000B8AA08 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		E757C0CA24C1662000B8AA08 /* MunchItUp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MunchItUp.xcdatamodel; sourceTree = "<group>"; };
 		E757C0CC24C1662400B8AA08 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E757C0CF24C1662400B8AA08 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E757C0D124C1662400B8AA08 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -45,18 +44,19 @@
 		E757C0E524C6639900B8AA08 /* EditMemberTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditMemberTableViewController.swift; sourceTree = "<group>"; };
 		E76F6A1F24DD03EF0009B0E0 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		E76F6A2224DD03EF0009B0E0 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		E76F6A2924DD09B60009B0E0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text; name = Base; path = Base.lproj/ServeSizes_Australia_en.txt; sourceTree = "<group>"; usesTabs = 1; };
+		E76F6A2924DD09B60009B0E0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text; name = Base; path = Base.lproj/ServeSizes_Australia.txt; sourceTree = "<group>"; usesTabs = 1; };
 		E76F6A2C24DD09E10009B0E0 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text; name = "zh-Hans"; path = "zh-Hans.lproj/ServeSizes_Australia.txt"; sourceTree = "<group>"; usesTabs = 1; };
 		E76F6A2E24DD2AA80009B0E0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/OtherItemCell.xib; sourceTree = "<group>"; };
 		E76F6A3124DD2AB50009B0E0 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/OtherItemCell.strings"; sourceTree = "<group>"; };
 		E76F6A3324DD2AEE0009B0E0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ServesCalculatorCell.xib; sourceTree = "<group>"; };
 		E76F6A3924E5551A0009B0E0 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		E76F6A3B24E5614A0009B0E0 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/ServesCalculatorCell.strings"; sourceTree = "<group>"; };
+		E76F6A3F24EA54300009B0E0 /* MunchItUp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MunchItUp.xcdatamodel; sourceTree = "<group>"; };
 		E7DA8C8C24CDA93500538CD3 /* ShoppingListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListViewController.swift; sourceTree = "<group>"; };
 		E7DA8C8E24D280C000538CD3 /* OtherItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherItemCell.swift; sourceTree = "<group>"; };
 		E7DA8C9A24D6C30800538CD3 /* ServesCalculatorTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServesCalculatorTableViewController.swift; sourceTree = "<group>"; };
 		E7DA8C9E24D6D22800538CD3 /* ServesCalculatorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServesCalculatorCell.swift; sourceTree = "<group>"; };
-		E7DA8CA224D78EDA00538CD3 /* NumberFormatsTYX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberFormatsTYX.swift; sourceTree = "<group>"; };
+		E7DA8CA224D78EDA00538CD3 /* SharedFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedFunctions.swift; sourceTree = "<group>"; };
 		E7DA8CA424D8E46700538CD3 /* ServesCalculatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServesCalculatorViewController.swift; sourceTree = "<group>"; };
 		E7EC346424DCED5D00BEB229 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		E7EC346524DCED5D00BEB229 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
@@ -109,9 +109,9 @@
 		E757C0DA24C1743900B8AA08 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				E76F6A2A24DD09B60009B0E0 /* ServeSizes_Australia_en.txt */,
+				E76F6A3E24EA54300009B0E0 /* MunchUp.xcdatamodeld */,
+				E76F6A2A24DD09B60009B0E0 /* ServeSizes_Australia.txt */,
 				E757C0DC24C1776E00B8AA08 /* Constants.swift */,
-				E757C0C924C1662000B8AA08 /* MunchUp.xcdatamodeld */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -131,8 +131,8 @@
 		E757C0DE24C51A1500B8AA08 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				E76F6A3924E5551A0009B0E0 /* SettingsTableViewController.swift */,
 				E757C0DF24C52A4100B8AA08 /* MemberListViewController.swift */,
+				E76F6A3924E5551A0009B0E0 /* SettingsTableViewController.swift */,
 				E757C0E524C6639900B8AA08 /* EditMemberTableViewController.swift */,
 				E7DA8C8C24CDA93500538CD3 /* ShoppingListViewController.swift */,
 				E7DA8CA424D8E46700538CD3 /* ServesCalculatorViewController.swift */,
@@ -146,7 +146,7 @@
 			children = (
 				E757C0CE24C1662400B8AA08 /* LaunchScreen.storyboard */,
 				E757C0CC24C1662400B8AA08 /* Assets.xcassets */,
-				E7DA8CA224D78EDA00538CD3 /* NumberFormatsTYX.swift */,
+				E7DA8CA224D78EDA00538CD3 /* SharedFunctions.swift */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -215,7 +215,7 @@
 				E76F6A2324DD03EF0009B0E0 /* Localizable.strings in Resources */,
 				E757C0CD24C1662400B8AA08 /* Assets.xcassets in Resources */,
 				E757C0C824C1662000B8AA08 /* Main.storyboard in Resources */,
-				E76F6A2824DD09B60009B0E0 /* ServeSizes_Australia_en.txt in Resources */,
+				E76F6A2824DD09B60009B0E0 /* ServeSizes_Australia.txt in Resources */,
 				E76F6A2024DD03EF0009B0E0 /* InfoPlist.strings in Resources */,
 				E76F6A2D24DD2AA80009B0E0 /* OtherItemCell.xib in Resources */,
 			);
@@ -231,13 +231,13 @@
 				E757C0C124C1662000B8AA08 /* AppDelegate.swift in Sources */,
 				E76F6A3A24E5551B0009B0E0 /* SettingsTableViewController.swift in Sources */,
 				E757C0E024C52A4100B8AA08 /* MemberListViewController.swift in Sources */,
+				E76F6A4024EA54300009B0E0 /* MunchUp.xcdatamodeld in Sources */,
 				E7DA8C9024D280C000538CD3 /* OtherItemCell.swift in Sources */,
 				E757C0C324C1662000B8AA08 /* SceneDelegate.swift in Sources */,
 				E757C0E624C6639900B8AA08 /* EditMemberTableViewController.swift in Sources */,
 				E7DA8CA524D8E46700538CD3 /* ServesCalculatorViewController.swift in Sources */,
 				E7DA8C9B24D6C30800538CD3 /* ServesCalculatorTableViewController.swift in Sources */,
-				E7DA8CA324D78EDA00538CD3 /* NumberFormatsTYX.swift in Sources */,
-				E757C0CB24C1662000B8AA08 /* MunchUp.xcdatamodeld in Sources */,
+				E7DA8CA324D78EDA00538CD3 /* SharedFunctions.swift in Sources */,
 				E7DA8C8D24CDA93500538CD3 /* ShoppingListViewController.swift in Sources */,
 				E757C0DD24C1776E00B8AA08 /* Constants.swift in Sources */,
 				E7DA8CA024D6D22800538CD3 /* ServesCalculatorCell.swift in Sources */,
@@ -281,13 +281,13 @@
 			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
-		E76F6A2A24DD09B60009B0E0 /* ServeSizes_Australia_en.txt */ = {
+		E76F6A2A24DD09B60009B0E0 /* ServeSizes_Australia.txt */ = {
 			isa = PBXVariantGroup;
 			children = (
 				E76F6A2924DD09B60009B0E0 /* Base */,
 				E76F6A2C24DD09E10009B0E0 /* zh-Hans */,
 			);
-			name = ServeSizes_Australia_en.txt;
+			name = ServeSizes_Australia.txt;
 			sourceTree = SOURCE_ROOT;
 			usesTabs = 1;
 		};
@@ -500,12 +500,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		E757C0C924C1662000B8AA08 /* MunchUp.xcdatamodeld */ = {
+		E76F6A3E24EA54300009B0E0 /* MunchUp.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				E757C0CA24C1662000B8AA08 /* MunchItUp.xcdatamodel */,
+				E76F6A3F24EA54300009B0E0 /* MunchItUp.xcdatamodel */,
 			);
-			currentVersion = E757C0CA24C1662000B8AA08 /* MunchItUp.xcdatamodel */;
+			currentVersion = E76F6A3F24EA54300009B0E0 /* MunchItUp.xcdatamodel */;
 			path = MunchUp.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

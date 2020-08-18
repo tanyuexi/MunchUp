@@ -13,7 +13,7 @@ class ServesCalculatorViewController: UIViewController {
 
     var category = ""
     var targetServes = 0.0
-    var totalServes = 0.0
+    var currentServes = 0.0
     var tableVC: ServesCalculatorTableViewController?
     
     @IBOutlet weak var targetServesLabel: UILabel!
@@ -22,7 +22,6 @@ class ServesCalculatorViewController: UIViewController {
     @IBOutlet weak var setButton: UIButton!
     @IBOutlet weak var clearButton: UIButton!
     
-    let myN = NumberFormatsTYX()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +29,10 @@ class ServesCalculatorViewController: UIViewController {
         setButton.layer.cornerRadius = 10
         clearButton.layer.cornerRadius = 10
         navigationItem.title = category
-        targetServesLabel.text = myN.limitDigits(targetServes)
+        targetServesLabel.text = limitDigits(targetServes)
+        
+//        tableVC.category = category
+//        tableVC.targetServes = targetServes
                 
     }
     
@@ -46,8 +48,8 @@ class ServesCalculatorViewController: UIViewController {
     //MARK: - Functions
     
     func updateTotal(_ serves: Double) {
-        totalServes = myN.roundToHalf(serves)
-        let delta = totalServes - targetServes
+        currentServes = roundToHalf(serves)
+        let delta = currentServes - targetServes
         totalServesLabel.text = (delta > 0) ? "+": ""
         if delta == 0 {
             moreOrLessLabel.text = NSLocalizedString("Just right", comment: "serves calculator")
@@ -56,7 +58,7 @@ class ServesCalculatorViewController: UIViewController {
         } else if delta < 0 {
             moreOrLessLabel.text = NSLocalizedString("Too little", comment: "serves calculator")
         }
-        totalServesLabel.text! += myN.limitDigits(delta)
+        totalServesLabel.text! += limitDigits(delta)
     }
     
 
@@ -66,14 +68,15 @@ class ServesCalculatorViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
         if segue.identifier == "GoToServesCalculatorTableVC" {
-            tableVC = segue.destination as? ServesCalculatorTableViewController
             
+            tableVC = segue.destination as? ServesCalculatorTableViewController
+
             tableVC?.category = category
             tableVC?.targetServes = targetServes
             tableVC?.containerVC = self
-            
+
         }
-        
+
     }
     
 }

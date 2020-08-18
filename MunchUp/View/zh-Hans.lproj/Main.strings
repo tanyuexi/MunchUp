@@ -4,6 +4,9 @@
 /* Class = "UILabel"; text = "0"; ObjectID = "7bU-w5-t4x"; */
 "7bU-w5-t4x.text" = "0";
 
+/* Class = "UITableViewSection"; headerTitle = "Links"; ObjectID = "BqX-8Y-CEy"; */
+"BqX-8Y-CEy.headerTitle" = "链接";
+
 /* Class = "UITextField"; placeholder = "DD/MM/YYYY"; ObjectID = "cih-Xh-IeF"; */
 "cih-Xh-IeF.placeholder" = "年年年年/月月/日日";
 
@@ -34,7 +37,7 @@
 /* Class = "UILabel"; text = "Date of Birth: "; ObjectID = "gqM-vH-aeS"; */
 "gqM-vH-aeS.text" = "出生日期：";
 
-/* Class = "UILabel"; text = "Days to plan for:"; ObjectID = "gYb-iX-hfV"; */
+/* Class = "UILabel"; text = "Days to plan for: "; ObjectID = "gYb-iX-hfV"; */
 "gYb-iX-hfV.text" = "采购天数：";
 
 /* Class = "UIButton"; normalTitle = "Delete"; ObjectID = "HTN-Mp-4fq"; */
@@ -49,17 +52,26 @@
 /* Class = "UINavigationItem"; title = "Family Members"; ObjectID = "jTx-ss-ylo"; */
 "jTx-ss-ylo.title" = "家庭成员";
 
+/* Class = "UITableViewSection"; headerTitle = "General"; ObjectID = "k1Q-MY-aFo"; */
+"k1Q-MY-aFo.headerTitle" = "通用";
+
 /* Class = "UINavigationItem"; title = "Settings"; ObjectID = "kT8-mJ-GSG"; */
 "kT8-mJ-GSG.title" = "设置";
 
 /* Class = "UIButton"; normalTitle = "Auto Set"; ObjectID = "MvE-EY-kvq"; */
 "MvE-EY-kvq.normalTitle" = "自动设定";
 
+/* Class = "UILabel"; text = "What is a serve?"; ObjectID = "oFZ-jP-wqy"; */
+"oFZ-jP-wqy.text" = "一份是多少？";
+
 /* Class = "UILabel"; text = "Add Member..."; ObjectID = "oIZ-my-Nxc"; */
 "oIZ-my-Nxc.text" = "添加成员...";
 
 /* Class = "UIBarButtonItem"; title = " "; ObjectID = "onx-ZW-GH3"; */
 "onx-ZW-GH3.title" = " ";
+
+/* Class = "UILabel"; text = "Recommended daily serves for adults"; ObjectID = "pg8-cV-Tts"; */
+"pg8-cV-Tts.text" = "成人每日推荐食物份数";
 
 /* Class = "UINavigationItem"; title = "Shopping List"; ObjectID = "pxr-r0-LZr"; */
 "pxr-r0-LZr.title" = "采购清单";
@@ -85,6 +97,9 @@
 /* Class = "UILabel"; text = "0"; ObjectID = "ric-w2-ndZ"; */
 "ric-w2-ndZ.text" = "0";
 
+/* Class = "UILabel"; text = "Recommended daily serves for children"; ObjectID = "sLG-6F-qTN"; */
+"sLG-6F-qTN.text" = "儿童每日推荐食物份数";
+
 /* Class = "UINavigationItem"; title = "Edit Member"; ObjectID = "SqI-Jh-9qL"; */
 "SqI-Jh-9qL.title" = "修改成员";
 
@@ -102,4 +117,7 @@
 
 /* Class = "UILabel"; text = "Title"; ObjectID = "xoZ-rF-gpR"; */
 "xoZ-rF-gpR.text" = "标题";
+
+/* Class = "UILabel"; text = "Re-load food database"; ObjectID = "ZAP-zd-gMi"; */
+"ZAP-zd-gMi.text" = "重新载入食物数据库";
 

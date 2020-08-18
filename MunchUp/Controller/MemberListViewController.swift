@@ -11,13 +11,16 @@ import CoreData
 
 class MemberListViewController: UIViewController {
     
+    
+    var days = 0.0
+    var ageThreshold: [Int: Date] = [:]
+    var memberArray : [FamilyMember] = []
+    var dailyTotalServes: [String: Double] = [:]
+    
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var shopButton: UIButton!
     
-    var memberArray : [FamilyMember] = []
-        
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    let defaults = UserDefaults.standard
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,10 +29,11 @@ class MemberListViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         
-        //initialize settings
-        if !defaults.bool(forKey: NSLocalizedString("Settings initialized", comment: "plist")) {
-            defaults.set(7, forKey: NSLocalizedString("Days", comment: "plist"))
-            defaults.set(true, forKey: NSLocalizedString("Settings initialized", comment: "plist"))
+        //if days not set, let days = 7
+        days = getDays()
+        if days == 0 {
+            updateDays(7)
+            days = 7.0
         }
     }
     
@@ -37,6 +41,7 @@ class MemberListViewController: UIViewController {
         loadFamilyMembers()
         disableShopButton(with: memberArray.count == 0)
     }
+    
     
     func disableShopButton(with disable: Bool){
         if disable {
@@ -47,6 +52,76 @@ class MemberListViewController: UIViewController {
             shopButton.backgroundColor = .systemRed
         }
     }
+    
+    
+    func yearsBeforeToday(_ years: Int) -> Date {
+        let calendar = Calendar.current
+        let today = Date()
+        let component = DateComponents(year: -years)
+        return calendar.date(byAdding: component, to: today)!
+    }
+    
+    func olderRangeInAgeZone(_ date: Date) -> Bool {
+        for i in [4, 9, 12, 14, 19] {
+            let diff = Calendar.current.dateComponents([.year], from: date, to: ageThreshold[i]!)
+            if diff.year! == 0 {
+                return true
+            }
+        }
+        return false
+    }
+    
+    func calculateDailyTotalServes() {
+        
+        dailyTotalServes = [:]
+        
+        for i in [1, 2, 4, 9, 12, 14, 19, 51, 70] {
+            ageThreshold[i] = yearsBeforeToday(i)
+        }
+
+        //calculate total serves
+        for member in memberArray {
+            var ageZone = 0
+            let olderRange = olderRangeInAgeZone(member.dateOfBirth!)
+            if member.pregnant || member.breastfeeding {
+                if member.dateOfBirth! <= ageThreshold[19]! {
+                    ageZone = 19
+                } else {
+                    ageZone = 1
+                }
+            } else {
+                for i in ageThreshold.keys.sorted() {
+                    if member.dateOfBirth! <= ageThreshold[i]! {
+                        ageZone = i
+                    }
+                }
+            }
+            
+            //if less than 1 yrs old, next member
+            if ageZone == 0 {continue}
+            
+            var key = "\(ageZone) "
+            key += member.female ? "F": "M"
+            if member.pregnant {key += "P"}
+            if member.breastfeeding {key += "B"}
+            
+            for group in K.foodGroups {
+                if dailyTotalServes[group] == nil {
+                    dailyTotalServes[group] = 0.0
+                }
+                
+                dailyTotalServes[group]! += K.dailyServes[group]![key]!
+                
+                if (member.additional || olderRange),
+                    group != K.foodGroups[5] {   //oil
+                    
+                    dailyTotalServes[group]! += K.dailyServes[K.additionalString]![key]!/5
+                }
+            }
+        }
+                
+    }
+    
 }
 
 //MARK: - TableView Data Source
@@ -89,34 +164,27 @@ extension MemberListViewController: UITableViewDataSource {
 extension MemberListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         performSegue(withIdentifier: "GoToMemberDetailVC", sender: self)
         tableView.deselectRow(at: indexPath, animated: true)
     }
-    
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            context.delete(memberArray[indexPath.row])
-            memberArray.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
-            do {
-                try context.save()
-            } catch {
-                print("Error saving context \(error)")
-            }
-        }
-    }
+
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "GoToMemberDetailVC",
             let destinationVC = segue.destination as? EditMemberTableViewController,
             let indexPath = tableView.indexPathForSelectedRow {
+            
             if indexPath.row < memberArray.count {
                 destinationVC.selectedMember = [memberArray[indexPath.row]]
             }
         } else if segue.identifier == "GoToShoppingListVC",
             let destinationVC = segue.destination as? ShoppingListViewController {
-            destinationVC.memberArray = memberArray
-        }
+            
+            calculateDailyTotalServes()
+            destinationVC.dailyTotalServes = dailyTotalServes
+            
+        } 
     }
 }
 
@@ -130,11 +198,14 @@ extension MemberListViewController {
         let sortByName = NSSortDescriptor(key: "name", ascending: true)
         request.sortDescriptors = [sortByAge, sortByName]
         do{
-            memberArray = try context.fetch(request)
+            memberArray = try K.context.fetch(request)
         } catch {
             print("Error loading FamilyMembers \(error)")
         }
         tableView.reloadData()
     }
     
+
 }
+
+

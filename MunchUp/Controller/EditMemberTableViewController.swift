@@ -11,6 +11,12 @@ import CoreData
 
 class EditMemberTableViewController: UITableViewController {
     
+    var selectedMember: [FamilyMember] = []
+    var validDOB = false
+    
+    let dateFormatter = DateFormatter()
+    let confirmFormatter = DateFormatter()
+    
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var DOBTextField: UITextField!
     @IBOutlet weak var DOBConfirmLabel: UILabel!
@@ -23,12 +29,6 @@ class EditMemberTableViewController: UITableViewController {
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var deleteButton: UIButton!
     
-    var selectedMember: [FamilyMember] = []
-    var validDOB = false
-    
-    let dateFormatter = DateFormatter()
-    let confirmFormatter = DateFormatter()
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -111,10 +111,10 @@ class EditMemberTableViewController: UITableViewController {
     
     @IBAction func saveButtonPressed(_ sender: UIButton) {
         if selectedMember.count == 0 {   //adding new member
-            selectedMember.append(FamilyMember(context: context))
+            selectedMember.append(FamilyMember(context: K.context))
         }
         formToData(to: selectedMember[0])
-        saveMemberDetail()
+        saveContext()
         navigationController?.popViewController(animated: true)
     }
     
@@ -128,8 +128,8 @@ class EditMemberTableViewController: UITableViewController {
     }
     
     @IBAction func deleteButtonPressed(_ sender: UIButton) {
-        context.delete(selectedMember[0])
-        saveMemberDetail()
+        K.context.delete(selectedMember[0])
+        saveContext()
         navigationController?.popViewController(animated: true)
     }
     
@@ -149,6 +149,15 @@ class EditMemberTableViewController: UITableViewController {
 //MARK: - UITextFieldDelegate
 
 extension EditMemberTableViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.endEditing(true)
+        return true
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textField.selectAll(nil)
+    }
     
     //DOBTextField auto format to "XX/XX/XXXX"
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -172,27 +181,6 @@ extension EditMemberTableViewController: UITextFieldDelegate {
         
         textField.text = updatedText
         return false
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.endEditing(true)
-        return true
-    }
-    
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        textField.selectAll(nil)
-    }
-}
-
-//MARK: - Model Manupulation Methods
-
-extension EditMemberTableViewController {
-    func saveMemberDetail() {
-        do {
-            try context.save()
-        } catch {
-            print("Error saving context \(error)")
-        }
     }
     
 }

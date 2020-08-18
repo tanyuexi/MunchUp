@@ -11,123 +11,45 @@ import CoreData
 
 class ShoppingListViewController: UITableViewController {
     
-    var memberArray : [FamilyMember] = []
-    var ageThreshold: [Int: Date] = [:]
-    var totalServes: [String: Double] = [:]
+    var days = 0.0
     var itemArray: [OtherItem] = []
-    var serveSizes: [OneServe] = []
+    var dailyTotalServes: [String: Double] = [:]
+    
     let foodIcon = ["🥬","🍎","🍗","🍞","🥛","🥜"]
-    let checkedSymbol = UIImage(systemName: "checkmark.circle.fill")
-    let uncheckedSymbol = UIImage(systemName: "circle")
-    let defaults = UserDefaults.standard
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    let myN = NumberFormatsTYX()
 
+    override func viewDidAppear(_ animated: Bool) {
+        
+        days = getDays()
+
+        let titleLocalize = NSLocalizedString("Shop for", comment: "navigation title")
+        let daysLocalize = NSLocalizedString("days", comment: "navigation title")
+        navigationItem.title = "\(titleLocalize) \(Int(days)) \(daysLocalize)"
+        
+        tableView.reloadData()
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.register(UINib(nibName: "OtherItemCell", bundle: nil), forCellReuseIdentifier: K.otherItemCellID)
         
-        for i in [1, 2, 4, 9, 12, 14, 19, 51, 70] {
-            ageThreshold[i] = yearsBeforeToday(i)
-        }
-        
+
         loadItems()
         if itemArray.count == 0 {
-            let emptyItem = OtherItem(context: context)
+            let emptyItem = OtherItem(context: K.context)
             emptyItem.lastEdited = Date()
             itemArray.append(emptyItem)
         }
         
         //initialize serve sizes
         let appLanguage = Locale.preferredLanguages[0]
-        print(appLanguage)
-        if defaults.string(forKey: "Localization") != appLanguage {
-            storeServeSizes()
-            defaults.set(appLanguage, forKey: "Localization")
-        }        
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        totalServes = [:]
-        
-        //calculate total serves
-        let days = Double(defaults.integer(forKey: NSLocalizedString("Days", comment: "plist days")))
-        let titleLocalize = NSLocalizedString("Shop for", comment: "navigation title")
-        let daysLocalize = NSLocalizedString("days", comment: "navigation title")
-        navigationItem.title = "\(titleLocalize) \(Int(days)) \(daysLocalize)"
-
-        for member in memberArray {
-            var ageZone = 0
-            let olderRange = olderRangeInAgeZone(member.dateOfBirth!)
-            if member.pregnant || member.breastfeeding {
-                if member.dateOfBirth! <= ageThreshold[19]! {
-                    ageZone = 19
-                } else {
-                    ageZone = 1
-                }
-            } else {
-                for i in ageThreshold.keys.sorted() {
-                    if member.dateOfBirth! <= ageThreshold[i]! {
-                        ageZone = i
-                    }
-                }
-            }
-            
-            //if less than 1 yrs old, next member
-            if ageZone == 0 {continue}
-            
-            var key = "\(ageZone) "
-            key += member.female ? "F": "M"
-            if member.pregnant {key += "P"}
-            if member.breastfeeding {key += "B"}
-            
-            for group in K.foodGroups {
-                if totalServes[group] == nil {
-                    totalServes[group] = 0.0
-                }
-                totalServes[group]! += K.dailyServes[group]![key]! * days
-                if (member.additional || olderRange), group != K.foodGroups[5] {
-                    totalServes[group]! += K.dailyServes[NSLocalizedString("Additional", comment: "food group")]![key]!/5 * days
-                }
-            }
+        if K.defaults.string(forKey: "Localization") != appLanguage {
+            reloadServeSizes()
+            K.defaults.set(appLanguage, forKey: "Localization")
         }
         
-        tableView.reloadData()
     }
-}
-
-//MARK: - Functions
-
-extension ShoppingListViewController {
-    
-    func yearsBeforeToday(_ years: Int) -> Date {
-        let calendar = Calendar.current
-        let today = Date()
-        let component = DateComponents(year: -years)
-        return calendar.date(byAdding: component, to: today)!
-    }
-    
-    func olderRangeInAgeZone(_ date: Date) -> Bool {
-        for i in [4, 9, 12, 14, 19] {
-            let diff = Calendar.current.dateComponents([.year], from: date, to: ageThreshold[i]!)
-            if diff.year! == 0 {
-                return true
-            }
-        }
-        return false
-    }
-    
-    func formatWeight(_ grams: Double) -> String {
-        if grams < 1000 {
-            return myN.limitDigits(grams)
-        } else {
-            return myN.limitDigits(grams/1000)
-
-        }
-    }
-    
-
 }
 
 //MARK: - TableView Data Source
@@ -142,27 +64,30 @@ extension ShoppingListViewController {
         
         //food groups
         if indexPath.row < K.foodGroups.count {
+            
             let cell = tableView.dequeueReusableCell(withIdentifier: K.foodGroupCellID, for: indexPath)
             let group = K.foodGroups[indexPath.row]
+            
             cell.textLabel?.text = "\(foodIcon[indexPath.row])  \(group)"
-            if let serves = totalServes[group] {
-                let servesLocalize = NSLocalizedString("serves", comment: "a unit of food")
-                if group == NSLocalizedString("Oil", comment: "food group") {
+            
+            if let serves = dailyTotalServes[group] {
+                let total = serves * days
+                var detail = "\(limitDigits(total)) \(K.servesString)"
+                if group == K.foodGroups[5] {
                     let upToLocalize = NSLocalizedString("up to", comment: "oil serves")
-                    cell.detailTextLabel?.text = "\(upToLocalize) \(myN.limitDigits(serves)) \(servesLocalize)"
-                } else {
-                    cell.detailTextLabel?.text = "\(myN.limitDigits(serves)) \(servesLocalize)"
+                    detail = "\(upToLocalize) \(detail)"
                 }
-            } else {
-                cell.detailTextLabel?.text = ""
+                cell.detailTextLabel?.text = detail
             }
+            
             return cell
+            
         //other items
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: K.otherItemCellID, for: indexPath) as! OtherItemCell
             let item = itemArray[indexPath.row - K.foodGroups.count]
             cell.done = item.done
-            cell.checkMarkImage.image = item.done ? checkedSymbol: uncheckedSymbol
+            cell.checkMarkImage.image = item.done ? K.checkedSymbol: K.uncheckedSymbol
             if item.title == nil {
                 cell.checkMarkImage.isHidden = true
             }
@@ -181,14 +106,17 @@ extension ShoppingListViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let itemIndex = indexPath.row - K.foodGroups.count
+        //if food, go to servers calculator
         if itemIndex < 0 {
             performSegue(withIdentifier: "GoToServesCalculatorVC", sender: self)
+            
+        //if other items, change 'done' state
         } else {
             let cell = tableView.cellForRow(at: indexPath) as! OtherItemCell
             cell.done = !cell.done
-            cell.checkMarkImage.image = cell.done ? checkedSymbol: uncheckedSymbol
+            cell.checkMarkImage.image = cell.done ? K.checkedSymbol: K.uncheckedSymbol
             itemArray[itemIndex].done = cell.done
-            saveItems(false)
+            saveContext()
         }
         tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -197,9 +125,10 @@ extension ShoppingListViewController {
         if segue.identifier == "GoToServesCalculatorVC",
             let destinationVC = segue.destination as? ServesCalculatorViewController,
             let indexPath = tableView.indexPathForSelectedRow {
+            
             let group = K.foodGroups[indexPath.row]
             destinationVC.category = group
-            destinationVC.targetServes = totalServes[group] ?? 0.0
+            destinationVC.targetServes = dailyTotalServes[group]! * days
         }
     }
 }
@@ -207,33 +136,41 @@ extension ShoppingListViewController {
 //MARK: - Text Field Delegate Methods
 
 extension ShoppingListViewController: UITextFieldDelegate {
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+
         textField.endEditing(true)
         return true
     }
     
+    
     func textFieldDidEndEditing(_ textField: UITextField) {
+        
         let itemIndex = textField.tag - K.foodGroups.count
 
         if textField.text == "", itemIndex > 0 {
-            context.delete(itemArray[itemIndex])
+            K.context.delete(itemArray[itemIndex])
             itemArray.remove(at: itemIndex)
-            saveItems()
+            saveContext()
+            tableView.reloadData()
         }else if textField.text != "" {
             itemArray[itemIndex].title = textField.text
             itemArray[itemIndex].lastEdited = Date()
             if itemIndex == 0 {
                 //add new item
-                itemArray.insert(OtherItem(context:context), at: 0)
+                itemArray.insert(OtherItem(context: K.context), at: 0)
             } else {
                 //put edited item first
                 itemArray.insert(itemArray[itemIndex], at: 1)
                 itemArray.remove(at: itemIndex + 1)
             }
             itemArray[0].lastEdited = Date().advanced(by: 1)
-            saveItems()
+            saveContext()
+            tableView.reloadData()
         }
     }
+    
+    
 }
 
 //MARK: - Core Data Actions
@@ -245,73 +182,12 @@ extension ShoppingListViewController {
         let sortByDate = NSSortDescriptor(key: "lastEdited", ascending: false)
         request.sortDescriptors = [sortByDate]
         do{
-            itemArray = try context.fetch(request)
+            itemArray = try K.context.fetch(request)
         } catch {
             print("Error loading OtherItem \(error)")
         }
         self.tableView.reloadData()
     }
     
-    func saveItems(_ reload: Bool = true) {
-        
-        do {
-          try context.save()
-        } catch {
-           print("Error saving context \(error)")
-        }
-        
-        if reload {
-            tableView.reloadData()
-        }
-    }
     
-    func loadServeSizes() {
-        let request : NSFetchRequest<OneServe> = OneServe.fetchRequest()
-
-        do{
-            serveSizes = try context.fetch(request)
-        } catch {
-            print("Error loading OneServe \(error)")
-        }
-    }
-    
-    func storeServeSizes(){
-    
-        let serveSizesPath = Bundle.main.path(forResource: "ServeSizes_Australia", ofType: "txt")
-        
-        if freopen(serveSizesPath, "r", stdin) == nil {
-            perror(serveSizesPath)
-        }
-        
-        //delete previous whatever serve sizes
-        loadServeSizes()
-        for i in serveSizes {
-            context.delete(i)
-        }
-        
-        serveSizes = []
-        
-        while let line = readLine() {
-            let fields: [String] = line.components(separatedBy: "\t")
-            let newServe = OneServe(context: context)
-            newServe.category = fields[0]
-            newServe.order = Int16(Int(fields[1]) ?? 0)
-            newServe.quantity1 = Double(fields[2]) ?? 0.0
-            newServe.unit1 = fields[3]
-            newServe.quantity2 = Double(fields[4]) ?? 0.0
-            newServe.unit2 = fields[5]
-            newServe.detail = fields[6]
-            newServe.custom = false
-            newServe.serves = -1
-            serveSizes.append(newServe)
-        }
-        
-        do {
-          try context.save()
-        } catch {
-           print("Error saving context \(error)")
-        }
-        
-        serveSizes = []
-    }
 }

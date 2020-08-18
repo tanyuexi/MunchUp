@@ -10,19 +10,20 @@ import UIKit
 
 class SettingsTableViewController: UITableViewController {
     
-    let defaults = UserDefaults.standard
     
     @IBOutlet weak var daysTextField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadSettings()
+        
+        daysTextField.text = "\(Int(getDays()))"
         
         daysTextField.delegate = self 
     
     }
     
     @IBAction func daysTextFieldEditingDidEnd(_ sender: UITextField) {
+        
         if let days = Int(sender.text!) {
             if days < 1 {
                 sender.text = "1"
@@ -32,26 +33,56 @@ class SettingsTableViewController: UITableViewController {
         } else {
             sender.text = "1"
         }
-        defaults.set(Int(sender.text!), forKey: NSLocalizedString("Days", comment: "plist"))
+        
+        updateDays(Int(sender.text!)!)
+    }
+    
+    
+    
+    func openUrl(_ string: String){
+        if let url = URL(string: string) {
+            UIApplication.shared.open(url)
+        }
+    }
+    
+    
+    func alertPopUp(_ message: String){
+        
+        let alert = UIAlertController(title: message, message: "", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "alert"), style: .cancel, handler: nil))
+        
+        present(alert, animated: true, completion: nil)
+
     }
 
-    @IBAction func servesForChildrenButtonPressed(_ sender: UIButton) {
-        
-        openUrl(K.servesForChildrenLink)
-    }
+}
+
+//MARK: - Table View Delegate Methods
+
+extension SettingsTableViewController {
     
-    @IBAction func servesForAdultsButtonPressed(_ sender: UIButton) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        openUrl(K.servesForAdultsLink)
-    }
-    
-    @IBAction func serveSizesButtonPressed(_ sender: UIButton) {
+        switch indexPath {
+        case [0,1]:
+            reloadServeSizes()
+            alertPopUp(NSLocalizedString("Food database reloaded", comment: "alert"))
+            
+        case [1,0]:
+            openUrl(K.servesForChildrenLink)
+            
+        case [1,1]:
+            openUrl(K.servesForAdultsLink)
+            
+        case [1,2]:
+            openUrl(K.serveSizesLink)
+
+        default:
+            break
+        }
         
-        openUrl(K.serveSizesLink)
-    }
-    
-    func loadSettings(){
-        daysTextField.text = "\(defaults.integer(forKey: NSLocalizedString("Days", comment: "plist")))"
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     func openUrl(_ string: String){

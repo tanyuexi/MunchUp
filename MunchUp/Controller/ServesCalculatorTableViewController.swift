@@ -16,8 +16,7 @@ class ServesCalculatorTableViewController: UITableViewController {
     var containerVC: ServesCalculatorViewController?
     
     var serveSizes: [OneServe] = []
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    let myN = NumberFormatsTYX()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,7 +66,7 @@ extension ServesCalculatorTableViewController {
             size.serves = 0
             size.done = false
         }
-        saveServeSizes()
+        saveContext()
         notifyChangeOfServes()
         tableView.reloadData()
         
@@ -76,12 +75,12 @@ extension ServesCalculatorTableViewController {
     
     func initServesAndDone(force: Bool = false){
         
-        let servesPerItem = myN.roundToHalf(targetServes/Double(serveSizes.count))
+        let servesPerItem = roundToHalf(targetServes/Double(serveSizes.count))
         for size in serveSizes {
             if force || size.serves == -1 {
                 size.serves = servesPerItem
                 size.done = false
-                saveServeSizes()
+                saveContext()
                 notifyChangeOfServes()
             }
         }
@@ -122,6 +121,20 @@ extension ServesCalculatorTableViewController {
         
     }
     
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+        let i = indexPath.row
+        
+        if editingStyle == .delete {
+            
+            K.context.delete(serveSizes[i])
+            serveSizes.remove(at: i)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            saveContext()
+        }
+        
+    }
+    
 }
 
 //MARK: - Core Data
@@ -139,20 +152,11 @@ extension ServesCalculatorTableViewController {
         request.sortDescriptors = [sortByOrder]
         
         do{
-            serveSizes = try context.fetch(request)
+            serveSizes = try K.context.fetch(request)
         } catch {
             print("Error loading OneServe \(error)")
         }
     }
     
-    
-    func saveServeSizes() {
-        
-        do {
-          try context.save()
-        } catch {
-           print("Error saving context \(error)")
-        }
-        
-    }
+
 }
