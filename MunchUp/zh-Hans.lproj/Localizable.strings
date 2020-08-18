@@ -22,7 +22,8 @@
 /* navigation title */
 "days" = "日";
 
-/* plist */
+/* plist
+   plist days */
 "Days" = "天数";
 
 /* DOB text field data format */
@@ -30,9 +31,6 @@
 
 /* navigation title */
 "Edit" = "修改";
-
-/* alert */
-"Food database reloaded" = "食物数据库已重新载入";
 
 /* food group */
 "Fruit" = "水果";
@@ -49,13 +47,11 @@
 /* food group */
 "Oil" = "油脂";
 
-/* alert */
-"OK" = "好的";
-
 /* food group */
 "Protein" = "蛋白质";
 
-/* a unit of food */
+/* a unit for food
+   a unit of food */
 "serves" = "份";
 
 /* plist */

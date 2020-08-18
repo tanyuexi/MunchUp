@@ -6,22 +6,9 @@
 //  Copyright © 2020 Yuexi Tan. All rights reserved.
 //
 
-import UIKit
-import CoreData
+import Foundation
 
 struct K {
-    
-    static let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    static let defaults = UserDefaults.standard
-    
-    static let checkedSymbol = UIImage(systemName: "checkmark.circle.fill")
-    static let uncheckedSymbol = UIImage(systemName: "circle")
-    
-    static let daysString = NSLocalizedString("Days", comment: "plist")
-//    static let settingInitString = NSLocalizedString("Settings initialized", comment: "plist")
-    static let additionalString = NSLocalizedString("Additional", comment: "food group")
-    static let servesString = NSLocalizedString("serves", comment: "a unit of food")
-    
     static let memberCellID = "MemberReusableCell"
     static let addingMemberCellID = "AddingMemberReusableCell"
     static let foodGroupCellID = "FoodGroupReusableCell"
@@ -39,12 +26,12 @@ struct K {
     //keys: M=Male, F=Female, P=Pregnant, B=Breastfeeding
     //dailyServes = ["food": ["age gender&condition": serves]]
     static let foodGroups = [
-        NSLocalizedString("Vegetable", comment: "food group"),   //0
-        NSLocalizedString("Fruit", comment: "food group"),       //1
-        NSLocalizedString("Protein", comment: "food group"),     //2
-        NSLocalizedString("Grain", comment: "food group"),       //3
-        NSLocalizedString("Calcium", comment: "food group"),     //4
-        NSLocalizedString("Oil", comment: "food group")          //5
+        NSLocalizedString("Vegetable", comment: "food group"),
+        NSLocalizedString("Fruit", comment: "food group"),
+        NSLocalizedString("Protein", comment: "food group"),
+        NSLocalizedString("Grain", comment: "food group"),
+        NSLocalizedString("Calcium", comment: "food group"),
+        NSLocalizedString("Oil", comment: "food group")
     ]
     static let dailyServes = [
         //NSLocalizedString("Vegetable", comment: "food group"): [

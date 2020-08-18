@@ -425,7 +425,7 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
-                                            <segue destination="HUJ-ck-05M" kind="show" identifier="GoToShoppingListVC" id="0L0-aX-AmU"/>
+                                            <action selector="shopButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="sRw-VH-jEm"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -452,6 +452,7 @@
                         <outlet property="shopButton" destination="3Po-vb-yu0" id="hGa-qL-evi"/>
                         <outlet property="tableView" destination="yiu-1U-HYM" id="SY7-tp-M8m"/>
                         <segue destination="Wjf-y2-dQj" kind="show" identifier="GoToMemberDetailVC" id="on4-BQ-rcz"/>
+                        <segue destination="HUJ-ck-05M" kind="show" identifier="GoToShoppingListVC" id="9Ac-ut-sJl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

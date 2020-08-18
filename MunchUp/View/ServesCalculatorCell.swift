@@ -11,11 +11,6 @@ import CoreData
 
 class ServesCalculatorCell: UITableViewCell {
     
-    var serveSizes: OneServe?
-    var tableVC: ServesCalculatorTableViewController?
-    
-    let shared = UIViewController()
-    
     @IBOutlet weak var detailLabel: UILabel!
     @IBOutlet weak var checkMark: UIImageView!
     @IBOutlet weak var foodImage: UIImageView!
@@ -23,7 +18,13 @@ class ServesCalculatorCell: UITableViewCell {
     @IBOutlet weak var servesStepper: UIStepper!
     @IBOutlet weak var unitSegmentedControl: UISegmentedControl!
     
-
+    var serveSizes: OneServe?
+    let tableVC = ServesCalculatorTableViewController()
+    
+    let myN = NumberFormatsTYX()
+    let checkedSymbol = UIImage(systemName: "checkmark.circle.fill")
+    let uncheckedSymbol = UIImage(systemName: "circle")
+    
     /********************************
      Value update ways:
         1. loading from core data, if -1, set for user
@@ -58,7 +59,7 @@ class ServesCalculatorCell: UITableViewCell {
         if let sizes = serveSizes, selected {
             sizes.done = !sizes.done
             updateCheckmark(sizes.done)
-            shared.saveContext()
+            tableVC.saveServeSizes()
         }
         
     }
@@ -68,8 +69,8 @@ class ServesCalculatorCell: UITableViewCell {
         
         if let sizes = serveSizes {
             sizes.serves = sender.value
-            shared.saveContext()
-            tableVC?.notifyChangeOfServes()
+            tableVC.saveServeSizes()
+            tableVC.notifyChangeOfServes()
             updateServesStepper(sizes.serves)
             updateUnitSegmentedControl(sizes)
             updateNumberTextField()
@@ -119,15 +120,17 @@ class ServesCalculatorCell: UITableViewCell {
     
     
     func updateUnitSegmentedControl(_ sizes: OneServe) {
-                
+        
+        let servesLocalize = NSLocalizedString("serves", comment: "a unit for food")
+        
         unitSegmentedControl.setTitle(
-            "\(shared.limitDigits(sizes.serves)) \(K.servesString)",
+            "\(myN.limitDigits(sizes.serves)) \(servesLocalize)",
             forSegmentAt: 0)
         
         let calculatedQ1 = sizes.quantity1 * sizes.serves
         
         unitSegmentedControl.setTitle(
-            "\(shared.limitDigits(calculatedQ1)) \(sizes.unit1!)",
+            "\(myN.limitDigits(calculatedQ1)) \(sizes.unit1!)",
             forSegmentAt: 1)
         
         if sizes.unit2 == "" {
@@ -140,7 +143,7 @@ class ServesCalculatorCell: UITableViewCell {
             let calculatedQ2 = sizes.quantity2 * sizes.serves
             
             unitSegmentedControl.setTitle(
-                "\(shared.limitDigits(calculatedQ2)) \(sizes.unit2!)",
+                "\(myN.limitDigits(calculatedQ2)) \(sizes.unit2!)",
                 forSegmentAt: 2)
             
             unitSegmentedControl.setEnabled(true, forSegmentAt: 2)
@@ -161,7 +164,12 @@ class ServesCalculatorCell: UITableViewCell {
     
     func updateCheckmark(_ done: Bool) {
         
-        checkMark.image = done ? K.checkedSymbol: K.uncheckedSymbol
+        if done {
+            checkMark.image = checkedSymbol
+        } else {
+            checkMark.image = uncheckedSymbol
+        }
+        
     }
     
     
@@ -214,17 +222,17 @@ extension ServesCalculatorCell: UITextFieldDelegate {
             
             switch unitSegmentedControl.selectedSegmentIndex {
             case 0:
-                sizes.serves = shared.roundToHalf(double)
+                sizes.serves = myN.roundToHalf(double)
             case 1:
-                sizes.serves = shared.roundToHalf(double/sizes.quantity1)
+                sizes.serves = myN.roundToHalf(double/sizes.quantity1)
             case 2:
-                sizes.serves = shared.roundToHalf(double/sizes.quantity2)
+                sizes.serves = myN.roundToHalf(double/sizes.quantity2)
             default:
                 return
             }
             
-            shared.saveContext()
-            tableVC?.notifyChangeOfServes()
+            tableVC.saveServeSizes()
+            tableVC.notifyChangeOfServes()
             updateServesStepper(sizes.serves)
             updateUnitSegmentedControl(sizes)
             updateNumberTextField()

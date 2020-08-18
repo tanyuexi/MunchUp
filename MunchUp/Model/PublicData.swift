@@ -1,27 +1,31 @@
 //
-//  SharedFunctions.swift
-//  MunchItUp
+//  PublicData.swift
+//  MunchUp
 //
-//  Created by Yuexi Tan on 2020/8/3.
+//  Created by Yuexi Tan on 2020/8/17.
 //  Copyright © 2020 Yuexi Tan. All rights reserved.
 //
 
 import UIKit
 import CoreData
 
-
-extension UIViewController {
+class PublicData {
     
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    let defaults = UserDefaults.standard
+    
+    var days = 0.0
+    var dailyTotalServes: [String: Double] = [:]
+    
+    let checkedSymbol = UIImage(systemName: "checkmark.circle.fill")
+    let uncheckedSymbol = UIImage(systemName: "circle")
+ 
+    //plist days
     func updateDays(_ int: Int){
-        K.defaults.set(int, forKey: K.daysString)
+        defaults.set(int, forKey: NSLocalizedString("Days", comment: "plist"))
+        days = Double(int)
+        print(days)
     }
-    
-    
-    func getDays() -> Double {
-        let days = K.defaults.integer(forKey: K.daysString)
-        return Double(days)
-    }
-    
     
     func reloadServeSizes(){
         
@@ -30,7 +34,7 @@ extension UIViewController {
         let request : NSFetchRequest<OneServe> = OneServe.fetchRequest()
 
         do{
-            oldServeSizes = try K.context.fetch(request)
+            oldServeSizes = try context.fetch(request)
         } catch {
             print("Error loading OneServe \(error)")
         }
@@ -48,7 +52,7 @@ extension UIViewController {
             if i.custom {
                 newServeSizes.append(i)
             } else {
-                K.context.delete(i)
+                context.delete(i)
             }
         }
         
@@ -57,7 +61,7 @@ extension UIViewController {
         //read in new serve sizes
         while let line = readLine() {
             let fields: [String] = line.components(separatedBy: "\t")
-            let newServe = OneServe(context: K.context)
+            let newServe = OneServe(context: context)
             newServe.category = fields[0]
             newServe.order = Int16(Int(fields[1]) ?? 0)
             newServe.quantity1 = Double(fields[2]) ?? 0.0
@@ -71,41 +75,11 @@ extension UIViewController {
             newServeSizes.append(newServe)
         }
         
-        saveContext()
+        do {
+          try context.save()
+        } catch {
+           print("Error saving context \(error)")
+        }
         
     }
-    
-    
-    func saveContext(){
-        do {
-            try K.context.save()
-        } catch {
-            print("Error saving context \(error)")
-        }
-    }
-
-    
-    func limitDigits(_ double: Double, max: Int = 1) -> String {
-        let formatter = NumberFormatter()
-        formatter.minimumFractionDigits = 0
-        formatter.maximumFractionDigits = max
-        return formatter.string(from: NSNumber(value: double))!
-    }
-    
-    
-    func roundToHalf(_ double: Double) -> Double {
-        return round(double*2)/2
-    }
-    
-    
-    func formatWeight(_ grams: Double) -> String {
-        if grams < 1000 {
-            return limitDigits(grams)
-        } else {
-            return limitDigits(grams/1000)
-
-        }
-    }
-    
-    
 }
