@@ -135,14 +135,8 @@ class EditMemberTableViewController: UITableViewController {
     
     
     func checkIfReadyToSave() {
-        if nameTextField.text != "",
-            validDOB {
-            saveButton.isEnabled = true
-            saveButton.backgroundColor = .systemGreen
-        } else {
-            saveButton.isEnabled = false
-            saveButton.backgroundColor = .systemGray
-        }
+        enableSaveButton(saveButton, enable: (nameTextField.text != "" &&
+        validDOB))
     }
 }
 

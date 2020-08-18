@@ -28,6 +28,7 @@
 		E7DA8CA024D6D22800538CD3 /* ServesCalculatorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DA8C9E24D6D22800538CD3 /* ServesCalculatorCell.swift */; };
 		E7DA8CA324D78EDA00538CD3 /* SharedFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DA8CA224D78EDA00538CD3 /* SharedFunctions.swift */; };
 		E7DA8CA524D8E46700538CD3 /* ServesCalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DA8CA424D8E46700538CD3 /* ServesCalculatorViewController.swift */; };
+		E7E1434924EB76A6008F495C /* NewFoodTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E1434824EB76A6008F495C /* NewFoodTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +59,7 @@
 		E7DA8C9E24D6D22800538CD3 /* ServesCalculatorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServesCalculatorCell.swift; sourceTree = "<group>"; };
 		E7DA8CA224D78EDA00538CD3 /* SharedFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedFunctions.swift; sourceTree = "<group>"; };
 		E7DA8CA424D8E46700538CD3 /* ServesCalculatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServesCalculatorViewController.swift; sourceTree = "<group>"; };
+		E7E1434824EB76A6008F495C /* NewFoodTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewFoodTableViewController.swift; sourceTree = "<group>"; };
 		E7EC346424DCED5D00BEB229 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		E7EC346524DCED5D00BEB229 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -137,6 +139,7 @@
 				E7DA8C8C24CDA93500538CD3 /* ShoppingListViewController.swift */,
 				E7DA8CA424D8E46700538CD3 /* ServesCalculatorViewController.swift */,
 				E7DA8C9A24D6C30800538CD3 /* ServesCalculatorTableViewController.swift */,
+				E7E1434824EB76A6008F495C /* NewFoodTableViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -228,6 +231,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7E1434924EB76A6008F495C /* NewFoodTableViewController.swift in Sources */,
 				E757C0C124C1662000B8AA08 /* AppDelegate.swift in Sources */,
 				E76F6A3A24E5551B0009B0E0 /* SettingsTableViewController.swift in Sources */,
 				E757C0E024C52A4100B8AA08 /* MemberListViewController.swift in Sources */,

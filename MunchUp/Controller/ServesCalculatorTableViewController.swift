@@ -98,7 +98,7 @@ extension ServesCalculatorTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-                
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: K.servesCalculatorCellID, for: indexPath) as! ServesCalculatorCell
         
         cell.serveSizes = serveSizes[indexPath.row]
@@ -107,6 +107,7 @@ extension ServesCalculatorTableViewController {
         cell.updateAll()
         
         return cell
+
     }
     
 }

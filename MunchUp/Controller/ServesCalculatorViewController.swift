@@ -31,8 +31,6 @@ class ServesCalculatorViewController: UIViewController {
         navigationItem.title = category
         targetServesLabel.text = limitDigits(targetServes)
         
-//        tableVC.category = category
-//        tableVC.targetServes = targetServes
                 
     }
     
@@ -75,6 +73,10 @@ class ServesCalculatorViewController: UIViewController {
             tableVC?.targetServes = targetServes
             tableVC?.containerVC = self
 
+        } else if segue.identifier == "GoToNewFoodVC" {
+            let destinationVC = segue.destination as? NewFoodTableViewController
+            destinationVC?.category = category
+            destinationVC?.containerVC = self
         }
 
     }
