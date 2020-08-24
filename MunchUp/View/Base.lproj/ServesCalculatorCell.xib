@@ -30,14 +30,14 @@
                                             <constraint firstAttribute="height" constant="30" id="qHi-av-69P"/>
                                         </constraints>
                                     </imageView>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photo" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="hsP-VQ-FIX" userLabel="Food Image">
-                                        <rect key="frame" x="35" y="1" width="60" height="57.5"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photo" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="hsP-VQ-FIX" userLabel="Food Image">
+                                        <rect key="frame" x="35" y="4" width="60" height="52.5"/>
                                         <color key="tintColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="Vg4-2I-g2c"/>
                                             <constraint firstAttribute="width" constant="60" id="qa0-xC-r0N"/>
                                         </constraints>
-                                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
+                                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="50" scale="default"/>
                                     </imageView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="oje-bA-ohm">
                                         <rect key="frame" x="100" y="0.0" width="250" height="59.5"/>

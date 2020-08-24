@@ -24,7 +24,7 @@ class MemberListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
+        print(K.documentDir)
 
         tableView.dataSource = self
         tableView.delegate = self

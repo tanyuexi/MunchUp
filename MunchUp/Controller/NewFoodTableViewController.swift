@@ -13,6 +13,10 @@ class NewFoodTableViewController: UITableViewController {
 
     var category = ""
     var containerVC: ServesCalculatorViewController?
+    
+    var imagePicker = UIImagePickerController()
+    var imageString = ""
+
 
     @IBOutlet weak var foodImageButton: UIButton!
     @IBOutlet weak var detailTextField: UITextField!
@@ -34,6 +38,9 @@ class NewFoodTableViewController: UITableViewController {
         q2TextField.delegate = self
         u2TextField.delegate = self
         
+        imagePicker.delegate = self
+
+        foodImageButton.imageView?.layer.cornerRadius = 10
         saveButton.layer.cornerRadius = 10
         cancelButton.layer.cornerRadius = 10
         
@@ -51,6 +58,30 @@ class NewFoodTableViewController: UITableViewController {
             
             enableSaveButton(saveButton)
         }
+    }
+    
+    
+    func choosePhoto(_ type: UIImagePickerController.SourceType){
+        
+        if UIImagePickerController.isSourceTypeAvailable(type){
+
+            imagePicker.sourceType = type
+            imagePicker.allowsEditing = true
+            present(imagePicker, animated: true, completion: nil)
+        }
+    }
+    
+    
+    @IBAction func foodImageButtonPressed(_ sender: UIButton) {
+        
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Take a photo", comment: "image picker"), style: .default, handler: {action in self.choosePhoto(.camera)}))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Choose from Library", comment: "image picker"), style: .default, handler: {action in self.choosePhoto(.photoLibrary)}))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "image picker"), style: .cancel, handler: nil))
+        
+        present(alert, animated: true, completion: nil)
+        
+
     }
     
     
@@ -75,6 +106,15 @@ class NewFoodTableViewController: UITableViewController {
                 let q2PerServe = q2/serves
                 newServeSizes.quantity2 = q2PerServe
                 newServeSizes.unit2 = u2TextField.text
+            }
+            
+            if imageString != "" {
+                do {
+                    try foodImageButton.currentImage?.pngData()?.write(to: URL(fileURLWithPath: imageString) )
+                } catch {
+                    print(error)
+                }
+                newServeSizes.image = imageString
             }
             
             containerVC?.tableVC?.serveSizes.append(newServeSizes)
@@ -108,4 +148,25 @@ extension NewFoodTableViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         checkIfReadyToSave()
     }
+}
+
+//MARK: - image picker
+extension NewFoodTableViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        if let pickedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
+            
+            imageString =  K.documentDir[0].appendingPathComponent("img\(Date().timeIntervalSince1970).png").path
+            let smallImage = scaleImage(pickedImage, within: foodImageButton.imageView!.bounds)
+            foodImageButton.setImage(smallImage, for: .normal)
+        }
+     
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
 }

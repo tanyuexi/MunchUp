@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import func AVFoundation.AVMakeRect
 
 
 extension UIViewController {
@@ -119,6 +120,16 @@ extension UIViewController {
         } else {
             button.isEnabled = false
             button.backgroundColor = .systemGray
+        }
+    }
+    
+    //MARK: - Image
+    func scaleImage(_ image: UIImage, within rect: CGRect) -> UIImage? {
+        
+        let rect = AVMakeRect(aspectRatio: image.size, insideRect: rect)
+        let renderer = UIGraphicsImageRenderer(size: rect.size)
+        return renderer.image { (context) in
+            image.draw(in: CGRect(origin: .zero, size: rect.size))
         }
     }
 }

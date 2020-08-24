@@ -128,6 +128,15 @@ extension ServesCalculatorTableViewController {
         
         if editingStyle == .delete {
             
+            if serveSizes[i].custom {
+                                
+                do {
+                    try FileManager.default.removeItem(at: URL(fileURLWithPath: serveSizes[i].image!))
+                } catch {
+                    print(error)
+                }
+            }
+            
             K.context.delete(serveSizes[i])
             serveSizes.remove(at: i)
             tableView.deleteRows(at: [indexPath], with: .fade)

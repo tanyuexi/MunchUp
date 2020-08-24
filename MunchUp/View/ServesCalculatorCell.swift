@@ -93,7 +93,7 @@ class ServesCalculatorCell: UITableViewCell {
             
             //image
             updateCheckmark(sizes.done)
-            updateFoodImage(sizes.image!)
+            updateFoodImage(sizes.image!, custom: sizes.custom)
             
             //stepper
             servesStepper.stepValue = 1
@@ -165,14 +165,15 @@ class ServesCalculatorCell: UITableViewCell {
     }
     
     
-    func updateFoodImage(_ name: String){
+    func updateFoodImage(_ name: String, custom: Bool = false){
         
-        if let image = UIImage(named: name) {
-            
-            foodImage.image = image
-            
+        if name != "" {
+            if custom {
+                foodImage.image = UIImage(contentsOfFile: name)
+            } else if let image = UIImage(named: name) {
+                foodImage.image = image
+            }
         }
-        
     }
     
     
