@@ -112,8 +112,8 @@ class ServesCalculatorCell: UITableViewCell {
     
     func updateServesStepper(_ serves: Double) {
         
+        servesStepper.maximumValue = serves + servesStepper.stepValue
         servesStepper.value = serves
-        servesStepper.maximumValue = servesStepper.value + servesStepper.stepValue
         
     }
     
