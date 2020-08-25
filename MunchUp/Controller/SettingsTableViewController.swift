@@ -83,8 +83,8 @@ class SettingsTableViewController: UITableViewController {
                     continue
                 }
                 list += food.done ? "@ ": "- "
-                list += "[ \(limitDigits(food.serves)) \(K.servesString)/ \(limitDigits(food.quantity1)) \(food.unit1!)"
-                list += (food.unit2 == "") ? "": "/ \(limitDigits(food.quantity2)) \(food.unit2!)"
+                list += "[ \(limitDigits(food.serves)) \(K.servesString)/ \(limitDigits(food.serves * food.quantity1)) \(food.unit1!)"
+                list += (food.unit2 == "") ? "": "/ \(limitDigits(food.serves * food.quantity2)) \(food.unit2!)"
                 list += " ] "
                 list += "\(food.detail!)\n\n"
             }
