@@ -22,6 +22,7 @@
 		E76F6A3224DD2AEE0009B0E0 /* ServesCalculatorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E76F6A3424DD2AEE0009B0E0 /* ServesCalculatorCell.xib */; };
 		E76F6A3A24E5551B0009B0E0 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76F6A3924E5551A0009B0E0 /* SettingsTableViewController.swift */; };
 		E76F6A4024EA54300009B0E0 /* MunchUp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E76F6A3E24EA54300009B0E0 /* MunchUp.xcdatamodeld */; };
+		E7C0A70424F52F950026B72E /* UITextField_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C0A70324F52F950026B72E /* UITextField_Extension.swift */; };
 		E7DA8C8D24CDA93500538CD3 /* ShoppingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DA8C8C24CDA93500538CD3 /* ShoppingListViewController.swift */; };
 		E7DA8C9024D280C000538CD3 /* OtherItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DA8C8E24D280C000538CD3 /* OtherItemCell.swift */; };
 		E7DA8C9B24D6C30800538CD3 /* ServesCalculatorTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DA8C9A24D6C30800538CD3 /* ServesCalculatorTableViewController.swift */; };
@@ -53,6 +54,7 @@
 		E76F6A3924E5551A0009B0E0 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		E76F6A3B24E5614A0009B0E0 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/ServesCalculatorCell.strings"; sourceTree = "<group>"; };
 		E76F6A3F24EA54300009B0E0 /* MunchItUp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MunchItUp.xcdatamodel; sourceTree = "<group>"; };
+		E7C0A70324F52F950026B72E /* UITextField_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextField_Extension.swift; sourceTree = "<group>"; };
 		E7DA8C8C24CDA93500538CD3 /* ShoppingListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListViewController.swift; sourceTree = "<group>"; };
 		E7DA8C8E24D280C000538CD3 /* OtherItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherItemCell.swift; sourceTree = "<group>"; };
 		E7DA8C9A24D6C30800538CD3 /* ServesCalculatorTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServesCalculatorTableViewController.swift; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 				E757C0CE24C1662400B8AA08 /* LaunchScreen.storyboard */,
 				E757C0CC24C1662400B8AA08 /* Assets.xcassets */,
 				E7DA8CA224D78EDA00538CD3 /* SharedFunctions.swift */,
+				E7C0A70324F52F950026B72E /* UITextField_Extension.swift */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -243,6 +246,7 @@
 				E7DA8C9B24D6C30800538CD3 /* ServesCalculatorTableViewController.swift in Sources */,
 				E7DA8CA324D78EDA00538CD3 /* SharedFunctions.swift in Sources */,
 				E7DA8C8D24CDA93500538CD3 /* ShoppingListViewController.swift in Sources */,
+				E7C0A70424F52F950026B72E /* UITextField_Extension.swift in Sources */,
 				E757C0DD24C1776E00B8AA08 /* Constants.swift in Sources */,
 				E7DA8CA024D6D22800538CD3 /* ServesCalculatorCell.swift in Sources */,
 			);

@@ -31,7 +31,7 @@
 钙质	3	100	g			almond	带皮巴旦木仁
 钙质	4	100	g			firm_tofu	硬豆腐（因钙质含量有差异，查看标签）
 钙质	5	0.5	杯	120	ml	evaporated_milk	淡奶
-钙质	6	2	片s	40	g	hard_cheese	硬奶酪（例如cheddar）
+钙质	6	2	片	40	g	hard_cheese	硬奶酪（例如cheddar）
 钙质	7	0.5	杯	120	g	ricotta	ricotta 奶酪
 钙质	8	60	g			sardine	罐头沙丁鱼。用水保存的
 钙质	9	0.5	杯	100	g	salmon	带骨的罐头粉红三文鱼
