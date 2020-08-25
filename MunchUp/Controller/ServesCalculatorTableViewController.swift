@@ -128,10 +128,12 @@ extension ServesCalculatorTableViewController {
         
         if editingStyle == .delete {
             
-            if serveSizes[i].custom {
+            if serveSizes[i].custom,
+                let imgUrl = getFilePath(serveSizes[i].image),
+                FileManager.default.fileExists(atPath: imgUrl.path) {
                                 
                 do {
-                    try FileManager.default.removeItem(at: URL(fileURLWithPath: serveSizes[i].image!))
+                    try FileManager.default.removeItem(at: imgUrl)
                 } catch {
                     print(error)
                 }

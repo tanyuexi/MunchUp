@@ -13,7 +13,6 @@ struct K {
     
     static let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     static let defaults = UserDefaults.standard
-    static let documentDir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
     
     static let checkedSymbol = UIImage(systemName: "checkmark.circle.fill")
     static let uncheckedSymbol = UIImage(systemName: "circle")

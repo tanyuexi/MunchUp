@@ -13,6 +13,27 @@ import func AVFoundation.AVMakeRect
 
 extension UIViewController {
     
+    
+    //MARK: - path
+    //usage:
+    //  getFilePath(directory: true) -> document directory url
+    //  getFilePath("file.txt")      -> file.txt url
+    //  getFilePath(nil)             -> nil
+    //  getFilePath("")              -> nil
+    func getFilePath(_ fileName: String? = nil, directory: Bool = false) -> URL? {
+        
+        let dirUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
+
+        if directory{
+            return dirUrl
+        } else if fileName == nil || fileName == "" {
+            return nil
+        } else {
+            return dirUrl?.appendingPathComponent(fileName!)
+        }
+
+    }
+    
     //MARK: - plist
     func updateDays(_ int: Int){
         K.defaults.set(int, forKey: K.daysString)

@@ -167,12 +167,15 @@ class ServesCalculatorCell: UITableViewCell {
     
     func updateFoodImage(_ name: String, custom: Bool = false){
         
-        if name != "" {
-            if custom {
-                foodImage.image = UIImage(contentsOfFile: name)
-            } else if let image = UIImage(named: name) {
-                foodImage.image = image
-            }
+        if custom,
+            let imgUrl = tableVC?.getFilePath(name) {
+            
+            foodImage.image = UIImage(contentsOfFile: imgUrl.path)
+            
+        } else if name != "",
+            let image = UIImage(named: name) {
+            
+            foodImage.image = image
         }
     }
     

@@ -15,7 +15,7 @@ class NewFoodTableViewController: UITableViewController {
     var containerVC: ServesCalculatorViewController?
     
     var imagePicker = UIImagePickerController()
-    var imageString = ""
+    var imageFileName = ""
 
 
     @IBOutlet weak var foodImageButton: UIButton!
@@ -108,13 +108,15 @@ class NewFoodTableViewController: UITableViewController {
                 newServeSizes.unit2 = u2TextField.text
             }
             
-            if imageString != "" {
+            if let imgUrl = getFilePath(imageFileName),
+                let data = foodImageButton.currentImage?.pngData() {
+                
                 do {
-                    try foodImageButton.currentImage?.pngData()?.write(to: URL(fileURLWithPath: imageString) )
+                    try data.write(to: imgUrl)
                 } catch {
                     print("Error saving image \(error)")
                 }
-                newServeSizes.image = imageString
+                newServeSizes.image = imageFileName
             }
             
             containerVC?.tableVC?.serveSizes.append(newServeSizes)
@@ -157,7 +159,7 @@ extension NewFoodTableViewController: UINavigationControllerDelegate, UIImagePic
         
         if let pickedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
             
-            imageString =  K.documentDir[0].appendingPathComponent("img\(Date().timeIntervalSince1970).png").path
+            imageFileName = "img\(Date().timeIntervalSince1970).png"
             let smallImage = scaleImage(pickedImage, within: foodImageButton.imageView!.bounds)
             foodImageButton.setImage(smallImage, for: .normal)
         }
