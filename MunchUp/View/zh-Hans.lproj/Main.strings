@@ -1,14 +1,32 @@
+/* Class = "UILabel"; text = "* Optional"; ObjectID = "1RC-26-VRE"; */
+"1RC-26-VRE.text" = "* 非必填项";
+
+/* Class = "UIButton"; normalTitle = "Save"; ObjectID = "3cM-Fe-KeV"; */
+"3cM-Fe-KeV.normalTitle" = "保存";
+
 /* Class = "UIButton"; normalTitle = "Shop!"; ObjectID = "3Po-vb-yu0"; */
 "3Po-vb-yu0.normalTitle" = "采购！";
 
 /* Class = "UILabel"; text = "0"; ObjectID = "7bU-w5-t4x"; */
 "7bU-w5-t4x.text" = "0";
 
+/* Class = "UITextField"; placeholder = "Quantity"; ObjectID = "14I-aE-Drv"; */
+"14I-aE-Drv.placeholder" = "数量";
+
 /* Class = "UITableViewSection"; headerTitle = "Links"; ObjectID = "BqX-8Y-CEy"; */
 "BqX-8Y-CEy.headerTitle" = "链接";
 
+/* Class = "UITextField"; placeholder = "Quantity"; ObjectID = "c2H-g0-tlP"; */
+"c2H-g0-tlP.placeholder" = "数量";
+
 /* Class = "UITextField"; placeholder = "DD/MM/YYYY"; ObjectID = "cih-Xh-IeF"; */
 "cih-Xh-IeF.placeholder" = "年年年年/月月/日日";
+
+/* Class = "UILabel"; text = "="; ObjectID = "Cp3-Sn-2rx"; */
+"Cp3-Sn-2rx.text" = "=";
+
+/* Class = "UILabel"; text = "="; ObjectID = "cuJ-q5-3CP"; */
+"cuJ-q5-3CP.text" = "=";
 
 /* Class = "UIButton"; normalTitle = "Save"; ObjectID = "dG2-tX-XIQ"; */
 "dG2-tX-XIQ.normalTitle" = "保存";
@@ -31,14 +49,26 @@
 /* Class = "UISegmentedControl"; eyZ-Lv-2Fx.segmentTitles[1] = "Male"; ObjectID = "eyZ-Lv-2Fx"; */
 "eyZ-Lv-2Fx.segmentTitles[1]" = "男性";
 
+/* Class = "UINavigationItem"; title = "New Food"; ObjectID = "geG-QD-2Em"; */
+"geG-QD-2Em.title" = "新食物";
+
 /* Class = "UILabel"; text = "e.g. 31/01/1990"; ObjectID = "Gkj-xe-OBr"; */
 "Gkj-xe-OBr.text" = "例：1990/01/31";
 
 /* Class = "UILabel"; text = "Date of Birth: "; ObjectID = "gqM-vH-aeS"; */
 "gqM-vH-aeS.text" = "出生日期：";
 
+/* Class = "UITextField"; placeholder = "Unit 1"; ObjectID = "gTJ-4m-pbw"; */
+"gTJ-4m-pbw.placeholder" = "单位 1";
+
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "GUT-Tk-Gqw"; */
+"GUT-Tk-Gqw.normalTitle" = "取消";
+
 /* Class = "UILabel"; text = "Days to plan for: "; ObjectID = "gYb-iX-hfV"; */
 "gYb-iX-hfV.text" = "采购天数：";
+
+/* Class = "UITableViewSection"; headerTitle = "Serves, Weight or Volume"; ObjectID = "hj4-JE-lOX"; */
+"hj4-JE-lOX.headerTitle" = "份数, 重量或体积";
 
 /* Class = "UIButton"; normalTitle = "Delete"; ObjectID = "HTN-Mp-4fq"; */
 "HTN-Mp-4fq.normalTitle" = "删除";
@@ -48,6 +78,9 @@
 
 /* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "i6X-wV-uba"; */
 "i6X-wV-uba.title" = "东西";
+
+/* Class = "UILabel"; text = "serves"; ObjectID = "J9w-Bf-xpo"; */
+"J9w-Bf-xpo.text" = "份";
 
 /* Class = "UINavigationItem"; title = "Family Members"; ObjectID = "jTx-ss-ylo"; */
 "jTx-ss-ylo.title" = "家庭成员";
@@ -73,11 +106,17 @@
 /* Class = "UILabel"; text = "Recommended daily serves for adults"; ObjectID = "pg8-cV-Tts"; */
 "pg8-cV-Tts.text" = "成人每日推荐食物份数";
 
+/* Class = "UITextField"; placeholder = "Description"; ObjectID = "PO3-Ee-LMK"; */
+"PO3-Ee-LMK.placeholder" = "描述";
+
 /* Class = "UINavigationItem"; title = "Shopping List"; ObjectID = "pxr-r0-LZr"; */
 "pxr-r0-LZr.title" = "采购清单";
 
 /* Class = "UILabel"; text = "Detail"; ObjectID = "Q4j-Ow-CGF"; */
 "Q4j-Ow-CGF.text" = "详细";
+
+/* Class = "UITableViewSection"; headerTitle = "Description"; ObjectID = "Qa6-Rb-QM5"; */
+"Qa6-Rb-QM5.headerTitle" = "描述";
 
 /* Class = "UILabel"; text = "Active/Taller than average: "; ObjectID = "qdk-Vb-w9n"; */
 "qdk-Vb-w9n.text" = "运动较多/身高较高";
@@ -97,6 +136,9 @@
 /* Class = "UILabel"; text = "0"; ObjectID = "ric-w2-ndZ"; */
 "ric-w2-ndZ.text" = "0";
 
+/* Class = "UITextField"; placeholder = "Unit 2*"; ObjectID = "s4k-qn-3oh"; */
+"s4k-qn-3oh.placeholder" = "单位 2 *";
+
 /* Class = "UILabel"; text = "Recommended daily serves for children"; ObjectID = "sLG-6F-qTN"; */
 "sLG-6F-qTN.text" = "儿童每日推荐食物份数";
 
@@ -114,6 +156,12 @@
 
 /* Class = "UITextField"; placeholder = "Number"; ObjectID = "XK0-Q0-K4z"; */
 "XK0-Q0-K4z.placeholder" = "整数";
+
+/* Class = "UILabel"; text = "Copy shopping list to clipboard"; ObjectID = "XNw-2S-Bgn"; */
+"XNw-2S-Bgn.text" = "把采购清单复制到剪贴板";
+
+/* Class = "UITextField"; placeholder = "Quantity*"; ObjectID = "xO2-Mm-NcU"; */
+"xO2-Mm-NcU.placeholder" = "数量 *";
 
 /* Class = "UILabel"; text = "Title"; ObjectID = "xoZ-rF-gpR"; */
 "xoZ-rF-gpR.text" = "标题";

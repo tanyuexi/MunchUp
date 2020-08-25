@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class SettingsTableViewController: UITableViewController {
     
@@ -46,14 +47,71 @@ class SettingsTableViewController: UITableViewController {
     }
     
     
-    func alertPopUp(_ message: String){
+    func confirmMessage(_ message: String){
         
-        let alert = UIAlertController(title: message, message: "", preferredStyle: .alert)
+        let alert = UIAlertController(title: message, message: nil, preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "alert"), style: .cancel, handler: nil))
         
         present(alert, animated: true, completion: nil)
 
+    }
+    
+    
+    func copyToClipboard(){
+        let pasteboard = UIPasteboard.general
+        
+        var list = NSLocalizedString("Shopping List ", comment: "export")
+        
+        //number of people and days
+        var memberArray: [FamilyMember] = []
+        loadFamilyMembers(to: &memberArray)
+        let days = Int(getDays())
+        list += "(\(memberArray.count) " + NSLocalizedString("people, ", comment: "export")
+        list += "\(days) " + NSLocalizedString("days)", comment: "export") + "\n\n"
+        memberArray = []
+        
+        //food
+        var sizeArray: [OneServe] = []
+        for group in K.foodGroups {
+            list += "#############\n"
+            list += "#  \(group)\n"
+            list += "#############\n\n"
+            loadServeSizes(to: &sizeArray, category: group)
+            for food in sizeArray {
+                if food.serves == 0 {
+                    continue
+                }
+                list += food.done ? "@ ": "- "
+                list += "[ \(limitDigits(food.serves)) \(K.servesString)/ \(limitDigits(food.quantity1)) \(food.unit1!)"
+                list += (food.unit2 == "") ? "": "/ \(limitDigits(food.quantity2)) \(food.unit2!)"
+                list += " ] "
+                list += "\(food.detail!)\n\n"
+            }
+            sizeArray = []
+        }
+        
+        //other items
+        list += "#############\n"
+        list += NSLocalizedString("#  Other items", comment: "export") + "\n"
+        list += "#############\n\n"
+        var itemArray: [OtherItem] = []
+        let request : NSFetchRequest<OtherItem> = OtherItem.fetchRequest()
+        let sortByDate = NSSortDescriptor(key: "lastEdited", ascending: false)
+        request.sortDescriptors = [sortByDate]
+        do{
+            itemArray = try K.context.fetch(request)
+            for i in itemArray {
+                if let item = i.title {
+                    list += i.done ? "@ ": "- "
+                    list += "\(item)\n\n"
+                }
+            }
+        } catch {
+            print("Error loading OtherItem \(error)")
+        }
+        
+        pasteboard.string = list
     }
 }
 
@@ -66,7 +124,11 @@ extension SettingsTableViewController {
         switch indexPath {
         case [0,1]:
             reloadServeSizes()
-            alertPopUp(NSLocalizedString("Food database reloaded", comment: "alert"))
+            confirmMessage(NSLocalizedString("Food database reloaded", comment: "alert"))
+            
+        case [0,2]:
+            copyToClipboard()
+            confirmMessage(NSLocalizedString("List copied", comment: "alert"))
             
         case [1,0]:
             openUrl(K.servesForChildrenLink)

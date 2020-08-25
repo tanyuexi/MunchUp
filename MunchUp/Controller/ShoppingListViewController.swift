@@ -35,7 +35,8 @@ class ShoppingListViewController: UITableViewController {
         tableView.register(UINib(nibName: "OtherItemCell", bundle: nil), forCellReuseIdentifier: K.otherItemCellID)
         
 
-        loadItems()
+        loadItems(to: &itemArray)
+        tableView.reloadData()
         if itemArray.count == 0 {
             let emptyItem = OtherItem(context: K.context)
             emptyItem.lastEdited = Date()
@@ -173,21 +174,3 @@ extension ShoppingListViewController: UITextFieldDelegate {
     
 }
 
-//MARK: - Core Data Actions
-
-extension ShoppingListViewController {
-    
-    func loadItems() {
-        let request : NSFetchRequest<OtherItem> = OtherItem.fetchRequest()
-        let sortByDate = NSSortDescriptor(key: "lastEdited", ascending: false)
-        request.sortDescriptors = [sortByDate]
-        do{
-            itemArray = try K.context.fetch(request)
-        } catch {
-            print("Error loading OtherItem \(error)")
-        }
-        self.tableView.reloadData()
-    }
-    
-    
-}

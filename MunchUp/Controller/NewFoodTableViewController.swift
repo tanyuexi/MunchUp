@@ -112,7 +112,7 @@ class NewFoodTableViewController: UITableViewController {
                 do {
                     try foodImageButton.currentImage?.pngData()?.write(to: URL(fileURLWithPath: imageString) )
                 } catch {
-                    print(error)
+                    print("Error saving image \(error)")
                 }
                 newServeSizes.image = imageString
             }

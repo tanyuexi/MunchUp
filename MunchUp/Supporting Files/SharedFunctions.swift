@@ -86,6 +86,49 @@ extension UIViewController {
             print("Error saving context \(error)")
         }
     }
+    
+    
+    func loadFamilyMembers(to array: inout [FamilyMember]) {
+        let request : NSFetchRequest<FamilyMember> = FamilyMember.fetchRequest()
+        let sortByAge = NSSortDescriptor(key: "dateOfBirth", ascending: true)
+        let sortByName = NSSortDescriptor(key: "name", ascending: true)
+        request.sortDescriptors = [sortByAge, sortByName]
+        do{
+            array = try K.context.fetch(request)
+        } catch {
+            print("Error loading FamilyMembers \(error)")
+        }
+    }
+    
+    
+    func loadItems(to array: inout [OtherItem]) {
+        let request : NSFetchRequest<OtherItem> = OtherItem.fetchRequest()
+        let sortByDate = NSSortDescriptor(key: "lastEdited", ascending: false)
+        request.sortDescriptors = [sortByDate]
+        do{
+            array = try K.context.fetch(request)
+        } catch {
+            print("Error loading OtherItem \(error)")
+        }
+    }
+    
+    func loadServeSizes(to array: inout [OneServe], category: String) {
+        
+        let request : NSFetchRequest<OneServe> = OneServe.fetchRequest()
+        
+        let categoryPredicate = NSPredicate(format: "category == %@", category)
+        request.predicate = categoryPredicate
+        
+        let sortByOrder = NSSortDescriptor(key: "order", ascending: true)
+        request.sortDescriptors = [sortByOrder]
+        
+        do{
+            array = try K.context.fetch(request)
+        } catch {
+            print("Error loading OneServe \(error)")
+        }
+    }
+
 
     
     //MARK: - Number formatting
@@ -102,14 +145,14 @@ extension UIViewController {
     }
     
     
-    func formatWeight(_ grams: Double) -> String {
-        if grams < 1000 {
-            return limitDigits(grams)
-        } else {
-            return limitDigits(grams/1000)
-
-        }
-    }
+//    func formatWeight(_ grams: Double) -> String {
+//        if grams < 1000 {
+//            return limitDigits(grams)
+//        } else {
+//            return limitDigits(grams/1000)
+//
+//        }
+//    }
     
     
     //MARK: - UI handling
@@ -132,4 +175,5 @@ extension UIViewController {
             image.draw(in: CGRect(origin: .zero, size: rect.size))
         }
     }
+    
 }

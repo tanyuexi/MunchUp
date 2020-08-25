@@ -38,7 +38,8 @@ class MemberListViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        loadFamilyMembers()
+        loadFamilyMembers(to: &memberArray)
+        tableView.reloadData()
         disableShopButton(with: memberArray.count == 0)
     }
     
@@ -188,24 +189,5 @@ extension MemberListViewController: UITableViewDelegate {
     }
 }
 
-//MARK: - Model Manupulation Methods
-
-extension MemberListViewController {
-
-    func loadFamilyMembers() {
-        let request : NSFetchRequest<FamilyMember> = FamilyMember.fetchRequest()
-        let sortByAge = NSSortDescriptor(key: "dateOfBirth", ascending: true)
-        let sortByName = NSSortDescriptor(key: "name", ascending: true)
-        request.sortDescriptors = [sortByAge, sortByName]
-        do{
-            memberArray = try K.context.fetch(request)
-        } catch {
-            print("Error loading FamilyMembers \(error)")
-        }
-        tableView.reloadData()
-    }
-    
-
-}
 
 

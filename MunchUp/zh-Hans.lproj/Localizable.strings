@@ -7,6 +7,9 @@
 /* DOB confirm label */
 "(Invalid date)" = "(无效日期)";
 
+/* export */
+"#  Other items" = "#  其他东西";
+
 /* auto format date */
 "2" = "4";
 
@@ -19,11 +22,20 @@
 /* food group */
 "Calcium" = "钙质";
 
+/* image picker */
+"Cancel" = "取消";
+
+/* image picker */
+"Choose from Library" = "从相册里选择";
+
 /* navigation title */
 "days" = "日";
 
 /* plist */
 "Days" = "天数";
+
+/* export */
+"days)" = "天)";
 
 /* DOB text field data format */
 "dd/MM/yyyy" = "yyyy/MM/dd";
@@ -43,6 +55,9 @@
 /* serves calculator */
 "Just right" = "正好";
 
+/* alert */
+"List copied" = "采购清单已拷贝";
+
 /* navigation title */
 "New Member" = "新成员";
 
@@ -51,6 +66,9 @@
 
 /* alert */
 "OK" = "好的";
+
+/* export */
+"people, " = "人，";
 
 /* food group */
 "Protein" = "蛋白质";
@@ -63,6 +81,12 @@
 
 /* navigation title */
 "Shop for" = "采购";
+
+/* export */
+"Shopping List " = "采购清单";
+
+/* image picker */
+"Take a photo" = "拍一张照";
 
 /* serves calculator */
 "Too little" = "少了";

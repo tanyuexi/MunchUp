@@ -21,7 +21,7 @@ class ServesCalculatorTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        loadServeSizes(category)
+        loadServeSizes(to: &serveSizes, category: category)
         initServesAndDone()
         notifyChangeOfServes()
         
@@ -147,26 +147,4 @@ extension ServesCalculatorTableViewController {
     
 }
 
-//MARK: - Core Data
 
-extension ServesCalculatorTableViewController {
-    
-    func loadServeSizes(_ category: String) {
-        
-        let request : NSFetchRequest<OneServe> = OneServe.fetchRequest()
-        
-        let categoryPredicate = NSPredicate(format: "category == %@", category)
-        request.predicate = categoryPredicate
-        
-        let sortByOrder = NSSortDescriptor(key: "order", ascending: true)
-        request.sortDescriptors = [sortByOrder]
-        
-        do{
-            serveSizes = try K.context.fetch(request)
-        } catch {
-            print("Error loading OneServe \(error)")
-        }
-    }
-    
-
-}
