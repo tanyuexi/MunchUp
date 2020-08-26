@@ -167,7 +167,6 @@ extension MemberListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         performSegue(withIdentifier: "GoToMemberDetailVC", sender: self)
-        tableView.deselectRow(at: indexPath, animated: true)
     }
 
     

@@ -7,12 +7,13 @@
 //
 
 import UIKit
+import CoreData
 
 class OtherItemCell: UITableViewCell {
 
-    var done = false
+    var item: OtherItem?
     
-    @IBOutlet weak var checkMarkImage: UIImageView!
+    @IBOutlet weak var checkMark: UIImageView!
     @IBOutlet weak var titleTextField: UITextField!
     
     override func awakeFromNib() {
@@ -30,5 +31,13 @@ class OtherItemCell: UITableViewCell {
     @IBAction func titleTextFieldEditingDidEnd(_ sender: UITextField) {
         sender.borderStyle = .none
     }
+    
+    
+//    func setDoneState(_ checked: Bool) {
+//        
+//        item?.done = checked
+//        checkMark.image = checked ? K.checkedSymbol: K.uncheckedSymbol
+//    }
+    
 }
 

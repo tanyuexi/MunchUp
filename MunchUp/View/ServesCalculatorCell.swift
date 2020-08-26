@@ -52,17 +52,13 @@ class ServesCalculatorCell: UITableViewCell {
         
     }
 
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         
         super.setSelected(selected, animated: animated)
-        if let sizes = serveSizes, selected {
-            sizes.done = !sizes.done
-            updateCheckmark(sizes.done)
-            shared.saveContext()
-        }
         
     }
-
+    
     
     @IBAction func servesStepperValueChanged(_ sender: UIStepper) {
         

@@ -51,6 +51,16 @@ class ShoppingListViewController: UITableViewController {
         }
         
     }
+    
+    
+    func setCellDoneState(_ checked: Bool, at indexPath: IndexPath) {
+        
+        let cell = tableView.cellForRow(at: indexPath) as! OtherItemCell
+        cell.item?.done = checked
+        cell.checkMark.image = checked ? K.checkedSymbol: K.uncheckedSymbol
+//        itemArray[arrayIndex].done = checked
+        saveContext()
+    }
 }
 
 //MARK: - TableView Data Source
@@ -87,10 +97,13 @@ extension ShoppingListViewController {
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: K.otherItemCellID, for: indexPath) as! OtherItemCell
             let item = itemArray[indexPath.row - K.foodGroups.count]
-            cell.done = item.done
-            cell.checkMarkImage.image = item.done ? K.checkedSymbol: K.uncheckedSymbol
-            if item.title == nil {
-                cell.checkMarkImage.isHidden = true
+            cell.item = item
+
+            if item.title == nil {  //for adding new item
+                cell.checkMark.isHidden = true
+            } else if item.done {
+                cell.checkMark.image = K.checkedSymbol
+                tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
             }
             cell.titleTextField.text = item.title
             cell.titleTextField.tag = indexPath.row
@@ -107,20 +120,28 @@ extension ShoppingListViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let itemIndex = indexPath.row - K.foodGroups.count
+        
         //if food, go to servers calculator
         if itemIndex < 0 {
             performSegue(withIdentifier: "GoToServesCalculatorVC", sender: self)
             
-        //if other items, change 'done' state
+        //if other items
         } else {
-            let cell = tableView.cellForRow(at: indexPath) as! OtherItemCell
-            cell.done = !cell.done
-            cell.checkMarkImage.image = cell.done ? K.checkedSymbol: K.uncheckedSymbol
-            itemArray[itemIndex].done = cell.done
-            saveContext()
+            setCellDoneState(true, at: indexPath)
         }
-        tableView.deselectRow(at: indexPath, animated: true)
     }
+    
+    
+    override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        
+        let itemIndex = indexPath.row - K.foodGroups.count
+        
+        //if other items
+        if itemIndex >= 0 {
+            setCellDoneState(false, at: indexPath)
+        }
+    }
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "GoToServesCalculatorVC",
@@ -154,7 +175,7 @@ extension ShoppingListViewController: UITextFieldDelegate {
             itemArray.remove(at: itemIndex)
             saveContext()
             tableView.reloadData()
-        }else if textField.text != "" {
+        } else if textField.text != "" {
             itemArray[itemIndex].title = textField.text
             itemArray[itemIndex].lastEdited = Date()
             if itemIndex == 0 {

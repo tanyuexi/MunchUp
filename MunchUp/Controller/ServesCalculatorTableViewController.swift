@@ -87,6 +87,15 @@ extension ServesCalculatorTableViewController {
         
     }
     
+    
+    func setCellDoneState(_ checked: Bool, at indexPath: IndexPath) {
+        
+        serveSizes[indexPath.row].done = checked
+        let cell = tableView.cellForRow(at: indexPath) as! ServesCalculatorCell
+        cell.updateCheckmark(checked)
+        saveContext()
+    }
+    
 }
 
 //MARK: - TableView Data Source
@@ -105,6 +114,9 @@ extension ServesCalculatorTableViewController {
         cell.tableVC = self
         
         cell.updateAll()
+        if serveSizes[indexPath.row].done {
+            tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+        }
         
         return cell
 
@@ -117,10 +129,16 @@ extension ServesCalculatorTableViewController {
 extension ServesCalculatorTableViewController {
         
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        tableView.deselectRow(at: indexPath, animated: true)
-        
+
+        setCellDoneState(true, at: indexPath)
     }
+    
+    
+    override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        
+        setCellDoneState(false, at: indexPath)
+    }
+    
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
@@ -147,6 +165,13 @@ extension ServesCalculatorTableViewController {
         
     }
     
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        if serveSizes[indexPath.row].done {
+            tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+        }
+    }
 }
 
 
