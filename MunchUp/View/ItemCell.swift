@@ -1,5 +1,5 @@
 //
-//  OtherItemCell.swift
+//  ItemCell.swift
 //  MunchItUp
 //
 //  Created by Yuexi Tan on 2020/7/30.
@@ -9,9 +9,9 @@
 import UIKit
 import CoreData
 
-class OtherItemCell: UITableViewCell {
+class ItemCell: UITableViewCell {
 
-    var item: OtherItem?
+    var item: Item?
     
     @IBOutlet weak var checkMark: UIImageView!
     @IBOutlet weak var titleTextField: UITextField!

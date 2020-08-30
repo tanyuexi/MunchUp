@@ -11,7 +11,7 @@ import CoreData
 
 class EditMemberTableViewController: UITableViewController {
     
-    var selectedMember: [FamilyMember] = []
+    var selectedMember: [People] = []
     var validDOB = false
     
     let dateFormatter = DateFormatter()
@@ -54,7 +54,7 @@ class EditMemberTableViewController: UITableViewController {
         checkIfReadyToSave()
     }
     
-    func dataToForm(from data: FamilyMember){
+    func dataToForm(from data: People){
         nameTextField.text = data.name
         DOBTextField.text = dateFormatter.string(from: data.dateOfBirth!)
         DOBConfirmLabel.text = confirmFormatter.string(from: data.dateOfBirth!)
@@ -111,14 +111,14 @@ class EditMemberTableViewController: UITableViewController {
     
     @IBAction func saveButtonPressed(_ sender: UIButton) {
         if selectedMember.count == 0 {   //adding new member
-            selectedMember.append(FamilyMember(context: K.context))
+            selectedMember.append(People(context: K.context))
         }
         formToData(to: selectedMember[0])
         saveContext()
         navigationController?.popViewController(animated: true)
     }
     
-    func formToData(to data: FamilyMember){
+    func formToData(to data: People){
         data.name = nameTextField.text!
         data.dateOfBirth = dateFormatter.date(from: DOBTextField.text!)
         data.additional = additionalSwitch.isOn

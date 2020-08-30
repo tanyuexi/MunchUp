@@ -14,7 +14,7 @@ class ServesCalculatorViewController: UIViewController {
     var category = ""
     var targetServes = 0.0
     var currentServes = 0.0
-    var tableVC: ServesCalculatorTableViewController?
+    var tableVC: ListTableVC?
     
     @IBOutlet weak var targetServesLabel: UILabel!
     @IBOutlet weak var moreOrLessLabel: UILabel!
@@ -33,52 +33,52 @@ class ServesCalculatorViewController: UIViewController {
         
                 
     }
-    
-    @IBAction func setButtonPressed(_ sender: UIButton) {
-        tableVC?.setForUser()
-    }
-    
-    
-    @IBAction func clearButtonPressed(_ sender: UIButton) {
-        tableVC?.clearServes()
-    }
-    
-    //MARK: - Functions
-    
-    func updateTotal(_ serves: Double) {
-        currentServes = roundToHalf(serves)
-        let delta = currentServes - targetServes
-        totalServesLabel.text = (delta > 0) ? "+": ""
-        if delta == 0 {
-            moreOrLessLabel.text = NSLocalizedString("Just right", comment: "serves calculator")
-        } else if delta > 0 {
-            moreOrLessLabel.text = NSLocalizedString("Too much", comment: "serves calculator")
-        } else if delta < 0 {
-            moreOrLessLabel.text = NSLocalizedString("Too little", comment: "serves calculator")
-        }
-        totalServesLabel.text! += limitDigits(delta)
-    }
-    
-
-    
-    // MARK: - Navigation
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-
-        if segue.identifier == "GoToServesCalculatorTableVC" {
-            
-            tableVC = segue.destination as? ServesCalculatorTableViewController
-
-            tableVC?.category = category
-            tableVC?.targetServes = targetServes
-            tableVC?.containerVC = self
-
-        } else if segue.identifier == "GoToNewFoodVC" {
-            let destinationVC = segue.destination as? NewFoodTableViewController
-            destinationVC?.category = category
-            destinationVC?.containerVC = self
-        }
-
-    }
+//    
+//    @IBAction func setButtonPressed(_ sender: UIButton) {
+//        tableVC?.setForUser()
+//    }
+//    
+//    
+//    @IBAction func clearButtonPressed(_ sender: UIButton) {
+//        tableVC?.clearServes()
+//    }
+//    
+//    //MARK: - Functions
+//    
+//    func updateTotal(_ serves: Double) {
+//        currentServes = roundToHalf(serves)
+//        let delta = currentServes - targetServes
+//        totalServesLabel.text = (delta > 0) ? "+": ""
+//        if delta == 0 {
+//            moreOrLessLabel.text = NSLocalizedString("Just right", comment: "serves calculator")
+//        } else if delta > 0 {
+//            moreOrLessLabel.text = NSLocalizedString("Too much", comment: "serves calculator")
+//        } else if delta < 0 {
+//            moreOrLessLabel.text = NSLocalizedString("Too little", comment: "serves calculator")
+//        }
+//        totalServesLabel.text! += limitDigits(delta)
+//    }
+//    
+//
+//    
+//    // MARK: - Navigation
+//
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//
+//        if segue.identifier == "GoToServesCalculatorTableVC" {
+//            
+//            tableVC = segue.destination as? ListTableVC
+//
+//            tableVC?.category = category
+//            tableVC?.targetServes = targetServes
+//            tableVC?.containerVC = self
+//
+//        } else if segue.identifier == "GoToNewFoodVC" {
+//            let destinationVC = segue.destination as? NewFoodTableViewController
+//            destinationVC?.category = category
+//            destinationVC?.containerVC = self
+//        }
+//
+//    }
     
 }

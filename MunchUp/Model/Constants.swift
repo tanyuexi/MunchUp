@@ -11,23 +11,24 @@ import CoreData
 
 struct K {
     
+    static let themeColor = #colorLiteral(red: 0, green: 0.5603182912, blue: 0, alpha: 1)
+    
     static let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     static let defaults = UserDefaults.standard
     
     static let checkedSymbol = UIImage(systemName: "checkmark.circle.fill")
     static let uncheckedSymbol = UIImage(systemName: "circle")
     
-    static let daysString = NSLocalizedString("Days", comment: "plist")
-//    static let settingInitString = NSLocalizedString("Settings initialized", comment: "plist")
     static let additionalString = NSLocalizedString("Additional", comment: "food group")
     static let servesString = NSLocalizedString("serves", comment: "a unit of food")
     
     static let memberCellID = "MemberReusableCell"
     static let addingMemberCellID = "AddingMemberReusableCell"
-    static let foodGroupCellID = "FoodGroupReusableCell"
-    static let otherItemCellID = "OtherItemReusableCell"
-    static let servesCalculatorCellID = "ServesCalculatorReusableCell"
-    
+//    static let foodGroupCellID = "FoodGroupReusableCell"
+    static let emptyCellID = "EmptyReusableCell"
+    static let foodCellID = "FoodReusableCell"
+    static let itemCellID = "ItemReusableCell"
+
     static let servesForChildrenLink = "https://www.eatforhealth.gov.au/food-essentials/how-much-do-we-need-each-day/recommended-number-serves-children-adolescents-and"
     static let servesForAdultsLink = "https://www.eatforhealth.gov.au/food-essentials/how-much-do-we-need-each-day/recommended-number-serves-adults"
     static let serveSizesLink = "https://www.eatforhealth.gov.au/food-essentials/how-much-do-we-need-each-day/serve-sizes"
@@ -46,6 +47,9 @@ struct K {
         NSLocalizedString("Calcium", comment: "food group"),     //4
         NSLocalizedString("Oil", comment: "food group")          //5
     ]
+    
+    static let foodIcon = ["🥬","🍎","🍗","🍞","🥛","🥜"]
+
     static let dailyServes = [
         //NSLocalizedString("Vegetable", comment: "food group"): [
         foodGroups[0]: [

@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class SettingsTableViewController: UITableViewController {
+class SettingsTableVC: UITableViewController {
     
     
     @IBOutlet weak var daysTextField: UITextField!
@@ -64,20 +64,20 @@ class SettingsTableViewController: UITableViewController {
         var list = NSLocalizedString("Shopping List ", comment: "export")
         
         //number of people and days
-        var memberArray: [FamilyMember] = []
-        loadFamilyMembers(to: &memberArray)
+        var memberArray: [People] = []
+        loadPeople(to: &memberArray)
         let days = Int(getDays())
         list += "(\(memberArray.count) " + NSLocalizedString("people, ", comment: "export")
         list += "\(days) " + NSLocalizedString("days)", comment: "export") + "\n\n"
         memberArray = []
         
         //food
-        var sizeArray: [OneServe] = []
+        var sizeArray: [Food] = []
         for group in K.foodGroups {
             list += "#############\n"
             list += "#  \(group)\n"
             list += "#############\n\n"
-            loadServeSizes(to: &sizeArray, category: group)
+            loadFood(to: &sizeArray, category: group)
             for food in sizeArray {
                 if food.serves == 0 {
                     continue
@@ -86,7 +86,7 @@ class SettingsTableViewController: UITableViewController {
                 list += "[ \(limitDigits(food.serves)) \(K.servesString)/ \(limitDigits(food.serves * food.quantity1)) \(food.unit1!)"
                 list += (food.unit2 == "") ? "": "/ \(limitDigits(food.serves * food.quantity2)) \(food.unit2!)"
                 list += " ] "
-                list += "\(food.detail!)\n\n"
+                list += "\(food.title!)\n\n"
             }
             sizeArray = []
         }
@@ -95,8 +95,8 @@ class SettingsTableViewController: UITableViewController {
         list += "#############\n"
         list += NSLocalizedString("#  Other items", comment: "export") + "\n"
         list += "#############\n\n"
-        var itemArray: [OtherItem] = []
-        let request : NSFetchRequest<OtherItem> = OtherItem.fetchRequest()
+        var itemArray: [Item] = []
+        let request : NSFetchRequest<Item> = Item.fetchRequest()
         let sortByDate = NSSortDescriptor(key: "lastEdited", ascending: false)
         request.sortDescriptors = [sortByDate]
         do{
@@ -108,7 +108,7 @@ class SettingsTableViewController: UITableViewController {
                 }
             }
         } catch {
-            print("Error loading OtherItem \(error)")
+            print("Error loading Item \(error)")
         }
         
         pasteboard.string = list
@@ -117,13 +117,13 @@ class SettingsTableViewController: UITableViewController {
 
 //MARK: - Table View Delegate Methods
 
-extension SettingsTableViewController {
+extension SettingsTableVC {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         switch indexPath {
         case [0,1]:
-            reloadServeSizes()
+            resetFoodDatabase()
             confirmMessage(NSLocalizedString("Food database reloaded", comment: "alert"))
             
         case [0,2]:
@@ -149,7 +149,7 @@ extension SettingsTableViewController {
 
 //MARK: - Text Field Delegate Methods
 
-extension SettingsTableViewController: UITextFieldDelegate {
+extension SettingsTableVC: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.endEditing(true)

@@ -9,14 +9,14 @@
 import UIKit
 import CoreData
 
-class ServesCalculatorCell: UITableViewCell {
+class FoodCell: UITableViewCell {
     
-    var serveSizes: OneServe?
-    var tableVC: ServesCalculatorTableViewController?
+    var foodData: Food?
+//    var tableVC: ListTableVC?
     
     let shared = UIViewController()
     
-    @IBOutlet weak var detailLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var checkMark: UIImageView!
     @IBOutlet weak var foodImage: UIImageView!
     @IBOutlet weak var numberTextField: UITextField!
@@ -33,13 +33,13 @@ class ServesCalculatorCell: UITableViewCell {
         5. user select cell (checkmark image)
      
      Serves value update dependencies (order):
-        1. serveSizes.serves
+        1. servefood.serves
         2. stepper
         3. segmented control
         4. text field
      
      Done value update order:
-        1. serveSizes.done
+        1. servefood.done
         2. image
      *********************************/
     
@@ -62,12 +62,12 @@ class ServesCalculatorCell: UITableViewCell {
     
     @IBAction func servesStepperValueChanged(_ sender: UIStepper) {
         
-        if let sizes = serveSizes {
-            sizes.serves = sender.value
+        if let food = foodData {
+            food.serves = sender.value
             shared.saveContext()
-            tableVC?.notifyChangeOfServes()
-            updateServesStepper(sizes.serves)
-            updateUnitSegmentedControl(sizes)
+//            tableVC?.notifyChangeOfServes()
+            updateServesStepper(food.serves)
+            updateUnitSegmentedControl(food)
             updateNumberTextField()
         }
     }
@@ -82,22 +82,22 @@ class ServesCalculatorCell: UITableViewCell {
     
     func updateAll(){
         
-        if let sizes = serveSizes {
+        if let food = foodData {
             
             //detail label
-            detailLabel.text = sizes.detail
+            titleLabel.text = food.title
             
             //image
-            updateCheckmark(sizes.done)
-            updateFoodImage(sizes.image!, custom: sizes.custom)
+            updateCheckmark(food.done)
+            updateFoodImage(food.image!, custom: food.custom)
             
             //stepper
             servesStepper.stepValue = 1
             servesStepper.minimumValue = 0
-            updateServesStepper(sizes.serves)
+            updateServesStepper(food.serves)
 
             //segmented control
-            updateUnitSegmentedControl(sizes)
+            updateUnitSegmentedControl(food)
             
             //text field
             updateNumberTextField()
@@ -114,29 +114,29 @@ class ServesCalculatorCell: UITableViewCell {
     }
     
     
-    func updateUnitSegmentedControl(_ sizes: OneServe) {
+    func updateUnitSegmentedControl(_ food: Food) {
                 
         unitSegmentedControl.setTitle(
-            "\(shared.limitDigits(sizes.serves)) \(K.servesString)",
+            "\(shared.limitDigits(food.serves)) \(K.servesString)",
             forSegmentAt: 0)
         
-        let calculatedQ1 = sizes.quantity1 * sizes.serves
+        let calculatedQ1 = food.quantity1 * food.serves
         
         unitSegmentedControl.setTitle(
-            "\(shared.limitDigits(calculatedQ1)) \(sizes.unit1!)",
+            "\(shared.limitDigits(calculatedQ1)) \(food.unit1!)",
             forSegmentAt: 1)
         
-        if sizes.unit2 == "" {
+        if food.unit2 == "" {
             
             unitSegmentedControl.setTitle("", forSegmentAt: 2)
             unitSegmentedControl.setEnabled(false, forSegmentAt: 2)
             
         } else {
             
-            let calculatedQ2 = sizes.quantity2 * sizes.serves
+            let calculatedQ2 = food.quantity2 * food.serves
             
             unitSegmentedControl.setTitle(
-                "\(shared.limitDigits(calculatedQ2)) \(sizes.unit2!)",
+                "\(shared.limitDigits(calculatedQ2)) \(food.unit2!)",
                 forSegmentAt: 2)
             
             unitSegmentedControl.setEnabled(true, forSegmentAt: 2)
@@ -164,7 +164,7 @@ class ServesCalculatorCell: UITableViewCell {
     func updateFoodImage(_ name: String, custom: Bool = false){
         
         if custom,
-            let imgUrl = tableVC?.getFilePath(name) {
+            let imgUrl = shared.getFilePath(name) {
             
             foodImage.image = UIImage(contentsOfFile: imgUrl.path)
             
@@ -180,20 +180,20 @@ class ServesCalculatorCell: UITableViewCell {
 
 //MARK: - TextField Delegate Methods
 
-extension ServesCalculatorCell: UITextFieldDelegate {
-    
+extension FoodCell: UITextFieldDelegate {
+
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        
+
         textField.selectAll(nil)
-        
+
     }
-    
-    
+
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
+
         textField.endEditing(true)
         return true
-        
+
     }
     
     
@@ -209,24 +209,24 @@ extension ServesCalculatorCell: UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         
-        if let sizes = serveSizes,
+        if let food = foodData,
             let double = Double(textField.text!) {
             
             switch unitSegmentedControl.selectedSegmentIndex {
             case 0:
-                sizes.serves = shared.roundToHalf(double)
+                food.serves = shared.roundToHalf(double)
             case 1:
-                sizes.serves = shared.roundToHalf(double/sizes.quantity1)
+                food.serves = shared.roundToHalf(double/food.quantity1)
             case 2:
-                sizes.serves = shared.roundToHalf(double/sizes.quantity2)
+                food.serves = shared.roundToHalf(double/food.quantity2)
             default:
                 return
             }
             
             shared.saveContext()
-            tableVC?.notifyChangeOfServes()
-            updateServesStepper(sizes.serves)
-            updateUnitSegmentedControl(sizes)
+//            tableVC?.notifyChangeOfServes()
+            updateServesStepper(food.serves)
+            updateUnitSegmentedControl(food)
             updateNumberTextField()
             
         }
