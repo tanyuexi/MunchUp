@@ -22,8 +22,8 @@ struct K {
     static let additionalString = NSLocalizedString("Additional", comment: "food group")
     static let servesString = NSLocalizedString("serves", comment: "a unit of food")
     
-    static let memberCellID = "MemberReusableCell"
-    static let addingMemberCellID = "AddingMemberReusableCell"
+    static let peopleCellID = "PeopleReusableCell"
+    static let addPeopleCellID = "AddPeopleReusableCell"
 //    static let foodGroupCellID = "FoodGroupReusableCell"
     static let emptyCellID = "EmptyReusableCell"
     static let foodCellID = "FoodReusableCell"

@@ -1,5 +1,5 @@
 //
-//  EditMemberTableViewController.swift
+//  EditPeopleTableVC.swift
 //  MunchItUp
 //
 //  Created by Yuexi Tan on 2020/7/20.
@@ -9,11 +9,12 @@
 import UIKit
 import CoreData
 
-class EditMemberTableViewController: UITableViewController {
+class EditPeopleTableVC: UITableViewController {
     
     var selectedMember: [People] = []
-    var validDOB = false
+    var peopleVC: PeopleTableVC?
     
+    var validDOB = false
     let dateFormatter = DateFormatter()
     let confirmFormatter = DateFormatter()
     
@@ -27,6 +28,7 @@ class EditMemberTableViewController: UITableViewController {
     @IBOutlet weak var breastfeedingStackView: UIStackView!
     @IBOutlet weak var breastfeedingSwitch: UISwitch!
     @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var deleteButton: UIButton!
     
     
@@ -34,17 +36,16 @@ class EditMemberTableViewController: UITableViewController {
         super.viewDidLoad()
         
         saveButton.layer.cornerRadius = 10
+        cancelButton.layer.cornerRadius = 10
         deleteButton.layer.cornerRadius = 10
         
         dateFormatter.dateFormat = NSLocalizedString("dd/MM/yyyy", comment: "DOB text field data format")
         confirmFormatter.dateFormat = NSLocalizedString("(d MMM, yyyy)", comment: "DOB confirm label data format")
         
         if selectedMember.count == 0 {
-            navigationItem.title = NSLocalizedString("New Member", comment: "navigation title")
             deleteButton.isHidden = true
         } else {
-            let editLocalize = NSLocalizedString("Edit", comment: "navigation title")
-            navigationItem.title = "\(editLocalize) \(selectedMember[0].name!)"
+            deleteButton.isHidden = false
             dataToForm(from: selectedMember[0])
         }
         
@@ -115,7 +116,8 @@ class EditMemberTableViewController: UITableViewController {
         }
         formToData(to: selectedMember[0])
         saveContext()
-        navigationController?.popViewController(animated: true)
+        peopleVC?.refresh()
+        dismiss(animated: true, completion: nil)
     }
     
     func formToData(to data: People){
@@ -130,7 +132,8 @@ class EditMemberTableViewController: UITableViewController {
     @IBAction func deleteButtonPressed(_ sender: UIButton) {
         K.context.delete(selectedMember[0])
         saveContext()
-        navigationController?.popViewController(animated: true)
+        peopleVC?.refresh()
+        dismiss(animated: true, completion: nil)
     }
     
     
@@ -138,11 +141,17 @@ class EditMemberTableViewController: UITableViewController {
         enableSaveButton(saveButton, enable: (nameTextField.text != "" &&
         validDOB))
     }
+    
+    
+    @IBAction func cancelButtonPressed(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
+    }
+    
 }
 
 //MARK: - UITextFieldDelegate
 
-extension EditMemberTableViewController: UITextFieldDelegate {
+extension EditPeopleTableVC: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.endEditing(true)

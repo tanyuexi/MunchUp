@@ -12,7 +12,8 @@
 
 import UIKit
 
-extension UITextField{
+extension UITextField {
+    
     
     @IBInspectable var doneAccessory: Bool{
         get{

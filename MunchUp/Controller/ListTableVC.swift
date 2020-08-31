@@ -31,11 +31,11 @@ class ListTableVC: UITableViewController {
         setExpandState(true)
     }
     
-//    override func viewDidAppear(_ animated: Bool) {
-//        super.viewDidAppear(animated)
-//        days = getDays()
-//        tableView.reloadData()
-//    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        days = getDays()
+        tableView.reloadData()
+    }
     
 }
 

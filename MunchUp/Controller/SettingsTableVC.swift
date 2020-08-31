@@ -1,5 +1,5 @@
 //
-//  SettingsTableViewController.swift
+//  SettingsTableVC.swift
 //  MunchItUp
 //
 //  Created by Yuexi Tan on 2020/7/24.
@@ -18,7 +18,6 @@ class SettingsTableVC: UITableViewController {
         super.viewDidLoad()
         
         daysTextField.text = "\(Int(getDays()))"
-        
         daysTextField.delegate = self 
     
     }
@@ -79,7 +78,7 @@ class SettingsTableVC: UITableViewController {
             list += "#############\n\n"
             loadFood(to: &sizeArray, category: group)
             for food in sizeArray {
-                if food.serves == 0 {
+                if food.serves == 0 || food.done {
                     continue
                 }
                 list += food.done ? "@ ": "- "
