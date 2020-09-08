@@ -11,6 +11,8 @@ import CoreData
 
 struct K {
     
+    static let notificationName = Notification.Name("notificationName")
+
     static let themeColor = #colorLiteral(red: 0, green: 0.5603182912, blue: 0, alpha: 1)
     
     static let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -21,13 +23,15 @@ struct K {
     
     static let additionalString = NSLocalizedString("Additional", comment: "food group")
     static let servesString = NSLocalizedString("serves", comment: "a unit of food")
+    static let nowString = NSLocalizedString("Now", comment: "section header")
     
     static let peopleCellID = "PeopleReusableCell"
     static let addPeopleCellID = "AddPeopleReusableCell"
 //    static let foodGroupCellID = "FoodGroupReusableCell"
     static let emptyCellID = "EmptyReusableCell"
-    static let foodCellID = "FoodReusableCell"
-    static let itemCellID = "ItemReusableCell"
+    static let foodCellID = "FoodCell"
+    static let itemCellID = "ItemCell"
+//    static let foodHeaderID = "FoodSectionHeaderView"
 
     static let servesForChildrenLink = "https://www.eatforhealth.gov.au/food-essentials/how-much-do-we-need-each-day/recommended-number-serves-children-adolescents-and"
     static let servesForAdultsLink = "https://www.eatforhealth.gov.au/food-essentials/how-much-do-we-need-each-day/recommended-number-serves-adults"

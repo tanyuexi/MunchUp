@@ -9,10 +9,19 @@
 import UIKit
 import CoreData
 
-class ItemCell: UITableViewCell {
+protocol ItemCellDelegate: class {
+    func addItem(_ newTitle: String)
+    func deleteItem(at index: Int)
+    func saveDataAndReloadTable()
+}
 
-    var item: Item?
+class ItemCell: UITableViewCell {
     
+    var item: Item?
+    var index = -1
+    weak var delegate: ItemCellDelegate?
+
+        
     @IBOutlet weak var checkMark: UIImageView!
     @IBOutlet weak var titleTextField: UITextField!
     
@@ -29,9 +38,31 @@ class ItemCell: UITableViewCell {
     }
     
     @IBAction func titleTextFieldEditingDidEnd(_ sender: UITextField) {
+        
         sender.borderStyle = .none
+        
+        if sender.text == "" {
+            if index > 0 {
+                delegate?.deleteItem(at: index)
+            }
+        } else {
+            if index == 0 {
+                //add new item
+                delegate?.addItem(sender.text!)
+            } else {
+                //put edited item first
+                delegate?.deleteItem(at: index)
+                delegate?.addItem(sender.text!)
+            }
+        }
+        delegate?.saveDataAndReloadTable()
     }
     
+    
+    func updateCheckmark(_ done: Bool) {
+        
+        checkMark.image = done ? K.checkedSymbol: K.uncheckedSymbol
+    }
     
 //    func setDoneState(_ checked: Bool) {
 //        

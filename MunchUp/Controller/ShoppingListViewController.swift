@@ -32,7 +32,7 @@ class ShoppingListViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.register(UINib(nibName: "ItemCell", bundle: nil), forCellReuseIdentifier: K.itemCellID)
+//        tableView.register(UINib(nibName: "ItemCell", bundle: nil), forCellReuseIdentifier: K.itemCellID)
         
 
         loadItems(to: &itemArray)
@@ -46,7 +46,7 @@ class ShoppingListViewController: UITableViewController {
         //initialize serve sizes
         let appLanguage = Locale.preferredLanguages[0]
         if K.defaults.string(forKey: "Localization") != appLanguage {
-            resetFoodDatabase()
+//            resetFoodDatabase(to: &)
             K.defaults.set(appLanguage, forKey: "Localization")
         }
         

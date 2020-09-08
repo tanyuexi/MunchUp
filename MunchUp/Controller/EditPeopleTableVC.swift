@@ -9,10 +9,17 @@
 import UIKit
 import CoreData
 
+protocol EditPeopleTableVCDelegate: class {
+    func addPerson(_ newData: People)
+    func deletePerson(at index: Int)
+    func saveDataAndReloadTable()
+}
+
 class EditPeopleTableVC: UITableViewController {
     
-    var selectedMember: [People] = []
-    var peopleVC: PeopleTableVC?
+    var delegate: EditPeopleTableVCDelegate?
+    var selectedPerson: [People] = []
+    var index = -1
     
     var validDOB = false
     let dateFormatter = DateFormatter()
@@ -35,18 +42,14 @@ class EditPeopleTableVC: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        saveButton.layer.cornerRadius = 10
-        cancelButton.layer.cornerRadius = 10
-        deleteButton.layer.cornerRadius = 10
-        
         dateFormatter.dateFormat = NSLocalizedString("dd/MM/yyyy", comment: "DOB text field data format")
         confirmFormatter.dateFormat = NSLocalizedString("(d MMM, yyyy)", comment: "DOB confirm label data format")
         
-        if selectedMember.count == 0 {
+        if selectedPerson.count == 0 {
             deleteButton.isHidden = true
         } else {
             deleteButton.isHidden = false
-            dataToForm(from: selectedMember[0])
+            dataToForm(from: selectedPerson[0])
         }
         
         nameTextField.delegate = self
@@ -111,12 +114,14 @@ class EditPeopleTableVC: UITableViewController {
     }
     
     @IBAction func saveButtonPressed(_ sender: UIButton) {
-        if selectedMember.count == 0 {   //adding new member
-            selectedMember.append(People(context: K.context))
+        let newPerson = People(context: K.context)
+        formToData(to: newPerson)
+        if selectedPerson.count == 1 {   //edit existing person
+            delegate?.deletePerson(at: index)
         }
-        formToData(to: selectedMember[0])
-        saveContext()
-        peopleVC?.refresh()
+        //add new person
+        delegate?.addPerson(newPerson)
+        delegate?.saveDataAndReloadTable()
         dismiss(animated: true, completion: nil)
     }
     
@@ -130,9 +135,8 @@ class EditPeopleTableVC: UITableViewController {
     }
     
     @IBAction func deleteButtonPressed(_ sender: UIButton) {
-        K.context.delete(selectedMember[0])
-        saveContext()
-        peopleVC?.refresh()
+        delegate?.deletePerson(at: index)
+        delegate?.saveDataAndReloadTable()
         dismiss(animated: true, completion: nil)
     }
     
@@ -164,6 +168,7 @@ extension EditPeopleTableVC: UITextFieldDelegate {
     
     //DOBTextField auto format to "XX/XX/XXXX"
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
         if textField != DOBTextField || string == "" {
             return true
         }

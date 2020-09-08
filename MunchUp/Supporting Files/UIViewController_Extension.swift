@@ -47,6 +47,17 @@ extension UIViewController {
 
     
     //MARK: - Core Data
+    
+    func sortPeopleArray(_ peopleArray: inout [People]){
+        peopleArray.sort {
+            if $0.dateOfBirth! != $1.dateOfBirth! {
+                return $0.dateOfBirth! < $1.dateOfBirth!
+            } else {
+                return $0.name! < $1.name!
+            }
+        }
+    }
+    
     func resetFoodDatabase(){
         
         //load old food
@@ -97,7 +108,6 @@ extension UIViewController {
         }
         
         saveContext()
-        
     }
     
     
@@ -105,21 +115,23 @@ extension UIViewController {
         do {
             try K.context.save()
         } catch {
-            print("Error saving context \(error)")
+            let nserror = error as NSError
+            print("Unresolved error \(nserror), \(nserror.userInfo)")
         }
     }
     
     
     func loadPeople(to array: inout [People]) {
         let request : NSFetchRequest<People> = People.fetchRequest()
-        let sortByAge = NSSortDescriptor(key: "dateOfBirth", ascending: true)
-        let sortByName = NSSortDescriptor(key: "name", ascending: true)
-        request.sortDescriptors = [sortByAge, sortByName]
+//        let sortByAge = NSSortDescriptor(key: "dateOfBirth", ascending: true)
+//        let sortByName = NSSortDescriptor(key: "name", ascending: true)
+//        request.sortDescriptors = [sortByAge, sortByName]
         do{
             array = try K.context.fetch(request)
         } catch {
             print("Error loading People \(error)")
         }
+        sortPeopleArray(&array)
     }
     
     
@@ -134,20 +146,21 @@ extension UIViewController {
         }
     }
     
-    func loadFood(to array: inout [Food], category: String) {
-        
-        let request : NSFetchRequest<Food> = Food.fetchRequest()
-        
-        let categoryPredicate = NSPredicate(format: "category == %@", category)
-        request.predicate = categoryPredicate
-        
-        let sortByDate = NSSortDescriptor(key: "date", ascending: true)
-        request.sortDescriptors = [sortByDate]
-        
-        do{
-            array = try K.context.fetch(request)
-        } catch {
-            print("Error loading Food \(error)")
+    func loadFood(to foodDict: inout [String: [Food]]) {
+        for category in K.foodGroups {
+            var foodByCategory: [Food] = []
+            let request : NSFetchRequest<Food> = Food.fetchRequest()
+            let categoryPredicate = NSPredicate(format: "category == %@", category)
+            request.predicate = categoryPredicate
+            let sortByDate = NSSortDescriptor(key: "date", ascending: true)
+            request.sortDescriptors = [sortByDate]
+            
+            do{
+                foodByCategory = try K.context.fetch(request)
+            } catch {
+                print("Error loading Food \(error)")
+            }
+            foodDict[category] = foodByCategory
         }
     }
 
@@ -222,7 +235,9 @@ extension UIViewController {
         return false
     }
     
-    func calculateDailyTotalServes(from peopleArray: inout [People], to totalDict: inout [String: Double]) {
+    func calculateDailyTotalServes(from peopleArray: [People], to totalDict: inout [String: Double]) {
+        
+        totalDict = [:]
         
         var ageThreshold: [Int: Date] = [:]
         
@@ -271,6 +286,11 @@ extension UIViewController {
             }
         }
                 
+    }
+    
+    //MARK: - Notification Center
+    func postNotification(_ userInfo: [String: Any]){
+        NotificationCenter.default.post(name: K.notificationName, object: nil, userInfo: userInfo)
     }
     
 }

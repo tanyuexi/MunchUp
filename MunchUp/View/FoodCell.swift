@@ -1,5 +1,5 @@
 //
-//  ServeCalculatorCell.swift
+//  FoodCell.swift
 //  MunchItUp
 //
 //  Created by Yuexi Tan on 2020/8/2.
@@ -9,10 +9,15 @@
 import UIKit
 import CoreData
 
+protocol FoodCellDelegate: class {
+    func onServesChange(_ category: String)
+}
+
 class FoodCell: UITableViewCell {
     
     var foodData: Food?
-//    var tableVC: ListTableVC?
+    weak var delegate: FoodCellDelegate?
+    var index = -1
     
     let shared = UIViewController()
     
@@ -45,7 +50,6 @@ class FoodCell: UITableViewCell {
     
     
     override func awakeFromNib() {
-        
         super.awakeFromNib()
         numberTextField.delegate = self
         foodImage.layer.cornerRadius = 10
@@ -65,7 +69,6 @@ class FoodCell: UITableViewCell {
         if let food = foodData {
             food.serves = sender.value
             shared.saveContext()
-//            tableVC?.notifyChangeOfServes()
             updateServesStepper(food.serves)
             updateUnitSegmentedControl(food)
             updateNumberTextField()
@@ -108,9 +111,12 @@ class FoodCell: UITableViewCell {
     
     func updateServesStepper(_ serves: Double) {
         
-        servesStepper.maximumValue = serves + servesStepper.stepValue
+        servesStepper.maximumValue = serves + 2
         servesStepper.value = serves
-        
+        if foodData != nil {
+            delegate?.onServesChange(foodData!.category!)
+        }
+
     }
     
     
@@ -224,7 +230,6 @@ extension FoodCell: UITextFieldDelegate {
             }
             
             shared.saveContext()
-//            tableVC?.notifyChangeOfServes()
             updateServesStepper(food.serves)
             updateUnitSegmentedControl(food)
             updateNumberTextField()

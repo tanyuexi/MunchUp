@@ -32,6 +32,7 @@
 		E7FF800424FA07380079A84C /* ListContainerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FF800324FA07380079A84C /* ListContainerVC.swift */; };
 		E7FF800624FBB5270079A84C /* UIViewController_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FF800524FBB5270079A84C /* UIViewController_Extension.swift */; };
 		E7FF800824FD172A0079A84C /* EditPeopleTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FF800724FD172A0079A84C /* EditPeopleTableVC.swift */; };
+		E7FF80102504EFF70079A84C /* UIView_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FF800F2504EFF70079A84C /* UIView_Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,6 +69,7 @@
 		E7FF800324FA07380079A84C /* ListContainerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListContainerVC.swift; sourceTree = "<group>"; };
 		E7FF800524FBB5270079A84C /* UIViewController_Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController_Extension.swift; sourceTree = "<group>"; };
 		E7FF800724FD172A0079A84C /* EditPeopleTableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditPeopleTableVC.swift; sourceTree = "<group>"; };
+		E7FF800F2504EFF70079A84C /* UIView_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView_Extension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,6 +161,7 @@
 				E757C0CC24C1662400B8AA08 /* Assets.xcassets */,
 				E7FF800524FBB5270079A84C /* UIViewController_Extension.swift */,
 				E7C0A70324F52F950026B72E /* UITextField_Extension.swift */,
+				E7FF800F2504EFF70079A84C /* UIView_Extension.swift */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -245,6 +248,7 @@
 				E757C0C124C1662000B8AA08 /* AppDelegate.swift in Sources */,
 				E76F6A3A24E5551B0009B0E0 /* SettingsTableVC.swift in Sources */,
 				E757C0E024C52A4100B8AA08 /* PeopleTableVC.swift in Sources */,
+				E7FF80102504EFF70079A84C /* UIView_Extension.swift in Sources */,
 				E76F6A4024EA54300009B0E0 /* MunchUp.xcdatamodeld in Sources */,
 				E7DA8C9024D280C000538CD3 /* ItemCell.swift in Sources */,
 				E757C0C324C1662000B8AA08 /* SceneDelegate.swift in Sources */,
