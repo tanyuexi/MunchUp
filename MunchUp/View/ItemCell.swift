@@ -12,7 +12,7 @@ import CoreData
 protocol ItemCellDelegate: class {
     func addItem(_ newTitle: String)
     func deleteItem(at index: Int)
-    func saveDataAndReloadTable()
+    func saveItemAndReloadTable()
 }
 
 class ItemCell: UITableViewCell {
@@ -55,7 +55,7 @@ class ItemCell: UITableViewCell {
                 delegate?.addItem(sender.text!)
             }
         }
-        delegate?.saveDataAndReloadTable()
+        delegate?.saveItemAndReloadTable()
     }
     
     

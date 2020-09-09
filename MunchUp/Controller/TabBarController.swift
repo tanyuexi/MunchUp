@@ -57,7 +57,7 @@ class TabBarController: UITabBarController {
 //MARK: - Notification center
 
 extension TabBarController {
-
+    
     @objc func onNotification(notification: Notification) {
         
         if let userInfo = notification.userInfo as? [String: Any] {
@@ -101,29 +101,69 @@ extension TabBarController {
                     itemArray = data as! [Item]
                 }
                 
+                if key == "foodDict update" {
+                    foodDict = data as! [String: [Food]]
+                }
+                
                 if key == "resetFoodDatabase" {
                     resetFoodDatabase()
                     loadFood(to: &foodDict)
                     postNotification([
                         "foodDict": foodDict
                     ])
+                }
+                
+                if key == "copy list" {
+                    let pasteboard = UIPasteboard.general
                     
+                    var list = String(format: "%@ (%d %@, %d %@)\n\n",
+                        NSLocalizedString("Shopping List", comment: "export"),
+                        peopleArray.count,
+                        NSLocalizedString("people", comment: "export"),
+                        Int(days),
+                        NSLocalizedString("days", comment: "export")
+                    )
+                    
+                    //food
+                    for group in K.foodGroups {
+                        list += "#############\n"
+                        list += "#  \(group)\n"
+                        list += "#############\n\n"
+                        if let foodArray = foodDict[group] {
+                            for food in foodArray {
+                                if food.serves == 0 || food.done {
+                                    continue
+                                }
+                                list += String(format: "- [ %@ %@/ %@/ %@ ] %@\n\n",
+                                    limitDigits(food.serves),
+                                    K.servesString,
+                                    formatQuantity((food.serves * food.quantity1), unit: food.unit1!),
+                                    (food.unit2 == "") ?
+                                        "":
+                                        formatQuantity((food.serves * food.quantity2), unit: food.unit2!),
+                                    food.title!
+                                )
+                            }
+                        }
+                    }
+                        
+                    
+                    //other items
+                    list += "#############\n"
+                    list += "#  " + NSLocalizedString("Other items", comment: "export") + "\n"
+                    list += "#############\n\n"
+                    for i in itemArray {
+                        if let title = i.title,
+                            i.done == false {
+                            
+                            list += "- \(title)\n\n"
+                        }
+                    }
+                    
+                    pasteboard.string = list
                 }
             }
         }
-        
-
-//        
-//        if let data = notification.userInfo?["foodDict"] as? [String: [Food]] {
-//            foodDict = data
-//        }
-//        
-
-//        
-
-        
-        
-        
 
     }
     

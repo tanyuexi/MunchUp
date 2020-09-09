@@ -93,7 +93,7 @@ extension ListTableVC {
                 }
             }
         }
-        saveContext()
+        saveFood()
         tableView.reloadData()
     }
     
@@ -104,7 +104,7 @@ extension ListTableVC {
                 food.serves = 0
             }
         }
-        saveContext()
+        saveFood()
         tableView.reloadData()
     }
     
@@ -115,9 +115,8 @@ extension ListTableVC {
         foodDict[category]![indexPath.row].done = checked
         let cell = tableView.cellForRow(at: indexPath) as! FoodCell
         cell.updateCheckmark(checked)
-        saveContext()
         if hideChecked, checked {
-            tableView.reloadSections([indexPath.section], with: .fade)
+            tableView.reloadSections([indexPath.section], with: .none)
         }
     }
     
@@ -127,9 +126,8 @@ extension ListTableVC {
         itemArray[indexPath.row].done = checked
         let cell = tableView.cellForRow(at: indexPath) as! ItemCell
         cell.updateCheckmark(checked)
-        saveContext()
         if hideChecked, checked {
-            tableView.reloadSections([indexPath.section], with: .fade)
+            tableView.reloadSections([indexPath.section], with: .none)
         }
     }
     
@@ -140,7 +138,9 @@ extension ListTableVC {
                 format: "%@ %@ (%@: %@, %@: %@)",
                 K.foodIcon[section],
                 K.foodGroups[section],
-                NSLocalizedString("Target", comment: "section header"),
+                (section == 5 ?
+                    NSLocalizedString("Up to", comment: "section header"):
+                    NSLocalizedString("Target", comment: "section header")),
                 limitDigits( (dailyTotal[category] ?? 0.0) * days ),
                 K.nowString,
                 limitDigits(currentServes[category] ?? 0.0)
@@ -202,7 +202,7 @@ extension ListTableVC {
     
     @objc func tapSection(sender: UIButton) {
         expandSection[sender.tag] = !expandSection[sender.tag]
-        tableView.reloadSections([sender.tag], with: .fade)
+        tableView.reloadSections([sender.tag], with: .none)
     }
     
     
@@ -334,8 +334,8 @@ extension ListTableVC {
                 
                 K.context.delete(foodData)
                 foodDict[category]?.remove(at: indexPath.row)
-                tableView.deleteRows(at: [indexPath], with: .fade)
-                saveContext()
+                tableView.deleteRows(at: [indexPath], with: .none)
+                saveFood()
             }
         }
         
@@ -362,6 +362,12 @@ extension ListTableVC: FoodCellDelegate {
     
     func onServesChange(_ category: String){
         currentServes[category] = sumUpServes(category)
+        saveFood()
+    }
+    
+    func saveFood(){
+        postNotification(["foodDict update": foodDict])
+        saveContext()
     }
 }
 
@@ -383,7 +389,7 @@ extension ListTableVC: ItemCellDelegate {
     }
     
     
-    func saveDataAndReloadTable(){
+    func saveItemAndReloadTable(){
         postNotification(["itemArray update": itemArray])
         saveContext()
         tableView.reloadSections([K.foodGroups.count], with: .none)

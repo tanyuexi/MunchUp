@@ -184,14 +184,19 @@ extension UIViewController {
     }
     
     
-//    func formatWeight(_ grams: Double) -> String {
-//        if grams < 1000 {
-//            return limitDigits(grams)
-//        } else {
-//            return limitDigits(grams/1000)
-//
-//        }
-//    }
+    func formatQuantity(_ quantity: Double, unit: String) -> String {
+        let convertableUnits = ["g", "ml", "mL"]
+        let newUnit = ["kg", "L", "L"]
+        
+        if let i = convertableUnits.firstIndex(of: unit),
+            quantity >= 1000 {
+            
+            return limitDigits(quantity/1000) + " " + newUnit[i]
+        } else {
+            return limitDigits(quantity) + " " + unit
+        }
+        
+    }
     
     
     //MARK: - UI handling

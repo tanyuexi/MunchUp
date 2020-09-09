@@ -68,7 +68,7 @@ class FoodCell: UITableViewCell {
         
         if let food = foodData {
             food.serves = sender.value
-            shared.saveContext()
+//            shared.saveContext()
             updateServesStepper(food.serves)
             updateUnitSegmentedControl(food)
             updateNumberTextField()
@@ -229,7 +229,7 @@ extension FoodCell: UITextFieldDelegate {
                 return
             }
             
-            shared.saveContext()
+//            shared.saveContext()
             updateServesStepper(food.serves)
             updateUnitSegmentedControl(food)
             updateNumberTextField()

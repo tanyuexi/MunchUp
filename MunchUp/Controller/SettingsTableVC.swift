@@ -12,6 +12,7 @@ import CoreData
 class SettingsTableVC: UITableViewController {
     
     var days = 0.0
+    
 
     @IBOutlet weak var daysTextField: UITextField!
     
@@ -67,52 +68,9 @@ class SettingsTableVC: UITableViewController {
     }
 
 
-//    func copyToClipboard(){
-//        let pasteboard = UIPasteboard.general
-//
-//        var list = NSLocalizedString("Shopping List ", comment: "export")
-//
-//        if let tbvc = tabbarC {
-//            //number of people and days
-//            list += String(format: "(%d %@, %d %@)\n\n",
-//                           tbvc.peopleArray.count,
-//                           NSLocalizedString("people", comment: "export"),
-//                           Int(tbvc.days),
-//                           NSLocalizedString("days", comment: "export"))
-//
-//            //food
-//            for group in K.foodGroups {
-//                list += "#############\n"
-//                list += "#  \(group)\n"
-//                list += "#############\n\n"
-//                if let foodArray = tbvc.foodDict[group] {
-//                    for food in foodArray {
-//                        if food.serves == 0 || food.done {
-//                            continue
-//                        }
-//                        list += food.done ? "@ ": "- "
-//                        list += "[ \(limitDigits(food.serves)) \(K.servesString)/ \(limitDigits(food.serves * food.quantity1)) \(food.unit1!)"
-//                        list += (food.unit2 == "") ? "": "/ \(limitDigits(food.serves * food.quantity2)) \(food.unit2!)"
-//                        list += " ] "
-//                        list += "\(food.title!)\n\n"
-//                    }
-//                }
-//            }
-//
-//            //other items
-//            list += "#############\n"
-//            list += NSLocalizedString("#  Other items", comment: "export") + "\n"
-//            list += "#############\n\n"
-//            for i in tbvc.itemArray {
-//                if let item = i.title {
-//                    list += i.done ? "@ ": "- "
-//                    list += "\(item)\n\n"
-//                }
-//            }
-//
-//        }
-//        pasteboard.string = list
-//    }
+    func copyToClipboard(){
+        postNotification(["copy list": true])
+    }
 }
 
 //MARK: - Table View Delegate Methods
@@ -125,10 +83,9 @@ extension SettingsTableVC {
         case [0,1]:
             postNotification(["resetFoodDatabase": true])
             confirmMessage(NSLocalizedString("Food database reloaded", comment: "alert"))
-//            tabbarC?.updateFoodRelatedComponents()
             
         case [0,2]:
-//            copyToClipboard()
+            copyToClipboard()
             confirmMessage(NSLocalizedString("List copied", comment: "alert"))
             
         case [1,0]:
