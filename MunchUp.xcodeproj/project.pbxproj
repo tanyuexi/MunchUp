@@ -32,6 +32,7 @@
 		E7FF80102504EFF70079A84C /* UIButton_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FF800F2504EFF70079A84C /* UIButton_Extension.swift */; };
 		E7FF8018250AEE8D0079A84C /* ListSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FF8017250AEE8D0079A84C /* ListSectionHeader.swift */; };
 		E7FF801C250B40830079A84C /* NewFoodTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FF801B250B40820079A84C /* NewFoodTableVC.swift */; };
+		E7FF801E250E2A5E0079A84C /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FF801D250E2A5E0079A84C /* Data.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,6 +69,7 @@
 		E7FF800F2504EFF70079A84C /* UIButton_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton_Extension.swift; sourceTree = "<group>"; };
 		E7FF8017250AEE8D0079A84C /* ListSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListSectionHeader.swift; sourceTree = "<group>"; };
 		E7FF801B250B40820079A84C /* NewFoodTableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewFoodTableVC.swift; sourceTree = "<group>"; };
+		E7FF801D250E2A5E0079A84C /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +122,7 @@
 				E76F6A3E24EA54300009B0E0 /* MunchUp.xcdatamodeld */,
 				E76F6A2A24DD09B60009B0E0 /* ServeSizes_Australia.txt */,
 				E757C0DC24C1776E00B8AA08 /* Constants.swift */,
+				E7FF801D250E2A5E0079A84C /* Data.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -247,6 +250,7 @@
 				E757C0E024C52A4100B8AA08 /* PeopleTableVC.swift in Sources */,
 				E7FF80102504EFF70079A84C /* UIButton_Extension.swift in Sources */,
 				E76F6A4024EA54300009B0E0 /* MunchUp.xcdatamodeld in Sources */,
+				E7FF801E250E2A5E0079A84C /* Data.swift in Sources */,
 				E7DA8C9024D280C000538CD3 /* ItemCell.swift in Sources */,
 				E757C0C324C1662000B8AA08 /* SceneDelegate.swift in Sources */,
 				E7FF800624FBB5270079A84C /* UIViewController_Extension.swift in Sources */,

@@ -11,10 +11,6 @@ import UIKit
 class ListContainerVC: UIViewController {
     
     var listTableVC: ListTableVC?
-    
-    var days = 0.0
-    var peopleCount = 0
-    
     var expandAll = true
 
 
@@ -27,16 +23,16 @@ class ListContainerVC: UIViewController {
 
         NotificationCenter.default.addObserver(self, selector: #selector(onNotification(notification:)), name: K.notificationName, object: nil)
         
-        postNotification(["pass data to ListContainerVC": true])
+        updateInfoLabel()
     }
     
     
     func updateInfoLabel(){
         infoLabel.text = String(format: "%@ %d %@, %d %@",
             NSLocalizedString("Number of serves for", comment: "info"),
-            peopleCount,
+            Data.shared.peopleArray.count,
             NSLocalizedString("people", comment: "info"),
-            Int(days),
+            Int(Data.shared.days),
             NSLocalizedString("days", comment: "info"))
     }
 
@@ -101,15 +97,13 @@ extension ListContainerVC {
         var updateInterface = false
         
         if let userInfo = notification.userInfo as? [String: Any] {
-            for (key, data) in userInfo {
+            for (key, _) in userInfo {
                 
                 if key == "days" {
-                    days = data as! Double
                     updateInterface = true
                 }
                 
                 if key == "peopleCount" {
-                    peopleCount = data as! Int
                     updateInterface = true
                 }
                 

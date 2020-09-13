@@ -11,11 +11,6 @@ import CoreData
 
 class ListTableVC: UITableViewController {
     
-    var foodDict: [String: [Food]] = [:]
-    var itemArray: [Item] = []
-    var dailyTotal: [String: Double] = [:]
-    var days = 0.0
-    
     var expandSection: [Bool] = []
     var hideChecked = false
     var hiddenCell: [IndexPath: Bool] = [:]
@@ -26,11 +21,13 @@ class ListTableVC: UITableViewController {
         super.viewDidLoad()
         
         setExpandState(true)
+        
+        for category in K.foodGroups {
+            currentServes[category] = sumUpServes(category)
+        }
 
         NotificationCenter.default.addObserver(self, selector: #selector(onNotification(notification:)), name: K.notificationName, object: nil)
         
-        postNotification(["pass data to ListTableVC": true])
-
         tableView.register(UINib(nibName: K.foodCellID, bundle: nil), forCellReuseIdentifier: K.foodCellID)
         tableView.register(UINib(nibName: K.itemCellID, bundle: nil), forCellReuseIdentifier: K.itemCellID)
         tableView.register(ListSectionHeader.self, forHeaderFooterViewReuseIdentifier: K.foodHeaderID)
@@ -54,7 +51,7 @@ extension ListTableVC {
 
     func sumUpServes(_ category: String) -> Double {
         var total = 0.0
-        if let array = foodDict[category] {
+        if let array = Data.shared.foodDict[category] {
             for food in array {
                 total += food.serves
             }
@@ -65,10 +62,10 @@ extension ListTableVC {
     
     
     func autoSet() {
-        for (category, foodArray) in foodDict {
-            if let dailyTarget = dailyTotal[category] {
+        for (category, foodArray) in Data.shared.foodDict {
+            if let dailyTarget = Data.shared.dailyTotal[category] {
                 
-                let targetServes = dailyTarget * days
+                let targetServes = dailyTarget * Data.shared.days
                 let servesPerItem = roundToHalf(targetServes/Double(foodArray.count))
                 for food in foodArray {
                     food.serves = servesPerItem
@@ -82,7 +79,7 @@ extension ListTableVC {
     
     
     func clearServes() {
-        for (category, foodArray) in foodDict {
+        for (category, foodArray) in Data.shared.foodDict {
             for food in foodArray {
                 food.serves = 0
             }
@@ -96,7 +93,7 @@ extension ListTableVC {
     func setFoodCellDoneState(_ checked: Bool, at indexPath: IndexPath) {
         
         let category = K.foodGroups[indexPath.section]
-        foodDict[category]![indexPath.row].done = checked
+        Data.shared.foodDict[category]![indexPath.row].done = checked
         let cell = tableView.cellForRow(at: indexPath) as! FoodCell
         cell.updateCheckmark(checked)
         if hideChecked, checked {
@@ -107,7 +104,7 @@ extension ListTableVC {
     
     func setItemCellDoneState(_ checked: Bool, at indexPath: IndexPath) {
         
-        itemArray[indexPath.row].done = checked
+        Data.shared.itemArray[indexPath.row].done = checked
         let cell = tableView.cellForRow(at: indexPath) as! ItemCell
         cell.updateCheckmark(checked)
         if hideChecked, checked {
@@ -125,7 +122,7 @@ extension ListTableVC {
                 (section == 5 ?
                     NSLocalizedString("Up to", comment: "section header"):
                     NSLocalizedString("Target", comment: "section header")),
-                limitDigits( (dailyTotal[category] ?? 0.0) * days ),
+                limitDigits( (Data.shared.dailyTotal[category] ?? 0.0) * Data.shared.days ),
                 K.nowString,
                 limitDigits(currentServes[category] ?? 0.0)
         )
@@ -172,7 +169,7 @@ extension ListTableVC {
         } else {
             let title = String(format: "%@ (%d)",
                             NSLocalizedString("Other Items", comment: "section header"),
-                            (itemArray.count - 1)
+                            (Data.shared.itemArray.count - 1)
             )
             headerView.collapseButton.setTitle(title, for: .normal)
             headerView.addButton.isHidden = true
@@ -184,26 +181,20 @@ extension ListTableVC {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-        if foodDict.count == 0 {
-            return 0
-        } else if section < K.foodGroups.count {
+        if section < K.foodGroups.count {
             let category = K.foodGroups[section]
-            return expandSection[section] ? (foodDict[category]?.count ?? 0): 0
+            return expandSection[section] ? (Data.shared.foodDict[category]?.count ?? 0): 0
         } else {
-            return expandSection[section] ? itemArray.count: 0
+            return expandSection[section] ? Data.shared.itemArray.count: 0
         }
     }
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if foodDict.count == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: K.emptyCellID, for: indexPath)
-            return cell
-            
-        } else if indexPath.section < K.foodGroups.count {
+        if indexPath.section < K.foodGroups.count {
             let category = K.foodGroups[indexPath.section]
-            let foodData = foodDict[category]![indexPath.row]
+            let foodData = Data.shared.foodDict[category]![indexPath.row]
             let cell = tableView.dequeueReusableCell(withIdentifier: K.foodCellID, for: indexPath) as! FoodCell
             cell.delegate = self
             cell.index = indexPath.row
@@ -213,7 +204,7 @@ extension ListTableVC {
             return cell
             
         } else {
-            let item = itemArray[indexPath.row]
+            let item = Data.shared.itemArray[indexPath.row]
             let cell = tableView.dequeueReusableCell(withIdentifier: K.itemCellID, for: indexPath) as! ItemCell
             cell.delegate = self
             cell.index = indexPath.row
@@ -264,12 +255,9 @@ extension ListTableVC {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if foodDict.count != 0, indexPath.section < K.foodGroups.count {
-            
+        if indexPath.section < K.foodGroups.count {
             setFoodCellDoneState(true, at: indexPath)
-        }
-        
-        if indexPath.section == K.foodGroups.count {
+        } else {
             setItemCellDoneState(true, at: indexPath)
         }
     }
@@ -277,12 +265,9 @@ extension ListTableVC {
     
     override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         
-        if foodDict.count != 0, indexPath.section < K.foodGroups.count {
-            
+        if indexPath.section < K.foodGroups.count {
             setFoodCellDoneState(false, at: indexPath)
-        }
-        
-        if indexPath.section == K.foodGroups.count {
+        } else {
             setItemCellDoneState(false, at: indexPath)
         }
     }
@@ -290,10 +275,10 @@ extension ListTableVC {
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
-        if foodDict.count != 0, indexPath.section < K.foodGroups.count {
+        if indexPath.section < K.foodGroups.count {
             
             let category = K.foodGroups[indexPath.section]
-            let foodData = foodDict[category]![indexPath.row]
+            let foodData = Data.shared.foodDict[category]![indexPath.row]
             
             if editingStyle == .delete {
                 
@@ -309,7 +294,7 @@ extension ListTableVC {
                 }
                 
                 K.context.delete(foodData)
-                foodDict[category]?.remove(at: indexPath.row)
+                Data.shared.foodDict[category]?.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .none)
                 saveFood()
             }
@@ -320,10 +305,10 @@ extension ListTableVC {
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
-        if foodDict.count != 0, indexPath.section < K.foodGroups.count {
+        if indexPath.section < K.foodGroups.count {
             
             let category = K.foodGroups[indexPath.section]
-            let foodData = foodDict[category]![indexPath.row]
+            let foodData = Data.shared.foodDict[category]![indexPath.row]
             if foodData.done {
                 tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
             }
@@ -351,7 +336,6 @@ extension ListTableVC: FoodCellDelegate {
     }
     
     func saveFood(){
-        postNotification(["foodDict update": foodDict])
         saveContext()
     }
 }
@@ -361,21 +345,20 @@ extension ListTableVC: FoodCellDelegate {
 extension ListTableVC: ItemCellDelegate {
     
     func addItem(_ newTitle: String) {
-        itemArray[0].title = newTitle
-        itemArray[0].lastEdited = Date()
-        itemArray.insert(Item(context: K.context), at: 0)
-        itemArray[0].lastEdited = Date().advanced(by: 1)
+        Data.shared.itemArray[0].title = newTitle
+        Data.shared.itemArray[0].lastEdited = Date()
+        Data.shared.itemArray.insert(Item(context: K.context), at: 0)
+        Data.shared.itemArray[0].lastEdited = Date().advanced(by: 1)
     }
     
     
     func deleteItem(at index: Int) {
-        K.context.delete(itemArray[index])
-        itemArray.remove(at: index)
+        K.context.delete(Data.shared.itemArray[index])
+        Data.shared.itemArray.remove(at: index)
     }
     
     
     func saveItemAndReloadTable(){
-        postNotification(["itemArray update": itemArray])
         saveContext()
         tableView.reloadSections([K.foodGroups.count], with: .none)
     }
@@ -392,28 +375,20 @@ extension ListTableVC {
         var updateInterface = false
         
         if let userInfo = notification.userInfo as? [String: Any] {
-            for (key, data) in userInfo {
+            for (key, _) in userInfo {
                 
                 if key == "foodDict" {
-                    foodDict = data as! [String: [Food]]
                     for category in K.foodGroups {
                         currentServes[category] = sumUpServes(category)
                     }
                     updateInterface = true
                 }
                 
-                if key == "itemArray" {
-                    itemArray = data as! [Item]
-                    updateInterface = true
-                }
-                
                 if key == "dailyTotal" {
-                    dailyTotal = data as! [String: Double]
                     updateInterface = true
                 }
                 
                 if key == "days" {
-                    days = data as! Double
                     updateInterface = true
                 }
             }
@@ -456,9 +431,9 @@ extension ListTableVC: ListSectionHeaderDelegate {
 extension ListTableVC: NewFoodTableVCDelegate {
     
     func addNewFood(_ food: Food, category: String) {
-        if foodDict[category] != nil,
+        if Data.shared.foodDict[category] != nil,
             let i = K.foodGroups.firstIndex(of: category) {
-            foodDict[category]!.append(food)
+            Data.shared.foodDict[category]!.append(food)
             saveFood()
             tableView.reloadSections([i], with: .none)
         }

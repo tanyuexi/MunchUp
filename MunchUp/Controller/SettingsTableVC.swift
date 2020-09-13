@@ -10,21 +10,13 @@ import UIKit
 import CoreData
 
 class SettingsTableVC: UITableViewController {
-    
-    var days = 0.0
-    
 
     @IBOutlet weak var daysTextField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        NotificationCenter.default.addObserver(self, selector: #selector(onNotification(notification:)), name: K.notificationName, object: nil)
-//        
-//        postNotification(["pass data to SettingsTableVC": true])
-
-        days = getDays()
-        daysTextField.text = String(Int(days))
+        daysTextField.text = String(Int(Data.shared.days))
         daysTextField.delegate = self
     
     }
@@ -41,10 +33,10 @@ class SettingsTableVC: UITableViewController {
             sender.text = "1"
         }
         
-        days = Double(sender.text!)!
-        updateDays(Int(days))
+        Data.shared.days = Double(sender.text!)!
+        updateDays(Int(Data.shared.days))
         postNotification([
-            "days": days
+            "days": Data.shared.days
         ])
     }
 
@@ -69,7 +61,54 @@ class SettingsTableVC: UITableViewController {
 
 
     func copyToClipboard(){
-        postNotification(["copy list": true])
+//        postNotification(["copy list": true])
+        let pasteboard = UIPasteboard.general
+        
+        var list = String(format: "%@ (%d %@, %d %@)\n\n",
+            NSLocalizedString("Shopping List", comment: "export"),
+            Data.shared.peopleArray.count,
+            NSLocalizedString("people", comment: "export"),
+            Int(Data.shared.days),
+            NSLocalizedString("days", comment: "export")
+        )
+        
+        //food
+        for group in K.foodGroups {
+            list += "#############\n"
+            list += "#  \(group)\n"
+            list += "#############\n\n"
+            if let foodArray = Data.shared.foodDict[group] {
+                for food in foodArray {
+                    if food.serves == 0 || food.done {
+                        continue
+                    }
+                    list += String(format: "- [ %@ %@/ %@/ %@ ] %@\n\n",
+                        limitDigits(food.serves),
+                        K.servesString,
+                        formatQuantity((food.serves * food.quantity1), unit: food.unit1!),
+                        (food.unit2 == "") ?
+                            "":
+                            formatQuantity((food.serves * food.quantity2), unit: food.unit2!),
+                        food.title!
+                    )
+                }
+            }
+        }
+            
+        
+        //other items
+        list += "#############\n"
+        list += "#  " + NSLocalizedString("Other items", comment: "export") + "\n"
+        list += "#############\n\n"
+        for i in Data.shared.itemArray {
+            if let title = i.title,
+                i.done == false {
+                
+                list += "- \(title)\n\n"
+            }
+        }
+        
+        pasteboard.string = list
     }
 }
 
@@ -81,7 +120,11 @@ extension SettingsTableVC {
         
         switch indexPath {
         case [0,1]:
-            postNotification(["resetFoodDatabase": true])
+            resetFoodDatabase()
+            loadFood(to: &Data.shared.foodDict)
+            postNotification([
+                "foodDict": Data.shared.foodDict
+            ])
             confirmMessage(NSLocalizedString("Food database reloaded", comment: "alert"))
             
         case [0,2]:

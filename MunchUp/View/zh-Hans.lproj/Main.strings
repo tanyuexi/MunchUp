@@ -56,7 +56,7 @@
 "mZM-8a-lia.title" = "设置";
 
 /* Class = "UITextField"; placeholder = "DD/MM/YYYY"; ObjectID = "NrP-dZ-rwM"; */
-"NrP-dZ-rwM.placeholder" = "年年年年/月月/日日";
+"NrP-dZ-rwM.placeholder" = "年/月/日";
 
 /* Class = "UITabBarItem"; title = "Shopping List"; ObjectID = "Ok8-ZC-sPc"; */
 "Ok8-ZC-sPc.title" = "采购清单";
@@ -68,10 +68,10 @@
 "pzP-Ad-db0.title" = "采购清单";
 
 /* Class = "UILabel"; text = "e.g. 31/01/1975"; ObjectID = "QMm-QZ-hGa"; */
-"QMm-QZ-hGa.text" = "如：1975/01/31";
+"QMm-QZ-hGa.text" = "例如：1975/01/31";
 
 /* Class = "UILabel"; text = "(DD/MM/YYYY)"; ObjectID = "QTI-Nd-WGK"; */
-"QTI-Nd-WGK.text" = "(年年年年/月月/日日)";
+"QTI-Nd-WGK.text" = "(年/月/日)";
 
 /* Class = "UILabel"; text = "Breastfeed/Lactating:"; ObjectID = "rJA-MB-HFz"; */
 "rJA-MB-HFz.text" = "正在哺乳/泌乳：";

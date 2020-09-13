@@ -10,17 +10,9 @@ import UIKit
 import CoreData
 
 class PeopleTableVC: UITableViewController {
-
-    
-    var peopleArray : [People] = []
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(onNotification(notification:)), name: K.notificationName, object: nil)
-        
-        postNotification(["pass data to PeopleTableVC": true])
     }
     
 
@@ -41,7 +33,7 @@ extension PeopleTableVC {
         
         switch section {
         case 0:   //people list
-            return peopleArray.count
+            return Data.shared.peopleArray.count
         default:   //button to add new person
             return 1
         }
@@ -52,7 +44,7 @@ extension PeopleTableVC {
         
         if indexPath.section == 0 {
             
-            let person = peopleArray[indexPath.row]
+            let person = Data.shared.peopleArray[indexPath.row]
             let cell = tableView.dequeueReusableCell(withIdentifier: K.peopleCellID, for: indexPath)
             cell.textLabel?.text = String(format: "%d. %@",
                                           indexPath.row + 1,
@@ -91,7 +83,7 @@ extension PeopleTableVC {
 
             editVC.delegate = self
             if indexPath.section == 0 {
-                editVC.selectedPerson = [peopleArray[indexPath.row]]
+                editVC.selectedPerson = [Data.shared.peopleArray[indexPath.row]]
                 editVC.index = indexPath.row
             }
         }
@@ -103,46 +95,22 @@ extension PeopleTableVC {
 extension PeopleTableVC: EditPeopleTableVCDelegate {
 
     func addPerson(_ newData: People) {
-        peopleArray.append(newData)
-        sortPeopleArray(&peopleArray)
+        Data.shared.peopleArray.append(newData)
+        sortPeopleArray(&Data.shared.peopleArray)
     }
     
     func deletePerson(at index: Int) {
-        K.context.delete(peopleArray[index])
-        peopleArray.remove(at: index)
+        K.context.delete(Data.shared.peopleArray[index])
+        Data.shared.peopleArray.remove(at: index)
     }
     
     func saveDataAndReloadTable() {
+        calculateDailyTotalServes(from: Data.shared.peopleArray, to: &Data.shared.dailyTotal)
         postNotification([
-            "peopleArray update": peopleArray
+            "peopleCount": Data.shared.peopleArray.count,
+            "dailyTotal": Data.shared.dailyTotal
         ])
         saveContext()
         tableView.reloadData()
     }
-}
-
-//MARK: - Notification center
-
-extension PeopleTableVC {
-    
-    @objc func onNotification(notification: Notification) {
-        
-        var updateInterface = false
-        
-        if let userInfo = notification.userInfo as? [String: Any] {
-            for (key, data) in userInfo {
-                
-                if key == "peopleArray" {
-                    peopleArray = data as! [People]
-                    updateInterface = true
-                }
-                
-            }
-        }
-        
-        if updateInterface {
-            tableView.reloadData()
-        }
-    }
-    
 }
