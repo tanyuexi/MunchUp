@@ -1,171 +1,114 @@
-/* Class = "UILabel"; text = "* Optional"; ObjectID = "1RC-26-VRE"; */
-"1RC-26-VRE.text" = "* 非必填项";
+/* Class = "UITextField"; placeholder = "Title"; ObjectID = "1QW-da-nR0"; */
+"1QW-da-nR0.placeholder" = "标题";
 
-/* Class = "UIButton"; normalTitle = "Save"; ObjectID = "3cM-Fe-KeV"; */
-"3cM-Fe-KeV.normalTitle" = "保存";
+/* Class = "UILabel"; text = "Date of Birth: "; ObjectID = "5F4-zq-3OQ"; */
+"5F4-zq-3OQ.text" = "生日：";
 
-/* Class = "UIButton"; normalTitle = "Shop!"; ObjectID = "3Po-vb-yu0"; */
-"3Po-vb-yu0.normalTitle" = "采购！";
+/* Class = "UITextField"; placeholder = "Unit"; ObjectID = "9N6-Sd-6e1"; */
+"9N6-Sd-6e1.placeholder" = "单位";
 
-/* Class = "UILabel"; text = "0"; ObjectID = "7bU-w5-t4x"; */
-"7bU-w5-t4x.text" = "0";
+/* Class = "UILabel"; text = "Name:"; ObjectID = "9Sl-qY-eC3"; */
+"9Sl-qY-eC3.text" = "名字：";
 
-/* Class = "UITextField"; placeholder = "Quantity"; ObjectID = "14I-aE-Drv"; */
-"14I-aE-Drv.placeholder" = "数量";
+/* Class = "UISegmentedControl"; 19U-aR-8pk.segmentTitles[0] = "Female"; ObjectID = "19U-aR-8pk"; */
+"19U-aR-8pk.segmentTitles[0]" = "女性";
 
-/* Class = "UITableViewSection"; headerTitle = "Links"; ObjectID = "BqX-8Y-CEy"; */
-"BqX-8Y-CEy.headerTitle" = "链接";
+/* Class = "UISegmentedControl"; 19U-aR-8pk.segmentTitles[1] = "Male"; ObjectID = "19U-aR-8pk"; */
+"19U-aR-8pk.segmentTitles[1]" = "男性";
 
-/* Class = "UITextField"; placeholder = "Quantity"; ObjectID = "c2H-g0-tlP"; */
-"c2H-g0-tlP.placeholder" = "数量";
+/* Class = "UILabel"; text = "Category"; ObjectID = "bFN-7D-qco"; */
+"bFN-7D-qco.text" = "类别";
 
-/* Class = "UITextField"; placeholder = "DD/MM/YYYY"; ObjectID = "cih-Xh-IeF"; */
-"cih-Xh-IeF.placeholder" = "年年年年/月月/日日";
+/* Class = "UILabel"; text = "Copy shopping list to clipboard"; ObjectID = "Bn5-Hr-ZON"; */
+"Bn5-Hr-ZON.text" = "复制采购清单至剪贴板";
 
-/* Class = "UILabel"; text = "="; ObjectID = "Cp3-Sn-2rx"; */
-"Cp3-Sn-2rx.text" = "=";
+/* Class = "UILabel"; text = "Detail"; ObjectID = "cyT-KM-iwp"; */
+"cyT-KM-iwp.text" = "详细";
 
-/* Class = "UILabel"; text = "="; ObjectID = "cuJ-q5-3CP"; */
-"cuJ-q5-3CP.text" = "=";
+/* Class = "UITextField"; placeholder = "Quantity*"; ObjectID = "dfm-Qs-Drf"; */
+"dfm-Qs-Drf.placeholder" = "数量*";
 
-/* Class = "UIButton"; normalTitle = "Save"; ObjectID = "dG2-tX-XIQ"; */
-"dG2-tX-XIQ.normalTitle" = "保存";
+/* Class = "UITableViewSection"; headerTitle = "Source"; ObjectID = "HbZ-OQ-fZL"; */
+"HbZ-OQ-fZL.headerTitle" = "资源";
 
-/* Class = "UILabel"; text = "Pregnant: "; ObjectID = "DgA-nX-cRt"; */
-"DgA-nX-cRt.text" = "怀孕：";
+/* Class = "UITabBarItem"; title = "People"; ObjectID = "HzK-YF-atu"; */
+"HzK-YF-atu.title" = "名单";
 
-/* Class = "UIBarButtonItem"; title = " "; ObjectID = "Djq-vb-Sca"; */
-"Djq-vb-Sca.title" = " ";
+/* Class = "UITableViewSection"; headerTitle = "General"; ObjectID = "i77-6y-h41"; */
+"i77-6y-h41.headerTitle" = "通用";
 
-/* Class = "UINavigationItem"; title = "Serves Calculator"; ObjectID = "eQX-hV-Nxl"; */
-"eQX-hV-Nxl.title" = "份数计算器";
+/* Class = "UIButton"; normalTitle = "Collapse All"; ObjectID = "Ian-i7-Lym"; */
+"Ian-i7-Lym.normalTitle" = "全部收起";
 
-/* Class = "UILabel"; text = "Name: "; ObjectID = "EX1-gM-keY"; */
-"EX1-gM-keY.text" = "名字：";
+/* Class = "UILabel"; text = "Days to plan for:"; ObjectID = "ieZ-wP-z5M"; */
+"ieZ-wP-z5M.text" = "计划天数：";
 
-/* Class = "UISegmentedControl"; eyZ-Lv-2Fx.segmentTitles[0] = "Female"; ObjectID = "eyZ-Lv-2Fx"; */
-"eyZ-Lv-2Fx.segmentTitles[0]" = "女性";
+/* Class = "UITextField"; placeholder = "Quantity"; ObjectID = "iQs-iF-0Cl"; */
+"iQs-iF-0Cl.placeholder" = "数量";
 
-/* Class = "UISegmentedControl"; eyZ-Lv-2Fx.segmentTitles[1] = "Male"; ObjectID = "eyZ-Lv-2Fx"; */
-"eyZ-Lv-2Fx.segmentTitles[1]" = "男性";
+/* Class = "UIButton"; normalTitle = "Hide Checked"; ObjectID = "j7E-5k-SEn"; */
+"j7E-5k-SEn.normalTitle" = "隐藏已选项";
 
-/* Class = "UINavigationItem"; title = "New Food"; ObjectID = "geG-QD-2Em"; */
-"geG-QD-2Em.title" = "新食物";
+/* Class = "UITextField"; placeholder = "Unit*"; ObjectID = "mg1-Zs-Hj2"; */
+"mg1-Zs-Hj2.placeholder" = "单位*";
 
-/* Class = "UILabel"; text = "e.g. 31/01/1990"; ObjectID = "Gkj-xe-OBr"; */
-"Gkj-xe-OBr.text" = "例：1990/01/31";
+/* Class = "UITabBarItem"; title = "Settings"; ObjectID = "mZM-8a-lia"; */
+"mZM-8a-lia.title" = "设置";
 
-/* Class = "UILabel"; text = "Date of Birth: "; ObjectID = "gqM-vH-aeS"; */
-"gqM-vH-aeS.text" = "出生日期：";
+/* Class = "UITextField"; placeholder = "DD/MM/YYYY"; ObjectID = "NrP-dZ-rwM"; */
+"NrP-dZ-rwM.placeholder" = "年年年年/月月/日日";
 
-/* Class = "UITextField"; placeholder = "Unit 1"; ObjectID = "gTJ-4m-pbw"; */
-"gTJ-4m-pbw.placeholder" = "单位 1";
+/* Class = "UITabBarItem"; title = "Shopping List"; ObjectID = "Ok8-ZC-sPc"; */
+"Ok8-ZC-sPc.title" = "采购清单";
 
-/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "GUT-Tk-Gqw"; */
-"GUT-Tk-Gqw.normalTitle" = "取消";
+/* Class = "UILabel"; text = "Reset food database"; ObjectID = "oTt-5b-DhN"; */
+"oTt-5b-DhN.text" = "重置食物数据库";
 
-/* Class = "UILabel"; text = "Days to plan for: "; ObjectID = "gYb-iX-hfV"; */
-"gYb-iX-hfV.text" = "采购天数：";
+/* Class = "UITabBarItem"; title = "Shopping List"; ObjectID = "pzP-Ad-db0"; */
+"pzP-Ad-db0.title" = "采购清单";
 
-/* Class = "UITableViewSection"; headerTitle = "Serves, Weight or Volume"; ObjectID = "hj4-JE-lOX"; */
-"hj4-JE-lOX.headerTitle" = "份数, 重量或体积";
+/* Class = "UILabel"; text = "e.g. 31/01/1975"; ObjectID = "QMm-QZ-hGa"; */
+"QMm-QZ-hGa.text" = "如：1975/01/31";
 
-/* Class = "UIButton"; normalTitle = "Delete"; ObjectID = "HTN-Mp-4fq"; */
-"HTN-Mp-4fq.normalTitle" = "删除";
+/* Class = "UILabel"; text = "(DD/MM/YYYY)"; ObjectID = "QTI-Nd-WGK"; */
+"QTI-Nd-WGK.text" = "(年年年年/月月/日日)";
 
-/* Class = "UILabel"; text = "Detail"; ObjectID = "i2d-Uy-7bv"; */
-"i2d-Uy-7bv.text" = "详细";
+/* Class = "UILabel"; text = "Breastfeed/Lactating:"; ObjectID = "rJA-MB-HFz"; */
+"rJA-MB-HFz.text" = "正在哺乳/泌乳：";
 
-/* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "i6X-wV-uba"; */
-"i6X-wV-uba.title" = "东西";
+/* Class = "UILabel"; text = "="; ObjectID = "roa-6h-cHF"; */
+"roa-6h-cHF.text" = "";
 
-/* Class = "UILabel"; text = "serves"; ObjectID = "J9w-Bf-xpo"; */
-"J9w-Bf-xpo.text" = "份";
+/* Class = "UILabel"; text = "Recommended number of serves for children"; ObjectID = "rvh-W6-nWA"; */
+"rvh-W6-nWA.text" = "儿童每日推荐份数";
 
-/* Class = "UINavigationItem"; title = "Family Members"; ObjectID = "jTx-ss-ylo"; */
-"jTx-ss-ylo.title" = "家庭成员";
+/* Class = "UILabel"; text = "What is a serve?"; ObjectID = "thK-VN-1dz"; */
+"thK-VN-1dz.text" = "一份是多少？";
 
-/* Class = "UITableViewSection"; headerTitle = "General"; ObjectID = "k1Q-MY-aFo"; */
-"k1Q-MY-aFo.headerTitle" = "通用";
+/* Class = "UILabel"; text = "Pregnant: "; ObjectID = "U9F-6h-0D6"; */
+"U9F-6h-0D6.text" = "怀孕：";
 
-/* Class = "UINavigationItem"; title = "Settings"; ObjectID = "kT8-mJ-GSG"; */
-"kT8-mJ-GSG.title" = "设置";
+/* Class = "UILabel"; text = "serves"; ObjectID = "UXb-ZH-rMJ"; */
+"UXb-ZH-rMJ.text" = "份";
 
-/* Class = "UIButton"; normalTitle = "Auto Set"; ObjectID = "MvE-EY-kvq"; */
-"MvE-EY-kvq.normalTitle" = "自动设定";
+/* Class = "UILabel"; text = "Recommended number of serves for adults"; ObjectID = "VBf-gn-8Zt"; */
+"VBf-gn-8Zt.text" = "成人每日推荐份数";
 
-/* Class = "UILabel"; text = "What is a serve?"; ObjectID = "oFZ-jP-wqy"; */
-"oFZ-jP-wqy.text" = "一份是多少？";
+/* Class = "UILabel"; text = "Add a person..."; ObjectID = "Vbi-6K-MRw"; */
+"Vbi-6K-MRw.text" = "添加成员…";
 
-/* Class = "UILabel"; text = "Add Member..."; ObjectID = "oIZ-my-Nxc"; */
-"oIZ-my-Nxc.text" = "添加成员...";
+/* Class = "UIButton"; normalTitle = "Clear"; ObjectID = "vlw-Xh-zLG"; */
+"vlw-Xh-zLG.normalTitle" = "归零";
 
-/* Class = "UIBarButtonItem"; title = " "; ObjectID = "onx-ZW-GH3"; */
-"onx-ZW-GH3.title" = " ";
+/* Class = "UIButton"; normalTitle = "Auto Set"; ObjectID = "vnC-qQ-2wq"; */
+"vnC-qQ-2wq.normalTitle" = "自动设定";
 
-/* Class = "UILabel"; text = "Recommended daily serves for adults"; ObjectID = "pg8-cV-Tts"; */
-"pg8-cV-Tts.text" = "成人每日推荐食物份数";
+/* Class = "UILabel"; text = "Very tall/active: "; ObjectID = "wXa-On-N8q"; */
+"wXa-On-N8q.text" = "身高较高/活动较多：";
 
-/* Class = "UITextField"; placeholder = "Description"; ObjectID = "PO3-Ee-LMK"; */
-"PO3-Ee-LMK.placeholder" = "描述";
+/* Class = "UITextField"; placeholder = "Quantity"; ObjectID = "XtA-dh-tNc"; */
+"XtA-dh-tNc.placeholder" = "数量";
 
-/* Class = "UINavigationItem"; title = "Shopping List"; ObjectID = "pxr-r0-LZr"; */
-"pxr-r0-LZr.title" = "采购清单";
-
-/* Class = "UILabel"; text = "Detail"; ObjectID = "Q4j-Ow-CGF"; */
-"Q4j-Ow-CGF.text" = "详细";
-
-/* Class = "UITableViewSection"; headerTitle = "Description"; ObjectID = "Qa6-Rb-QM5"; */
-"Qa6-Rb-QM5.headerTitle" = "描述";
-
-/* Class = "UILabel"; text = "Active/Taller than average: "; ObjectID = "qdk-Vb-w9n"; */
-"qdk-Vb-w9n.text" = "运动较多/身高较高";
-
-/* Class = "UILabel"; text = "Title"; ObjectID = "Qe0-K3-2b1"; */
-"Qe0-K3-2b1.text" = "标题";
-
-/* Class = "UIButton"; normalTitle = "Clear"; ObjectID = "qKN-en-rBk"; */
-"qKN-en-rBk.normalTitle" = "归零";
-
-/* Class = "UILabel"; text = "Delta"; ObjectID = "qmj-2F-Yja"; */
-"qmj-2F-Yja.text" = "现有";
-
-/* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "QNk-g2-LCx"; */
-"QNk-g2-LCx.title" = "东西";
-
-/* Class = "UILabel"; text = "0"; ObjectID = "ric-w2-ndZ"; */
-"ric-w2-ndZ.text" = "0";
-
-/* Class = "UITextField"; placeholder = "Unit 2*"; ObjectID = "s4k-qn-3oh"; */
-"s4k-qn-3oh.placeholder" = "单位 2 *";
-
-/* Class = "UILabel"; text = "Recommended daily serves for children"; ObjectID = "sLG-6F-qTN"; */
-"sLG-6F-qTN.text" = "儿童每日推荐食物份数";
-
-/* Class = "UINavigationItem"; title = "Edit Member"; ObjectID = "SqI-Jh-9qL"; */
-"SqI-Jh-9qL.title" = "修改成员";
-
-/* Class = "UILabel"; text = "Target"; ObjectID = "T1z-mU-6wK"; */
-"T1z-mU-6wK.text" = "目标";
-
-/* Class = "UILabel"; text = "Breastfeeding/Lactating: "; ObjectID = "WLL-Vv-AqW"; */
-"WLL-Vv-AqW.text" = "正在哺乳/泌乳：";
-
-/* Class = "UILabel"; text = "(DD/MM/YYYY)"; ObjectID = "wob-Ag-PvP"; */
-"wob-Ag-PvP.text" = "(年/月/日)";
-
-/* Class = "UITextField"; placeholder = "Number"; ObjectID = "XK0-Q0-K4z"; */
-"XK0-Q0-K4z.placeholder" = "整数";
-
-/* Class = "UILabel"; text = "Copy shopping list to clipboard"; ObjectID = "XNw-2S-Bgn"; */
-"XNw-2S-Bgn.text" = "把采购清单复制到剪贴板";
-
-/* Class = "UITextField"; placeholder = "Quantity*"; ObjectID = "xO2-Mm-NcU"; */
-"xO2-Mm-NcU.placeholder" = "数量 *";
-
-/* Class = "UILabel"; text = "Title"; ObjectID = "xoZ-rF-gpR"; */
-"xoZ-rF-gpR.text" = "标题";
-
-/* Class = "UILabel"; text = "Re-load food database"; ObjectID = "ZAP-zd-gMi"; */
-"ZAP-zd-gMi.text" = "重新载入食物数据库";
+/* Class = "UILabel"; text = "* Optional"; ObjectID = "ydm-fi-6hs"; */
+"ydm-fi-6hs.text" = "* 非必填项";
 

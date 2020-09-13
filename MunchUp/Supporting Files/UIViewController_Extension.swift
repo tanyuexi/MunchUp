@@ -15,23 +15,22 @@ extension UIViewController {
     
     
     //MARK: - path
-    //usage:
-    //  getFilePath(directory: true) -> document directory url
-    //  getFilePath("file.txt")      -> file.txt url
-    //  getFilePath(nil)             -> nil
-    //  getFilePath("")              -> nil
-    func getFilePath(_ fileName: String? = nil, directory: Bool = false) -> URL? {
+
+    func getFilePath(directory: Bool) -> URL? {
+        
+        let dirUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
+        return dirUrl
+    }
+    
+    func getFilePath(_ fileName: String?) -> URL? {
         
         let dirUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
 
-        if directory{
-            return dirUrl
-        } else if fileName == nil || fileName == "" {
+        if fileName == nil || fileName == "" {
             return nil
         } else {
             return dirUrl?.appendingPathComponent(fileName!)
         }
-
     }
     
     //MARK: - plist

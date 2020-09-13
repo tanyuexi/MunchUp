@@ -31,7 +31,7 @@ struct K {
     static let emptyCellID = "EmptyReusableCell"
     static let foodCellID = "FoodCell"
     static let itemCellID = "ItemCell"
-//    static let foodHeaderID = "FoodSectionHeaderView"
+    static let foodHeaderID = "ListSectionHeader"
 
     static let servesForChildrenLink = "https://www.eatforhealth.gov.au/food-essentials/how-much-do-we-need-each-day/recommended-number-serves-children-adolescents-and"
     static let servesForAdultsLink = "https://www.eatforhealth.gov.au/food-essentials/how-much-do-we-need-each-day/recommended-number-serves-adults"

@@ -7,9 +7,6 @@
 /* DOB confirm label */
 "(Invalid date)" = "(无效日期)";
 
-/* export */
-"#  Other items" = "#  其他东西";
-
 /* auto format date */
 "2" = "4";
 
@@ -28,20 +25,21 @@
 /* image picker */
 "Choose from Library" = "从相册里选择";
 
-/* navigation title */
+/* button */
+"Collapse All" = "全部收起";
+
+/* export
+   info */
 "days" = "日";
-
-/* plist */
-"Days" = "天数";
-
-/* export */
-"days)" = "天)";
 
 /* DOB text field data format */
 "dd/MM/yyyy" = "yyyy/MM/dd";
 
-/* navigation title */
-"Edit" = "修改";
+/* keyboard toolbar button */
+"Done" = "完成";
+
+/* button */
+"Expand All" = "全部展开";
 
 /* alert */
 "Food database reloaded" = "食物数据库已重新载入";
@@ -52,14 +50,17 @@
 /* food group */
 "Grain" = "谷物";
 
-/* serves calculator */
-"Just right" = "正好";
+/* button */
+"Hide Checked" = "隐藏已选项";
 
 /* alert */
 "List copied" = "采购清单已拷贝";
 
-/* navigation title */
-"New Member" = "新成员";
+/* section header */
+"Now" = "现在";
+
+/* info */
+"Number of serves for" = "推荐份数：";
 
 /* food group */
 "Oil" = "油脂";
@@ -68,7 +69,14 @@
 "OK" = "好的";
 
 /* export */
-"people, " = "人，";
+"Other items" = "其他物品";
+
+/* section header */
+"Other Items" = "其他物品";
+
+/* export
+   info */
+"people" = "人";
 
 /* food group */
 "Protein" = "蛋白质";
@@ -76,30 +84,24 @@
 /* a unit of food */
 "serves" = "份";
 
-/* plist */
-"Settings initialized" = "初始化设置";
-
-/* navigation title */
-"Shop for" = "采购";
-
 /* export */
-"Shopping List " = "采购清单";
+"Shopping List" = "采购清单";
+
+/* button */
+"Show Checked" = "显示已选项";
 
 /* image picker */
 "Take a photo" = "拍一张照";
 
-/* serves calculator */
-"Too little" = "少了";
+/* section header */
+"Target" = "目标";
 
-/* serves calculator */
-"Too much" = "多了";
-
-/* oil serves */
-"up to" = "不超过";
+/* section header */
+"Up to" = "最多";
 
 /* food group */
 "Vegetable" = "蔬菜";
 
-/* a unit for age */
+/* people list */
 "yrs" = "岁";
 

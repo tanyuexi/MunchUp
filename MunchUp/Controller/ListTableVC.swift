@@ -33,10 +33,8 @@ class ListTableVC: UITableViewController {
 
         tableView.register(UINib(nibName: K.foodCellID, bundle: nil), forCellReuseIdentifier: K.foodCellID)
         tableView.register(UINib(nibName: K.itemCellID, bundle: nil), forCellReuseIdentifier: K.itemCellID)
+        tableView.register(ListSectionHeader.self, forHeaderFooterViewReuseIdentifier: K.foodHeaderID)
 
-//        for category in K.foodGroups {
-//            currentServes[category] = sumUpServes(category)
-//        }
     }
     
     
@@ -52,23 +50,7 @@ extension ListTableVC {
             expandSection.append(state)
         }
     }
-    
-    
-    
-    //    func notifyChangeOfServes(_ category: String) {
-    //
-    ////        if let i = K.foodGroups.firstIndex(of: category),
-    ////            let hv = tableView.headerView(forSection: i),
-    ////            let button = hv.viewWithTag(i) as! UIButton?,
-    ////            let title = button.currentTitle {
-    ////
-    ////            let total = limitDigits(sumUpServes(category))
-    ////            let newTitle = title.replacingOccurrences(of: #"(\d|\.)+\)$"#, with: total + ")", options: .regularExpression, range: nil)
-    ////            button.setTitle(newTitle, for: .normal)
-    ////        }
-    //        print("notifyChangeOfServes")
-    //
-    //    }
+
 
     func sumUpServes(_ category: String) -> Double {
         var total = 0.0
@@ -92,6 +74,7 @@ extension ListTableVC {
                     food.serves = servesPerItem
                 }
             }
+            currentServes[category] = sumUpServes(category)
         }
         saveFood()
         tableView.reloadData()
@@ -99,10 +82,11 @@ extension ListTableVC {
     
     
     func clearServes() {
-        for foodArray in foodDict.values {
+        for (category, foodArray) in foodDict {
             for food in foodArray {
                 food.serves = 0
             }
+            currentServes[category] = 0
         }
         saveFood()
         tableView.reloadData()
@@ -176,33 +160,25 @@ extension ListTableVC {
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        //        let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: FoodSectionHeaderView.reuseIdentifier) as! FoodSectionHeaderView
-        //
-        //        headerView.button.setTitle(
-        //            section < K.foodGroups.count ?
-        //                foodHeaderString(at: section):
-        //                NSLocalizedString("Other Items", comment: "section header"),
-        //            for: .normal)
-        //
-        //        return headerView
-        //
-        let buttonTitle = section < K.foodGroups.count ?
-            foodHeaderString(at: section):
-            NSLocalizedString("Other Items", comment: "section header")
-        let viewHeader = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: 40))
-        viewHeader.backgroundColor = K.themeColor
-        let button = UIButton(type: .custom)
-        button.frame = viewHeader.bounds
-        button.tag = section // Assign section tag to this button
-        button.addTarget(self, action: #selector(tapSection(sender:)), for: .touchUpInside)
-        button.setTitle(buttonTitle, for: .normal)
-        viewHeader.addSubview(button)
-        return viewHeader
-    }
-    
-    @objc func tapSection(sender: UIButton) {
-        expandSection[sender.tag] = !expandSection[sender.tag]
-        tableView.reloadSections([sender.tag], with: .none)
+        let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: K.foodHeaderID) as! ListSectionHeader
+        
+        headerView.delegate = self
+        headerView.collapseButton.tag = section
+        
+        if section < K.foodGroups.count {
+            let title = foodHeaderString(at: section)
+            headerView.addButton.tag = section
+            headerView.collapseButton.setTitle(title, for: .normal)
+        } else {
+            let title = String(format: "%@ (%d)",
+                            NSLocalizedString("Other Items", comment: "section header"),
+                            (itemArray.count - 1)
+            )
+            headerView.collapseButton.setTitle(title, for: .normal)
+            headerView.addButton.isHidden = true
+        }
+        
+        return headerView
     }
     
     
@@ -363,6 +339,15 @@ extension ListTableVC: FoodCellDelegate {
     func onServesChange(_ category: String){
         currentServes[category] = sumUpServes(category)
         saveFood()
+        
+        if let i = K.foodGroups.firstIndex(of: category),
+            let hv = tableView.headerView(forSection: i) as? ListSectionHeader,
+            let title = hv.collapseButton.currentTitle {
+            
+            let total = limitDigits(currentServes[category])
+            let newTitle = title.replacingOccurrences(of: #"(\d|\.)+\)$"#, with: total + ")", options: .regularExpression, range: nil)
+            hv.collapseButton.setTitle(newTitle, for: .normal)
+        }
     }
     
     func saveFood(){
@@ -411,6 +396,9 @@ extension ListTableVC {
                 
                 if key == "foodDict" {
                     foodDict = data as! [String: [Food]]
+                    for category in K.foodGroups {
+                        currentServes[category] = sumUpServes(category)
+                    }
                     updateInterface = true
                 }
                 
@@ -428,7 +416,6 @@ extension ListTableVC {
                     days = data as! Double
                     updateInterface = true
                 }
-                
             }
         }
         
@@ -437,4 +424,43 @@ extension ListTableVC {
         }
     }
 
+}
+
+//MARK: - ListSectionHeaderDelegate
+
+extension ListTableVC: ListSectionHeaderDelegate {
+    
+    func onCollapseButtonPressed(sender: UIButton) {
+        expandSection[sender.tag] = !expandSection[sender.tag]
+        tableView.reloadSections([sender.tag], with: .none)
+    }
+    
+    func onAddButtonPressed(sender: UIButton) {
+        performSegue(withIdentifier: "GoToNewFoodTableVC", sender: sender)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "GoToNewFoodTableVC",
+            let vc = segue.destination as? NewFoodTableVC,
+            let button = sender as? UIButton {
+            
+            vc.delegate = self
+            vc.category = K.foodGroups[button.tag]
+        }
+    }
+    
+}
+
+//MARK: - NewFoodTableVCDelegate
+
+extension ListTableVC: NewFoodTableVCDelegate {
+    
+    func addNewFood(_ food: Food, category: String) {
+        if foodDict[category] != nil,
+            let i = K.foodGroups.firstIndex(of: category) {
+            foodDict[category]!.append(food)
+            saveFood()
+            tableView.reloadSections([i], with: .none)
+        }
+    }
 }

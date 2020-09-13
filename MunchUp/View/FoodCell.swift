@@ -68,7 +68,6 @@ class FoodCell: UITableViewCell {
         
         if let food = foodData {
             food.serves = sender.value
-//            shared.saveContext()
             updateServesStepper(food.serves)
             updateUnitSegmentedControl(food)
             updateNumberTextField()
@@ -167,18 +166,21 @@ class FoodCell: UITableViewCell {
     }
     
     
-    func updateFoodImage(_ name: String, custom: Bool = false){
-        
+    func updateFoodImage(_ name: String, custom: Bool){
+
         if custom,
             let imgUrl = shared.getFilePath(name) {
-            
+
             foodImage.image = UIImage(contentsOfFile: imgUrl.path)
             
         } else if name != "",
             let image = UIImage(named: name) {
-            
+
             foodImage.image = image
+        } else {
+            foodImage.image = nil
         }
+        
     }
     
     
