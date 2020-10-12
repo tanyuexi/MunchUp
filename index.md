@@ -2,7 +2,7 @@
 
 Can't think of what/how much to put in the trolley for the whole family?
 
-今天该买什么菜？
+不知道今天该买什么菜？
 
 This app will create a shopping list for you! Based on healthy dietary guideline and taken the age, gender and other needs of each family member into consideration.
 
@@ -10,3 +10,4 @@ This app will create a shopping list for you! Based on healthy dietary guideline
 
 # Contact <br>联系方式
 
+aliciatan4edu+munchup@gmail.com
