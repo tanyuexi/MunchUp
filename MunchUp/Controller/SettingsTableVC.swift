@@ -110,6 +110,22 @@ class SettingsTableVC: UITableViewController {
         
         pasteboard.string = list
     }
+    
+    func readInAbout() -> String {
+        
+        var contents = ""
+        
+        if let filePath = Bundle.main.path(forResource: "About", ofType: "txt") {
+            
+            do {
+                try contents = String(contentsOfFile: filePath)
+            } catch {
+                print("Error reading file: \(error)")
+            }
+        }
+        
+        return contents
+    }
 }
 
 //MARK: - Table View Delegate Methods
@@ -130,6 +146,9 @@ extension SettingsTableVC {
         case [0,2]:
             copyToClipboard()
             confirmMessage(NSLocalizedString("List copied", comment: "alert"))
+            
+        case [0,3]:
+            confirmMessage(readInAbout())
             
         case [1,0]:
             openUrl(K.servesForChildrenLink)

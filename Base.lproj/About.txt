@@ -1,0 +1,7 @@
+1. In tab "People", add your family members.
+
+2. Recommended numbers of serves for each food group are calculated automatically and shown in tab "Shopping List".
+
+Use them as targets and modify your list.
+
+The calculation is based on the Australian Dietary Guidelines, with consideration of the gender, age and other conditions of your family members.

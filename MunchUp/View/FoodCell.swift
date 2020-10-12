@@ -147,6 +147,7 @@ class FoodCell: UITableViewCell {
             unitSegmentedControl.setEnabled(true, forSegmentAt: 2)
             
         }
+        unitSegmentedControl.selectedSegmentIndex = 0
         
     }
     

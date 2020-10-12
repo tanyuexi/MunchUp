@@ -68,12 +68,6 @@ extension UIViewController {
         } catch {
             print("Error loading Food \(error)")
         }
-    
-        let FoodPath = Bundle.main.path(forResource: "ServeSizes_Australia", ofType: "txt")
-        
-        if freopen(FoodPath, "r", stdin) == nil {
-            perror(FoodPath)
-        }
         
         //delete data in previous database
         var newData: [Food] = []
@@ -87,6 +81,12 @@ extension UIViewController {
         }
         
         oldData = []
+        
+        let FoodPath = Bundle.main.path(forResource: "ServeSizes_Australia", ofType: "txt")
+        
+        if freopen(FoodPath, "r", stdin) == nil {
+            perror(FoodPath)
+        }
         
         //read in new serve sizes
         while let line = readLine() {

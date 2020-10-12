@@ -21,6 +21,7 @@
 		E76F6A3224DD2AEE0009B0E0 /* FoodCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E76F6A3424DD2AEE0009B0E0 /* FoodCell.xib */; };
 		E76F6A3A24E5551B0009B0E0 /* SettingsTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76F6A3924E5551A0009B0E0 /* SettingsTableVC.swift */; };
 		E76F6A4024EA54300009B0E0 /* MunchUp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E76F6A3E24EA54300009B0E0 /* MunchUp.xcdatamodeld */; };
+		E79A918A2534083B009A8D7B /* About.txt in Resources */ = {isa = PBXBuildFile; fileRef = E79A91882534083B009A8D7B /* About.txt */; };
 		E7C0A70424F52F950026B72E /* UITextField_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C0A70324F52F950026B72E /* UITextField_Extension.swift */; };
 		E7DA8C9024D280C000538CD3 /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DA8C8E24D280C000538CD3 /* ItemCell.swift */; };
 		E7DA8C9B24D6C30800538CD3 /* ListTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DA8C9A24D6C30800538CD3 /* ListTableVC.swift */; };
@@ -56,6 +57,8 @@
 		E76F6A3924E5551A0009B0E0 /* SettingsTableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableVC.swift; sourceTree = "<group>"; };
 		E76F6A3B24E5614A0009B0E0 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/FoodCell.strings"; sourceTree = "<group>"; };
 		E76F6A3F24EA54300009B0E0 /* MunchItUp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MunchItUp.xcdatamodel; sourceTree = "<group>"; };
+		E79A91892534083B009A8D7B /* Base */ = {isa = PBXFileReference; lastKnownFileType = text; name = Base; path = Base.lproj/About.txt; sourceTree = SOURCE_ROOT; };
+		E79A918B25340858009A8D7B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text; name = "zh-Hans"; path = "../../zh-Hans.lproj/About.txt"; sourceTree = "<group>"; };
 		E7C0A70324F52F950026B72E /* UITextField_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextField_Extension.swift; sourceTree = "<group>"; };
 		E7DA8C8E24D280C000538CD3 /* ItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
 		E7DA8C9A24D6C30800538CD3 /* ListTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableVC.swift; sourceTree = "<group>"; };
@@ -120,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				E76F6A3E24EA54300009B0E0 /* MunchUp.xcdatamodeld */,
+				E79A91882534083B009A8D7B /* About.txt */,
 				E76F6A2A24DD09B60009B0E0 /* ServeSizes_Australia.txt */,
 				E757C0DC24C1776E00B8AA08 /* Constants.swift */,
 				E7FF801D250E2A5E0079A84C /* Data.swift */,
@@ -225,6 +229,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E79A918A2534083B009A8D7B /* About.txt in Resources */,
 				E757C0D024C1662400B8AA08 /* LaunchScreen.storyboard in Resources */,
 				E76F6A3224DD2AEE0009B0E0 /* FoodCell.xib in Resources */,
 				E76F6A2324DD03EF0009B0E0 /* Localizable.strings in Resources */,
@@ -327,6 +332,15 @@
 				E76F6A3B24E5614A0009B0E0 /* zh-Hans */,
 			);
 			name = FoodCell.xib;
+			sourceTree = "<group>";
+		};
+		E79A91882534083B009A8D7B /* About.txt */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E79A91892534083B009A8D7B /* Base */,
+				E79A918B25340858009A8D7B /* zh-Hans */,
+			);
+			name = About.txt;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

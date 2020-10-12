@@ -209,6 +209,7 @@ extension ListTableVC {
             cell.delegate = self
             cell.index = indexPath.row
             cell.titleTextField.text = item.title
+            cell.updateCheckmark(item.done)
             initCheckedState(with: item.done, at: indexPath, cell: cell)
             
             return cell
@@ -235,8 +236,7 @@ extension ListTableVC {
     
     func getRowHeight(_ indexPath: IndexPath) -> CGFloat {
         
-        if indexPath.section < K.foodGroups.count,
-            let isHidden = hiddenCell[indexPath],
+        if let isHidden = hiddenCell[indexPath],
             isHidden,
             hideChecked {
             
@@ -273,47 +273,44 @@ extension ListTableVC {
     }
     
     
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        
+        if indexPath.section < K.foodGroups.count {
+            return true
+        } else {
+            return false
+            
+        }
+    }
+    
+    
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
-        if indexPath.section < K.foodGroups.count {
+        
+        let category = K.foodGroups[indexPath.section]
+        let foodData = Data.shared.foodDict[category]![indexPath.row]
+        
+        if editingStyle == .delete {
             
-            let category = K.foodGroups[indexPath.section]
-            let foodData = Data.shared.foodDict[category]![indexPath.row]
-            
-            if editingStyle == .delete {
+            if foodData.custom,
+                let imgUrl = getFilePath(foodData.image),
+                FileManager.default.fileExists(atPath: imgUrl.path) {
                 
-                if foodData.custom,
-                    let imgUrl = getFilePath(foodData.image),
-                    FileManager.default.fileExists(atPath: imgUrl.path) {
-                    
-                    do {
-                        try FileManager.default.removeItem(at: imgUrl)
-                    } catch {
-                        print(error)
-                    }
+                do {
+                    try FileManager.default.removeItem(at: imgUrl)
+                } catch {
+                    print(error)
                 }
-                
-                K.context.delete(foodData)
-                Data.shared.foodDict[category]?.remove(at: indexPath.row)
-                tableView.deleteRows(at: [indexPath], with: .none)
-                saveFood()
             }
-        }
-        
-    }
-    
-    
-    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        
-        if indexPath.section < K.foodGroups.count {
             
-            let category = K.foodGroups[indexPath.section]
-            let foodData = Data.shared.foodDict[category]![indexPath.row]
-            if foodData.done {
-                tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
-            }
+            K.context.delete(foodData)
+            Data.shared.foodDict[category]?.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .none)
+            saveFood()
         }
+        
     }
+    
     
 }
 

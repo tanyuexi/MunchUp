@@ -103,6 +103,9 @@
 /* Class = "UIButton"; normalTitle = "Auto Set"; ObjectID = "vnC-qQ-2wq"; */
 "vnC-qQ-2wq.normalTitle" = "自动设定";
 
+/* Class = "UILabel"; text = "How to use this app"; ObjectID = "VPY-Oh-cr8"; */
+"VPY-Oh-cr8.text" = "如何使用本应用";
+
 /* Class = "UILabel"; text = "Very tall/active: "; ObjectID = "wXa-On-N8q"; */
 "wXa-On-N8q.text" = "身高较高/活动较多：";
 
