@@ -6,13 +6,26 @@
 //  Copyright © 2020 Yuexi Tan. All rights reserved.
 //
 
+import GoogleMobileAds
 import UIKit
 import CoreData
 
-class PeopleTableVC: UITableViewController {
+class PeopleTableVC: UITableViewController, GADBannerViewDelegate {
+    
+    // Google AdMob
+    var bannerView: GADBannerView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Google AdMob
+        bannerView = GADBannerView(adSize: kGADAdSizeBanner)
+        bannerView.adUnitID = K.adUnitIDPeople  //change this after test before publish
+        bannerView.rootViewController = self
+        bannerView.load(GADRequest())
+        bannerView.delegate = self
+        tableView.tableHeaderView?.frame = bannerView.frame
+        tableView.tableHeaderView = bannerView
     }
     
 

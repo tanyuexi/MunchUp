@@ -11,6 +11,11 @@ import CoreData
 
 struct K {
     
+    static let adUnitIDTest = "ca-app-pub-3940256099942544/2934735716"
+    static let adUnitIDList = "ca-app-pub-1617129166971753/3451047896"
+    static let adUnitIDPeople = "ca-app-pub-1617129166971753/4605676458"
+    static let adUnitIDSettings = "ca-app-pub-1617129166971753/3646806241"
+    
     static let notificationName = Notification.Name("notificationName")
 
     static let themeColor = #colorLiteral(red: 0, green: 0.5603182912, blue: 0, alpha: 1)

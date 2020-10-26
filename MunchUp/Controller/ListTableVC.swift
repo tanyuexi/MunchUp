@@ -6,16 +6,20 @@
 //  Copyright © 2020 Yuexi Tan. All rights reserved.
 //
 
+import GoogleMobileAds
 import UIKit
 import CoreData
 
-class ListTableVC: UITableViewController {
+class ListTableVC: UITableViewController, GADBannerViewDelegate {
     
     var expandSection: [Bool] = []
     var hideChecked = false
     var hiddenCell: [IndexPath: Bool] = [:]
     var currentServes: [String: Double] = [:]
 
+    // Google AdMob
+    var bannerView: GADBannerView!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +35,15 @@ class ListTableVC: UITableViewController {
         tableView.register(UINib(nibName: K.foodCellID, bundle: nil), forCellReuseIdentifier: K.foodCellID)
         tableView.register(UINib(nibName: K.itemCellID, bundle: nil), forCellReuseIdentifier: K.itemCellID)
         tableView.register(ListSectionHeader.self, forHeaderFooterViewReuseIdentifier: K.foodHeaderID)
+        
+        // Google AdMob
+        bannerView = GADBannerView(adSize: kGADAdSizeBanner)
+        bannerView.adUnitID = K.adUnitIDList  //change this after test before publish
+        bannerView.rootViewController = self
+        bannerView.load(GADRequest())
+        bannerView.delegate = self
+        tableView.tableHeaderView?.frame = bannerView.frame
+        tableView.tableHeaderView = bannerView
 
     }
     
@@ -40,6 +53,7 @@ class ListTableVC: UITableViewController {
 //MARK: - Functions
 
 extension ListTableVC {
+
     
     func setExpandState(_ state: Bool){
         expandSection = []

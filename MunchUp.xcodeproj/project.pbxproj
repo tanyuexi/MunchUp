@@ -34,9 +34,12 @@
 		E7FF8018250AEE8D0079A84C /* ListSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FF8017250AEE8D0079A84C /* ListSectionHeader.swift */; };
 		E7FF801C250B40830079A84C /* NewFoodTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FF801B250B40820079A84C /* NewFoodTableVC.swift */; };
 		E7FF801E250E2A5E0079A84C /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FF801D250E2A5E0079A84C /* Data.swift */; };
+		EA05C60A0F22093E1AB40B45 /* Pods_MunchUp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA2190E0F68C7340AE983FB5 /* Pods_MunchUp.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		37042BD071160F3102DD215E /* Pods-MunchUp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MunchUp.debug.xcconfig"; path = "Target Support Files/Pods-MunchUp/Pods-MunchUp.debug.xcconfig"; sourceTree = "<group>"; };
+		8C31702C5E8A03C8D810FAAA /* Pods-MunchUp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MunchUp.release.xcconfig"; path = "Target Support Files/Pods-MunchUp/Pods-MunchUp.release.xcconfig"; sourceTree = "<group>"; };
 		E757C0BD24C1662000B8AA08 /* MunchUp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MunchUp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E757C0C024C1662000B8AA08 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E757C0C224C1662000B8AA08 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -73,6 +76,7 @@
 		E7FF8017250AEE8D0079A84C /* ListSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListSectionHeader.swift; sourceTree = "<group>"; };
 		E7FF801B250B40820079A84C /* NewFoodTableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewFoodTableVC.swift; sourceTree = "<group>"; };
 		E7FF801D250E2A5E0079A84C /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
+		EA2190E0F68C7340AE983FB5 /* Pods_MunchUp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MunchUp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,17 +84,38 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA05C60A0F22093E1AB40B45 /* Pods_MunchUp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		134FEB47009F63CB84D7245F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				37042BD071160F3102DD215E /* Pods-MunchUp.debug.xcconfig */,
+				8C31702C5E8A03C8D810FAAA /* Pods-MunchUp.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		45772634437A98E9D130C588 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EA2190E0F68C7340AE983FB5 /* Pods_MunchUp.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		E757C0B424C1662000B8AA08 = {
 			isa = PBXGroup;
 			children = (
 				E757C0BF24C1662000B8AA08 /* MunchUp */,
 				E757C0BE24C1662000B8AA08 /* Products */,
+				134FEB47009F63CB84D7245F /* Pods */,
+				45772634437A98E9D130C588 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -177,9 +202,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E757C0D424C1662400B8AA08 /* Build configuration list for PBXNativeTarget "MunchUp" */;
 			buildPhases = (
+				8B24ACD92AE67544A6F5F0DB /* [CP] Check Pods Manifest.lock */,
+				490C212306549D90500ADFD4 /* [CP] Prepare Artifacts */,
 				E757C0B924C1662000B8AA08 /* Sources */,
 				E757C0BA24C1662000B8AA08 /* Frameworks */,
 				E757C0BB24C1662000B8AA08 /* Resources */,
+				C64DE8178222711FE590564A /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -242,6 +270,65 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		490C212306549D90500ADFD4 /* [CP] Prepare Artifacts */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MunchUp/Pods-MunchUp-artifacts-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Prepare Artifacts";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MunchUp/Pods-MunchUp-artifacts-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MunchUp/Pods-MunchUp-artifacts.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8B24ACD92AE67544A6F5F0DB /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MunchUp-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C64DE8178222711FE590564A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MunchUp/Pods-MunchUp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MunchUp/Pods-MunchUp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MunchUp/Pods-MunchUp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		E757C0B924C1662000B8AA08 /* Sources */ = {
@@ -464,6 +551,7 @@
 		};
 		E757C0D524C1662400B8AA08 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 37042BD071160F3102DD215E /* Pods-MunchUp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = MunchUp/MunchUp.entitlements;
@@ -488,6 +576,7 @@
 		};
 		E757C0D624C1662400B8AA08 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8C31702C5E8A03C8D810FAAA /* Pods-MunchUp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = MunchUp/MunchUp.entitlements;

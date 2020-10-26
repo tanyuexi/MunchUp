@@ -6,10 +6,14 @@
 //  Copyright © 2020 Yuexi Tan. All rights reserved.
 //
 
+import GoogleMobileAds
 import UIKit
 import CoreData
 
-class SettingsTableVC: UITableViewController {
+class SettingsTableVC: UITableViewController, GADBannerViewDelegate {
+    
+    // Google AdMob
+    var bannerView: GADBannerView!
 
     @IBOutlet weak var daysTextField: UITextField!
     
@@ -18,6 +22,15 @@ class SettingsTableVC: UITableViewController {
         
         daysTextField.text = String(Int(Data.shared.days))
         daysTextField.delegate = self
+        
+        // Google AdMob
+        bannerView = GADBannerView(adSize: kGADAdSizeBanner)
+        bannerView.adUnitID = K.adUnitIDSettings  //change this after test before publish
+        bannerView.rootViewController = self
+        bannerView.load(GADRequest())
+        bannerView.delegate = self
+        tableView.tableHeaderView?.frame = bannerView.frame
+        tableView.tableHeaderView = bannerView
     
     }
     

@@ -588,21 +588,32 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="p2R-Jq-d4f" userLabel="Header Stack View">
-                                <rect key="frame" x="5" y="0.0" width="310" height="65.5"/>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6ds-cM-v32">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="456"/>
+                                <connections>
+                                    <segue destination="V01-Q2-dVS" kind="embed" identifier="GoToListTableVC" id="Eec-cx-DGa"/>
+                                </connections>
+                            </containerView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="p2R-Jq-d4f" userLabel="Header Stack View">
+                                <rect key="frame" x="2" y="458" width="316" height="59"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="xpm-kf-2iO" userLabel="Button Stack View">
-                                        <rect key="frame" x="0.0" y="0.0" width="310" height="40"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="xpm-kf-2iO" userLabel="Button Stack View">
+                                        <rect key="frame" x="0.0" y="0.0" width="316" height="40"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vnC-qQ-2wq" customClass="DesignableButton" customModule="MunchUp" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="63.5" height="40"/>
-                                                <color key="backgroundColor" red="0.0" green="0.56031829119999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="67" height="40"/>
                                                 <state key="normal" title="Auto Set">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="titleColor" red="0.0" green="0.56031829119999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                         <real key="value" value="10"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                        <color key="value" red="0.0" green="0.56031829119999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                        <real key="value" value="1"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
@@ -610,14 +621,19 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vlw-Xh-zLG" customClass="DesignableButton" customModule="MunchUp" customModuleProvider="target">
-                                                <rect key="frame" x="68.5" y="0.0" width="39" height="40"/>
-                                                <color key="backgroundColor" red="0.0" green="0.56031829119999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <rect key="frame" x="69" y="0.0" width="40.5" height="40"/>
                                                 <state key="normal" title="Clear">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="titleColor" red="0.0" green="0.56031829119999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                         <real key="value" value="10"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                        <real key="value" value="1"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                        <color key="value" red="0.0" green="0.56031829119999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
@@ -625,14 +641,19 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j7E-5k-SEn" customClass="DesignableButton" customModule="MunchUp" customModuleProvider="target">
-                                                <rect key="frame" x="112.5" y="0.0" width="104" height="40"/>
-                                                <color key="backgroundColor" red="0.0" green="0.56031829119999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <rect key="frame" x="111.5" y="0.0" width="110" height="40"/>
                                                 <state key="normal" title="Hide Checked">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="titleColor" red="0.0" green="0.56031829119999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                         <real key="value" value="10"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                        <real key="value" value="1"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                        <color key="value" red="0.0" green="0.56031829119999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
@@ -640,14 +661,19 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ian-i7-Lym" customClass="DesignableButton" customModule="MunchUp" customModuleProvider="target">
-                                                <rect key="frame" x="221.5" y="0.0" width="88.5" height="40"/>
-                                                <color key="backgroundColor" red="0.0" green="0.56031829119999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <rect key="frame" x="223.5" y="0.0" width="92.5" height="40"/>
                                                 <state key="normal" title="Collapse All">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="titleColor" red="0.0" green="0.56031829119999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                         <real key="value" value="10"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                        <real key="value" value="1"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                        <color key="value" red="0.0" green="0.56031829119999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
@@ -660,29 +686,23 @@
                                         </constraints>
                                     </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Number of serves for ? people, ? days" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gJN-hh-4ur">
-                                        <rect key="frame" x="0.0" y="45" width="310" height="20.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <rect key="frame" x="0.0" y="42" width="316" height="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                             </stackView>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6ds-cM-v32">
-                                <rect key="frame" x="0.0" y="70.5" width="320" height="448.5"/>
-                                <connections>
-                                    <segue destination="V01-Q2-dVS" kind="embed" identifier="GoToListTableVC" id="Eec-cx-DGa"/>
-                                </connections>
-                            </containerView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="6ds-cM-v32" firstAttribute="leading" secondItem="Wwv-Jn-o2u" secondAttribute="leading" id="4Kx-4I-tfZ"/>
-                            <constraint firstItem="p2R-Jq-d4f" firstAttribute="top" secondItem="Wwv-Jn-o2u" secondAttribute="top" id="A8K-3U-fZT"/>
-                            <constraint firstItem="6ds-cM-v32" firstAttribute="top" secondItem="p2R-Jq-d4f" secondAttribute="bottom" constant="5" id="Ige-FD-UXO"/>
-                            <constraint firstItem="Wwv-Jn-o2u" firstAttribute="trailing" secondItem="p2R-Jq-d4f" secondAttribute="trailing" constant="5" id="O3l-Tv-Ym1"/>
-                            <constraint firstItem="Wwv-Jn-o2u" firstAttribute="bottom" secondItem="6ds-cM-v32" secondAttribute="bottom" id="ZLZ-u5-Seo"/>
+                            <constraint firstItem="p2R-Jq-d4f" firstAttribute="top" secondItem="6ds-cM-v32" secondAttribute="bottom" constant="2" id="A8K-3U-fZT"/>
+                            <constraint firstItem="6ds-cM-v32" firstAttribute="top" secondItem="Wwv-Jn-o2u" secondAttribute="top" id="Ige-FD-UXO"/>
+                            <constraint firstItem="Wwv-Jn-o2u" firstAttribute="trailing" secondItem="p2R-Jq-d4f" secondAttribute="trailing" constant="2" id="O3l-Tv-Ym1"/>
+                            <constraint firstItem="Wwv-Jn-o2u" firstAttribute="bottom" secondItem="p2R-Jq-d4f" secondAttribute="bottom" constant="2" id="ZLZ-u5-Seo"/>
                             <constraint firstItem="6ds-cM-v32" firstAttribute="trailing" secondItem="Wwv-Jn-o2u" secondAttribute="trailing" id="weP-ue-k7u"/>
-                            <constraint firstItem="p2R-Jq-d4f" firstAttribute="leading" secondItem="Wwv-Jn-o2u" secondAttribute="leading" constant="5" id="xgb-pA-UcU"/>
+                            <constraint firstItem="p2R-Jq-d4f" firstAttribute="leading" secondItem="Wwv-Jn-o2u" secondAttribute="leading" constant="2" id="xgb-pA-UcU"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Wwv-Jn-o2u"/>
                     </view>
@@ -702,7 +722,7 @@
             <objects>
                 <tableViewController id="V01-Q2-dVS" userLabel="List Table" customClass="ListTableVC" customModule="MunchUp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="1" id="t2b-8F-w5r">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="448.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="456"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <sections/>
@@ -725,7 +745,7 @@
             <objects>
                 <tableViewController id="5Fq-dl-RlR" customClass="NewFoodTableVC" customModule="MunchUp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="WZY-SG-VSW">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="448.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="456"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <sections>

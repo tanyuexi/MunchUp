@@ -9,13 +9,13 @@
 import UIKit
 import CoreData
 
+
 class TabBarController: UITabBarController {
     
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         print(getFilePath(directory: true)!)
-        
 
         //if days not set, let days = 7
         Data.shared.days = getDays()
@@ -43,7 +43,10 @@ class TabBarController: UITabBarController {
         
         //show shopping list first
         selectedIndex = 1
+        
+
     }
     
+
 }
 

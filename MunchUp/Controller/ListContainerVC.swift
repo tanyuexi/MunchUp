@@ -12,7 +12,7 @@ class ListContainerVC: UIViewController {
     
     var listTableVC: ListTableVC?
     var expandAll = true
-
+    
 
     @IBOutlet weak var hideCheckedButton: UIButton!
     @IBOutlet weak var collapseButton: UIButton!
@@ -24,8 +24,10 @@ class ListContainerVC: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(onNotification(notification:)), name: K.notificationName, object: nil)
         
         updateInfoLabel()
+
     }
     
+
     
     func updateInfoLabel(){
         infoLabel.text = String(format: "%@ %d %@, %d %@",

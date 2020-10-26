@@ -6,6 +6,7 @@
 //  Copyright © 2020 Yuexi Tan. All rights reserved.
 //
 
+import GoogleMobileAds
 import UIKit
 import CoreData
 
@@ -16,6 +17,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        // Google AdMob
+//        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = [ "4003c219990d0ac81cb4ae60be85202e" ]  //test on device
+        GADMobileAds.sharedInstance().start(completionHandler: nil)
+        
         return true
     }
 
